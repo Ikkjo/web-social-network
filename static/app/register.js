@@ -57,7 +57,7 @@ Vue.component("register", {
                     <i class="fas fa-envelope"></i>
                     <input v-model="form.email" @focus="inFocus('email')" @blur="outFocus('email')" type="text" placeholder="Email" name="email"/>
                 </div>
-                <div v-show="!isFocused('email') && $v.form.email.$invalid" class="alert alert-danger">Email is required</div>
+                <div v-show="!isFocused('email') && $v.form.email.$invalid" class="alert alert-danger">Email adresa je obavezna</div>
             </div>
             <div class="form-element">
                 <div class="input-field">
