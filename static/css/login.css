@@ -16,7 +16,8 @@
         overflow: hidden;
     }
     
-    .login-container {
+    .login-container,
+    .register-container {
         display: flex;
         justify-content: flex-start;
         width: 50%;
@@ -76,9 +77,29 @@
         color: #333;
     }
     
+    select {
+        background: none;
+        outline: none;
+        border: none;
+        line-height: 1;
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #333;
+    }
+    
     .input-field input::placeholder {
         color: #aaa;
         font-weight: 500;
+    }
+    
+    .name-surname {
+        display: grid;
+        grid-template-columns: 47.5% 5% 47.5%;
+        max-width: 380px;
+    }
+    
+    .name-surname.input-field {
+        margin-right: 10px;
     }
     
     .links {
