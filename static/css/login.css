@@ -5,6 +5,7 @@
         /* padding doesn't make the width bigger */
         box-sizing: border-box;
     }
+    /*Change text in autofill textbox*/
     
     body {
         font-family: "Poppins", sans-serif;
@@ -23,13 +24,22 @@
         background-color: #fff;
         min-height: 100vh;
         overflow: hidden;
+        z-index: 2;
+    }
+    
+    form.register-form {
+        margin-left: 20%;
+        margin-top: 15%;
+    }
+    
+    form.login-form {
+        margin-left: 25%;
+        margin-top: 25%;
     }
     
     form {
         display: relative;
         width: 100%;
-        margin-left: 20%;
-        margin-top: 15%;
         align-items: center;
         padding: 0rem 5rem;
         overflow: hidden;
@@ -185,11 +195,17 @@
         color: #fff;
     }
     
+    .buttons-div {
+        display: flex;
+        flex-direction: column;
+    }
+    
     .picture-container {
         width: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: -1;
     }
     
     .picture-container span {
@@ -200,11 +216,7 @@
     @media (max-width: 870px) {
         .picture-container img {
             margin-left: -60%;
-            z-index: 1;
             transition: 0.5s;
-        }
-        .login-container {
-            z-index: 2;
         }
         form {
             transition: ease;
