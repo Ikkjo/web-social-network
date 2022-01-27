@@ -1,5 +1,6 @@
 const LoginForm = { template: '<login></login>' }
 const RegisterForm = { template: '<register></register>' }
+const ForgotPasswordForm = { template: '<forgot-password></forgot-password>' }
 
 const router = new VueRouter({
     mode: 'hash',
@@ -7,7 +8,7 @@ const router = new VueRouter({
         { path: '/', component: LoginForm },
         { path: '/login/', component: LoginForm },
         { path: '/register/', component: RegisterForm },
-        // { path: '/login/forgot', component: RegisterForm },
+        { path: '/login/forgot', component: ForgotPasswordForm },
     ]
 });
 
