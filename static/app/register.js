@@ -26,7 +26,7 @@ Vue.component("register", {
     <div class="container">
 
     <div class="register-container">
-        <form>
+        <form class="register-form">
             <h2 class="title">Registruj se</h2>
             <div class="name-surname">
                 <div class="form-element">
@@ -82,11 +82,13 @@ Vue.component("register", {
             </div>
             <div class="links">
                 <p>Već imaš profil?</p>
-                <a href="#">Uloguj se</a>
+                <router-link to="/login">Uloguj se</router-link>
             </div>
-            
-            <input :disabled="$v.form.$invalid" type="submit" value="Registruj se" class="btn solid" />
-            <button class="btn transparent">Nastavi kao gost</button>
+
+            <div class="buttons-div">
+                <input :disabled="$v.form.$invalid" type="submit" value="Registruj se" class="btn solid" />
+                <button class="btn transparent">Nastavi kao gost</button>
+            </div>
         </form>
     </div>
     <div class="picture-container">

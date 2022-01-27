@@ -14,7 +14,7 @@ Vue.component("login", {
     <div class="container">
 
     <div class="login-container">
-        <form>
+        <form class="login-form">
             <h2 class="title">Uloguj se</h2>
             <div class="input-field">
             <i class="fas fa-user"></i>
@@ -26,12 +26,12 @@ Vue.component("login", {
             </div>
             <div class="links">
                 <a href="#">Zaboravljena lozinka?</a>
-                <a href="#">Registruj se</a>
+                <router-link to="/register">Registruj se</router-link>
             </div>
-            <input type="submit" value="Uloguj se" class="btn solid" />
-
-            <button class="btn transparent">Nastavi kao gost</button>
-
+            <div class="buttons-div">
+                <input type="submit" value="Uloguj se" class="btn solid" />
+                <button class="btn transparent">Nastavi kao gost</button>
+            </div>
         </form>
     </div>
     <div class="picture-container">
@@ -43,4 +43,4 @@ Vue.component("login", {
     mounted() {},
 });
 
-new Vue({}).$mount("#wrapper")
+// new Vue({}).$mount("#wrapper")
