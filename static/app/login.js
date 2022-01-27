@@ -12,7 +12,6 @@ Vue.component("login", {
     props: ["submitForm"],
     template: ` 
     <div class="container">
-
     <div class="login-container">
         <form class="login-form">
             <h2 class="title">Uloguj se</h2>
@@ -25,7 +24,7 @@ Vue.component("login", {
                 <input type="password" placeholder="Lozinka" name="password"  required/>
             </div>
             <div class="links">
-                <a href="#">Zaboravljena lozinka?</a>
+                <router-link to="/login/forgot">Zaboravljena lozinka?</router-link>
                 <router-link to="/register">Registruj se</router-link>
             </div>
             <div class="buttons-div">
