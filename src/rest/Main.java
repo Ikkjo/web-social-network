@@ -9,13 +9,13 @@ import java.io.File;
 
 import com.google.gson.Gson;
 
-import beans.webshop.ProductToAdd;
-import beans.webshop.Products;
-import beans.webshop.ShoppingCart;
+import beans.models.ProductToAdd;
+import beans.models.Products;
+import beans.models.ShoppingCart;
 import spark.Request;
 import spark.Session;
 
-public class SparkWebShopMain {
+public class Main {
 
 	private static Products products = new Products();
 	private static Gson g = new Gson();
