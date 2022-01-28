@@ -3,7 +3,7 @@ Vue.component("user-profile", { data() { return { } }, template: `
     <div class="inner-container">
         <div class=" user-profile-container ">
             <div class="profile ">
-                <img src="./img/profilePic.svg " alt=" " class="profile-thumbnail ">
+                <img src="./img/profile_pic.svg " alt=" " class="profile-thumbnail ">
                 <h2 class="user-fullname">Imenko Prezimić</h2>
             </div>
 
@@ -23,11 +23,12 @@ Vue.component("user-profile", { data() { return { } }, template: `
                     </div>
                 </div>
                 <div class="links-right ">
-                    <div class="link-group">
-                        <i class="fas fa-user-slash"></i>
-                        <a href=" ">Prijatelji</a>
-                    </div>
-                    <button class="btn"><i class="fas fa-comment-dots"></i>Poruka</button>
+                    <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"><div><i class="fas fa-user-slash"></i></div></span>
+                            </label>
+
+                    <button class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
                 </div>
             </div>
         </div>
