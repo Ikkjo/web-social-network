@@ -8,6 +8,8 @@ Vue.component("user-profile", { data() { return { } }, template: `
             </div>
 
             <div class="user-links ">
+
+
                 <div class="links-left ">
                     <div class="link-group">
                         <i class="fas fa-book-open"></i>
@@ -22,13 +24,17 @@ Vue.component("user-profile", { data() { return { } }, template: `
                         <a href=" ">Zajednički prijatelji/ce</a>
                     </div>
                 </div>
-                <div class="links-right ">
-                    <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"><div><i class="fas fa-user-slash"></i></div></span>
-                            </label>
 
+                <div class="links-right ">
+                    <!-- <div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"><div><i class="fas fa-user-slash"></i></div></span>
+                        </label>
+                    </div>
+                    <div> -->
                     <button class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
+                    <button class="btn transparent btn-message"><i class="fas fa-user-plus"></i>Pošalji zahtev</button>
                 </div>
             </div>
         </div>

@@ -25,19 +25,29 @@
 
 .user-links {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.user-links div {
-    display: flex;
-    flex-direction: column;
+.user-links .link-group {
+    max-width: 33.3%;
+    margin: 0 10px;
 }
 
 .user-links .links-left {
-    width: 70%;
+    display: flex;
+    flex-direction: row;
 }
 
-.user-links .links-left .link-group,
-.user-links .links-right .link-group {
+.user-links .links-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.user-links .links-left .link-group {
     display: grid;
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;
@@ -59,17 +69,14 @@
     font-size: 1.1rem;
 }
 
-.user-links .links-right {
-    width: auto;
-}
-
 .links-right .btn {
-    font-size: 1rem;
-    text-transform: capitalize;
+    font-size: 1.2rem;
+    text-transform: initial;
+    width: 100%;
 }
 
 .links-right .btn i {
-    margin-right: 5px;
+    margin-right: 7px;
 }
 
 .user-side-picture {
