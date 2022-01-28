@@ -1,0 +1,84 @@
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile .profile-thumbnail {
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+}
+
+.profile .user-fullname {
+    margin: 10px auto;
+}
+
+.user-links {
+    display: flex;
+}
+
+.user-links div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.user-links .links-left {
+    width: 70%;
+}
+
+.user-links .links-left .link-group,
+.user-links .links-right .link-group {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    font-size: 1.1rem;
+    align-items: center;
+}
+
+.link-group i {
+    text-align: center;
+    line-height: 55px;
+    color: #707070;
+    transition: 0.5s;
+}
+
+.link-group a {
+    margin-left: 10px;
+    color: #707070;
+    transition: 0.5s;
+    font-size: 1.1rem;
+}
+
+.user-links .links-right {
+    width: auto;
+    justify-content: space-between;
+}
+
+.links-right .btn {
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.links-right .btn i {
+    margin-right: 5px;
+}
+
+.user-side-picture {
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+.user-side-picture img {
+    margin-left: 200px;
+}
