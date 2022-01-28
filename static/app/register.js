@@ -145,4 +145,4 @@ Vue.component("register", {
     }
 });
 
-new Vue({}).$mount("#register")
+// new Vue({}).$mount("#register")
