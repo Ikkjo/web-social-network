@@ -3,7 +3,6 @@
         margin: 0;
         padding: 0;
         /* padding doesn't make the width bigger */
-        box-sizing: border-box;
     }
     /*Change text in autofill textbox*/
     
@@ -15,7 +14,6 @@
     .container {
         display: flex;
         height: 100vh;
-        overflow: hidden;
     }
     
     .container .inner-container {
@@ -23,14 +21,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
     }
     
     .form-container {
-        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        max-width: 30vw;
     }
     
     form {
@@ -101,13 +98,12 @@
     }
     
     .name-surname {
-        display: grid;
-        grid-template-columns: 47.5% 5% 47.5%;
-        max-width: 380px;
+        display: flex;
+        justify-content: space-between;
     }
     
-    .name-surname.input-field {
-        margin-right: 10px;
+    .name-surname .form-element {
+        width: 49%;
     }
     
     .links {
