@@ -5,12 +5,11 @@ Vue.component("user-profile", { data() { return { } }, template: `
             <div class="profile ">
                 <img src="./img/profile_pic.svg " alt=" " class="profile-thumbnail ">
                 <h2 class="user-fullname">Imenko Prezimić</h2>
+                <div class="dob">29.01.2000.</div>
             </div>
 
             <div class="user-links ">
-
-
-                <div class="links-left ">
+                <div class="links-top">
                     <div class="link-group">
                         <i class="fas fa-book-open"></i>
                         <a href=" ">Objave</a>
@@ -25,7 +24,7 @@ Vue.component("user-profile", { data() { return { } }, template: `
                     </div>
                 </div>
 
-                <div class="links-right ">
+                <div class="links-bottom">
                     <!-- <div>
                         <label class="switch">
                             <input type="checkbox">

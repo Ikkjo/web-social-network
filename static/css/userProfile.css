@@ -23,6 +23,10 @@
     margin: 10px auto;
 }
 
+.profile dob {
+    color: #707070;
+}
+
 .user-links {
     display: flex;
     flex-direction: column;
@@ -34,12 +38,12 @@
     margin: 0 10px;
 }
 
-.user-links .links-left {
+.user-links .links-top {
     display: flex;
     flex-direction: row;
 }
 
-.user-links .links-right {
+.user-links .links-bottom {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,7 +51,7 @@
     width: 100%;
 }
 
-.user-links .links-left .link-group {
+.user-links .links-top .link-group {
     display: grid;
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;
@@ -69,13 +73,13 @@
     font-size: 1.1rem;
 }
 
-.links-right .btn {
+.links-bottom .btn {
     font-size: 1.2rem;
     text-transform: initial;
     width: 100%;
 }
 
-.links-right .btn i {
+.links-bottom .btn i {
     margin-right: 7px;
 }
 
