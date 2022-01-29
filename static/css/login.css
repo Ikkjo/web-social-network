@@ -1,5 +1,9 @@
     .container {
         display: flex;
+    }
+    
+    .login-container,
+    .register-container {
         height: 100vh;
     }
     
@@ -67,6 +71,10 @@
         font-size: 1.1rem;
         color: #333;
         min-width: 380px;
+        text-overflow: ellipsis;
+        /* Required for text-overflow to do anything */
+        white-space: nowrap;
+        overflow: hidden;
     }
     
     select {
