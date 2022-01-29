@@ -46,7 +46,7 @@ Vue.component("user-profile", {
                         </div>
                         <div> -->
                         <button v-if="isFriend || isAdmin" class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
-                        <button v-if="loggedUser" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i class="fas fa-user-plus"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
+                        <button v-if="loggedUser" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
                     </div>
                 </div>
             </div>
