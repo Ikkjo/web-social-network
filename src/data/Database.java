@@ -1,8 +1,8 @@
 package data;
 
-public interface Database<T> {
+public interface Database{
 	
-	public abstract void Save(T obj);
-	public abstract T Load();
+	public abstract void Save(Object obj);
+	public abstract Object Load();
 
 }

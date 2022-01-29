@@ -8,8 +8,9 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 
-public class JsonDatabase<T> implements Database{
+public class JsonDatabase implements Database{
 	
+	private Object data;
 	private File jsonFile;
 	
 	public JsonDatabase() {
@@ -73,10 +74,13 @@ public class JsonDatabase<T> implements Database{
 			
 			Gson json = new Gson();
 			
-			return json.fromJson(br, Object.class);
+			data = (Object) json.fromJson(br, Object.class);
+			
+			return data;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
