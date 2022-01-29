@@ -127,6 +127,16 @@
         color: #fff;
     }
     
+    .btn.unfriend {
+        color: red;
+        border: 2px solid red;
+    }
+    
+    .btn.unfriend:hover {
+        background-color: red;
+        color: #fff;
+    }
+    
     .buttons-div {
         display: flex;
         flex-direction: column;

@@ -1,10 +1,11 @@
 Vue.component("user-profile", {
     data() {
         return {
-            userData: {
-                fullname: 'Imenko Prezimic',
-                dateOfBirth: '29.01.2000.',
-            }
+            user: {
+                name: "Neko",
+                surname: "Prezime"
+            },
+            isFriend: true,
         }
     },
     template: `
@@ -13,23 +14,23 @@ Vue.component("user-profile", {
             <div class=" user-profile-container ">
                 <div class="profile ">
                     <img src="./img/profile_pic.svg " alt=" " class="profile-thumbnail ">
-                    <h2 class="user-fullname">{{ userData.fullname }}</h2>
-                    <div class="dob">{{ userData.dateOfBirth }}</div>
+                    <h2 class="user-fullname">{{ user.name}} {{user.surname }}</h2>
+                    <div class="dob">{{ user.dateOfBirth }}</div>
                 </div>
 
                 <div class="user-links ">
                     <div class="links-top">
                         <div class="link-group">
                             <i class="fas fa-book-open"></i>
-                            <a href=" ">Objave</a>
+                            <router-link to="/posts">Objave</router-link>
                         </div>
                         <div class="link-group">
                             <i class="fas fa-images"></i>
-                            <a href=" ">Fotografije</a>
+                            <router-link to="/mutual-friends">Fotografije</router-link>
                         </div>
                         <div class="link-group">
                             <i class="fas fa-user-friends"></i>
-                            <a href=" ">Zajednički prijatelji/ce</a>
+                            <router-link to="/mutual-friends">Zajednički prijatelji/ce</router-link>
                         </div>
                     </div>
 
@@ -42,7 +43,7 @@ Vue.component("user-profile", {
                         </div>
                         <div> -->
                         <button class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
-                        <button class="btn transparent btn-message"><i class="fas fa-user-plus"></i>Pošalji zahtev</button>
+                        <button class="btn transparent" v-bind:class="{unfriend: isFriend}"><i class="fas fa-user-plus"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
                     </div>
                 </div>
             </div>
