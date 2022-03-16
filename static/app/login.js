@@ -37,7 +37,7 @@ Vue.component("login", {
                         <router-link to="/register">Registruj se</router-link>
                     </div>
                     <div class="buttons-div">
-                        <input :disabled="$v.form.$invalid" type="submit" value="Uloguj se" class="btn solid" />
+                        <input @click="login" :disabled="$v.form.$invalid" type="submit" value="Uloguj se" class="btn solid" />
                         <button class="btn transparent">Nastavi kao gost</button>
                     </div>
                 </form>
@@ -57,6 +57,13 @@ Vue.component("login", {
         },
         outFocus(field) {
             this.infocus[field] = false
+        },
+        login() {
+            axios.post("/login/", {
+                username: this.form.username,
+                password: this.form.password,
+            }).then(() => router.push("/profile/"))
+            .catch(() => alert("Login neuspješan."))
         }
     },
     mounted() {},
