@@ -3,48 +3,45 @@
         margin: 0;
         padding: 0;
         /* padding doesn't make the width bigger */
-        box-sizing: border-box;
     }
+    /*Change text in autofill textbox*/
     
     body {
         font-family: "Poppins", sans-serif;
+        background-color: #fff;
     }
     
     .container {
         display: flex;
         height: 100vh;
-        overflow: hidden;
     }
     
-    .login-container,
-    .register-container {
+    .container .inner-container {
         width: 50%;
-        min-width: 430px;
-        background-color: #fff;
-        min-height: 100vh;
-        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 30vw;
     }
     
     form {
-        display: relative;
-        width: 100%;
-        margin-left: 20%;
-        margin-top: 15%;
-        align-items: center;
         padding: 0rem 5rem;
         overflow: hidden;
     }
     
     .title {
-        align-self: flex-start;
         font-size: 2.2rem;
         color: #444;
         margin-bottom: 10px;
     }
     
     .input-field {
-        max-width: 380px;
-        width: 100%;
         background-color: #f0f0f0;
         margin: 10px 0;
         height: 55px;
@@ -82,6 +79,7 @@
         font-weight: 600;
         font-size: 1.1rem;
         color: #333;
+        min-width: 380px;
     }
     
     select {
@@ -100,63 +98,20 @@
     }
     
     .name-surname {
-        display: grid;
-        grid-template-columns: 47.5% 5% 47.5%;
-        max-width: 380px;
-    }
-    
-    .name-surname.input-field {
-        margin-right: 10px;
-    }
-    
-    .links {
-        width: 100%;
-        max-width: 380px;
         display: flex;
         justify-content: space-between;
     }
     
-    .social-media {
-        width: 100%;
-        max-width: 380px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .name-surname .form-element {
+        width: 49%;
     }
     
-    .social-text {
-        width: 100%;
-        max-width: 380px;
+    .links {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.7rem 0;
-        font-size: 1rem;
-    }
-    
-    .social-icon {
-        height: 46px;
-        width: 46px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0.45rem;
-        color: #333;
-        border-radius: 50%;
-        border: 1px solid #333;
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: 0.3s;
-    }
-    
-    .social-icon:hover {
-        color: #4481eb;
-        border-color: #4481eb;
+        justify-content: space-between;
     }
     
     .btn {
-        width: 100%;
-        max-width: 380px;
         background-color: #5995fd;
         border: none;
         outline: none;
@@ -185,41 +140,15 @@
         color: #fff;
     }
     
-    .picture-container {
-        width: 50%;
+    .buttons-div {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
     }
     
     .picture-container span {
-        width: 100%;
         margin-right: 20%;
     }
     
-    @media (max-width: 870px) {
-        .picture-container img {
-            margin-left: -60%;
-            z-index: 1;
-            transition: 0.5s;
-        }
-        .login-container {
-            z-index: 2;
-        }
-        form {
-            transition: ease;
-            margin: auto;
-        }
-    }
+    @media (max-width: 870px) {}
     
-    @media (max-width: 570px) {
-        .picture-container {
-            display: none;
-        }
-        .login-container {
-            width: 100%;
-        }
-        form {
-            margin: auto;
-        }
-    }
+    @media (max-width: 570px) {}
