@@ -27,7 +27,7 @@ Vue.component("register", {
 
         <div class="inner-container register-container">
             <div class="form-container">
-                <form class="register-form">
+                <form @submit.prevent class="register-form">
                     <h2 class="title">Registruj se</h2>
                     <div class="name-surname">
                         <div class="form-element">
@@ -87,7 +87,7 @@ Vue.component("register", {
                     </div>
 
                     <div class="buttons-div">
-                        <input :disabled="$v.form.$invalid" type="submit" value="Registruj se" class="btn solid" />
+                        <input @click="register" :disabled="$v.form.$invalid" type="submit" value="Registruj se" class="btn solid" />
                         <button class="btn transparent">Nastavi kao gost</button>
                     </div>
                 </form>

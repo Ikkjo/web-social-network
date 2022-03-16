@@ -3,12 +3,17 @@ package dao;
 import beans.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class JSONUserDAO implements UserDAO{
 
     private Map<String, User> users;
+
+    public JSONUserDAO() {
+        users = new HashMap<>();
+    }
 
     @Override
     public List<User> getUsers() {
