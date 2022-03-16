@@ -107,6 +107,16 @@ Vue.component("register", {
         },
         outFocus(field) {
             this.infocus[field] = false
+        },
+        register() {
+            axios.post("/register/", {
+                name: this.form.name,
+                surname: this.form.surname,
+                username: this.form.username,
+                email: this.form.email,
+                password: this.form.password,
+            }).then(response => router.push("/login/"))
+            .catch(error => alert("Registracija neuspješna. Korisničko ime ili email već iskorišten."))
         }
     },
     mounted() {},
