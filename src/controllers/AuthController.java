@@ -2,7 +2,6 @@ package controllers;
 
 import beans.models.User;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import services.UserService;
 import spark.Request;
 import spark.Response;
