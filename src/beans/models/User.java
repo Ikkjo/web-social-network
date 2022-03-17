@@ -19,8 +19,9 @@ public class User {
     private List<User> friends;
     private Boolean isPrivate;
     private Boolean deleted;
-    
-    public User() {
+	private String jwt;
+
+	public User() {
     	
     }
     
@@ -167,4 +168,11 @@ public class User {
 		this.deleted = deleted;
 	}
 
+	public void setJwt(String jwt) {
+		this.jwt = jwt;
+	}
+
+	public String getJwt() {
+		return jwt;
+	}
 }

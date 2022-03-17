@@ -7,6 +7,7 @@ import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import utils.AuthUtils;
 
 import static spark.Spark.post;
 
@@ -23,7 +24,8 @@ public class AuthController {
         User user = new Gson().fromJson(request.body(), User.class);
         if(userService.isValidUser(user)) {
             user = userService.getUser(user.getUsername());
-            // create login token
+            String jws = AuthUtils.createJWT(user.getUsername(), 800000);
+            user.setJwt(jws);
             return new Gson().toJson(user);
         }
         response.status(401);
