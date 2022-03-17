@@ -1,0 +1,188 @@
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile .profile-thumbnail {
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+}
+
+.profile .user-fullname {
+    margin: 10px auto;
+}
+
+.profile dob {
+    color: #707070;
+}
+
+.user-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-links .link-group {
+    max-width: 33.33%;
+    margin: 0 10px;
+}
+
+.user-links-50 .link-group {
+    max-width: 50%;
+    margin: 0 10px;
+}
+
+.user-links .links-top {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-links .links-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.user-links .links-top .link-group {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    font-size: 1.1rem;
+    align-items: center;
+}
+
+.link-group i {
+    text-align: center;
+    line-height: 55px;
+    color: #707070;
+    transition: 0.5s;
+}
+
+.link-group a {
+    margin-left: 10px;
+    color: #707070;
+    transition: 0.5s;
+    font-size: 1.1rem;
+}
+
+.links-bottom .btn {
+    font-size: 1.2rem;
+    text-transform: initial;
+    width: 100%;
+}
+
+.links-bottom .btn i {
+    margin-right: 7px;
+}
+
+.user-side-picture {
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+.user-side-picture img {
+    margin-left: 200px;
+}
+
+
+/* toggle switch */
+
+
+/* The switch - the box around the slider */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 85px;
+    height: 49px;
+}
+
+
+/* Hide default HTML checkbox */
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+/* The slider */
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #707070;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    left: 5px;
+    bottom: 5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider div {
+    position: absolute;
+    bottom: 17px;
+    left: 13px;
+    color: #707070;
+    -webkit-transition: .4s;
+    transition: .4s;
+    font-size: 1.2rem;
+}
+
+input:checked+.slider {
+    background-color: var(--light-blue, #5995fd);
+    color: var(--light-blue, #5995fd);
+}
+
+input:checked+.slider div i {
+    color: var(--light-blue, #5995fd);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--light-blue, #5995fd);
+}
+
+input:checked+.slider:before,
+input:checked+.slider div {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(36px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
