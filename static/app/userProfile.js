@@ -29,7 +29,7 @@ Vue.component("user-profile", {
                         </div>
                         <div v-if="isFriend || user.isPublic" class="link-group">
                             <i class="fas fa-images"></i>
-                            <router-link to="/mutual-friends">Fotografije</router-link>
+                            <router-link to="/photos">Fotografije</router-link>
                         </div>
                         <div v-if="isFriend" class="link-group">
                             <i class="fas fa-user-friends"></i>
