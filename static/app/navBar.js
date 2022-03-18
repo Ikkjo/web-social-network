@@ -13,7 +13,7 @@ Vue.component("nav-bar", {
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
-            <a class="cta" href="#"><button class="btn">Odjavi se</button></a>
+            <button class="btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
         </div>
     </div>
     `,
