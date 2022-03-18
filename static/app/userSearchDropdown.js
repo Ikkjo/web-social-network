@@ -50,7 +50,7 @@ Vue.component("user-search-dropdown", {
                 <input v-model="surname" type="text" placeholder="Prezime" name="surname"/>
             </div>
             <date-picker :lang="lang" v-model="dateRange" range class="date-picker"></date-picker>
-            <button class="btn">Pretraži</button>
+            <button @click="search" class="btn">Pretraži</button>
         </div>
     </div>
 </div>
@@ -59,6 +59,18 @@ Vue.component("user-search-dropdown", {
         toggleShow() {
             document.getElementById("dropdown").classList.toggle("show");
         },
+        search() {
+            if (!this.name && !this.surname && !this.dateRange)
+                alert("Unesite bar jedan parametar pretrage");
+            else {
+                axios.get("/user-search", {
+                    name: this.name,
+                    surname: this.surname,
+                    dateRange: this.dateRange
+                }).then(response => router.push("/user-search-result/:response"))
+                .catch(error => alert("Pretraga neuspješna."));
+            }
+        }
     },
     mounted() {},
 });
