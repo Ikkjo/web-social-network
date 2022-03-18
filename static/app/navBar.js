@@ -13,11 +13,25 @@ Vue.component("nav-bar", {
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
-            <button class="btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
+            <button @click="signOut" class="btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
         </div>
     </div>
     `,
-    methods: { isFocused(field) { return this.infocus[field] }, inFocus(field) { this.infocus[field] = true }, outFocus(field) { this.infocus[field] = false } },
+    methods: {
+        isFocused(field) {
+            return this.infocus[field]
+        },
+        inFocus(field) {
+            this.infocus[field] = true
+        },
+        outFocus(field) {
+            this.infocus[field] = false
+        },
+        signOut() {
+            window.sessionStorage.removeItem("user");
+            router.push("/login")
+        },
+     },
     mounted() {},
     validations: {
         form: {
