@@ -63,10 +63,12 @@ Vue.component("user-search-dropdown", {
             if (!this.name && !this.surname && !this.dateRange)
                 alert("Unesite bar jedan parametar pretrage");
             else {
-                axios.get("/user-search", {
-                    name: this.name,
-                    surname: this.surname,
-                    dateRange: this.dateRange
+                axios.get("/user-search/", {
+                    params: {
+                        name: this.name,
+                        surname: this.surname,
+                        dateRange: this.dateRange        
+                    }
                 }).then(response => router.push("/user-search-result/:response"))
                 .catch(error => alert("Pretraga neuspješna."));
             }
