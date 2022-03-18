@@ -3,6 +3,19 @@
     display: inline-block;
 }
 
+.dropdown span:hover {
+    /* Disables text selection */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    cursor: pointer;
+    color: var(--light-blue);
+    transition: all 0.3s ease 0s;
+}
+
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -22,7 +35,6 @@
     overflow: hidden;
 }
 
-.dropdown:hover .dropdown-content {
+.show {
     display: block;
-    overflow: hidden;
 }
