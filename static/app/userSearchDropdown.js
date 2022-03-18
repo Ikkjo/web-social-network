@@ -60,6 +60,10 @@ Vue.component("user-search-dropdown", {
             document.getElementById("dropdown").classList.toggle("show");
         },
         search() {
+            let date = null;
+            if (this.dateRange && !this.dateRange.every(x => x === null)){
+                date = JSON.stringify([this.dateRange[0].getTime(), this.dateRange[1].getTime()]);
+            }
             if (!this.name && !this.surname && !this.dateRange)
                 alert("Unesite bar jedan parametar pretrage");
             else {
@@ -67,7 +71,7 @@ Vue.component("user-search-dropdown", {
                     params: {
                         name: this.name,
                         surname: this.surname,
-                        dateRange: this.dateRange        
+                        dateRange: date
                     }
                 }).then(response => router.push("/user-search-result/:response"))
                 .catch(error => alert("Pretraga neuspješna."));
