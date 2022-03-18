@@ -39,8 +39,8 @@ Vue.component("user-search-dropdown", {
     template: `
 <div class="container">
     <div class="dropdown">
-        <span>Pretraga korisnika</span>
-        <div class="dropdown-content">
+    <i class="fas fa-search"></i> <span @click="toggleShow">Pretraga korisnika</span>
+        <div id="dropdown" class="dropdown-content">
             <div class="input-field">
             <i class="fas fa-user"></i>
             <input v-model="name" type="text" placeholder="Ime" name="name"/>
@@ -54,6 +54,10 @@ Vue.component("user-search-dropdown", {
     </div>
 </div>
 `,
-    methods: {},
+    methods: {
+        toggleShow() {
+            document.getElementById("dropdown").classList.toggle("show");
+        },
+    },
     mounted() {},
 });
