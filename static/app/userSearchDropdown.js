@@ -42,14 +42,15 @@ Vue.component("user-search-dropdown", {
     <i class="fas fa-search"></i> <span @click="toggleShow">Pretraga korisnika</span>
         <div id="dropdown" class="dropdown-content">
             <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input v-model="name" type="text" placeholder="Ime" name="name"/>
+                <i class="fas fa-user"></i>
+                <input v-model="name" type="text" placeholder="Ime" name="name"/>
             </div>
             <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input v-model="surname" type="text" placeholder="Prezime" name="surname"/>
+                <i class="fas fa-user"></i>
+                <input v-model="surname" type="text" placeholder="Prezime" name="surname"/>
             </div>
             <date-picker :lang="lang" v-model="dateRange" range class="date-picker"></date-picker>
+            <button class="btn">Pretraži</button>
         </div>
     </div>
 </div>

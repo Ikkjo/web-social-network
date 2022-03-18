@@ -29,10 +29,15 @@
     border-radius: 5%;
 }
 
-.dropdown-content input {
+.dropdown-content input .input-field {
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+.dropdown-content button {
+    margin-top: 10px !important;
+    width: 100%;
 }
 
 .show {
