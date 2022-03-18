@@ -23,7 +23,7 @@ Vue.component("register", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container">
+    <div class="container register-container">
 
         <div class="inner-container register-container">
             <div class="form-container">
