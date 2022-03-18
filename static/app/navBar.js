@@ -8,12 +8,12 @@ Vue.component("nav-bar", {
             <img class="logo" src="./img/logo.svg" alt="logo">
             <nav>
                 <ul class="nav-links">
-                    <li><router-link to="">Početna</router-link></li>
-                    <li><router-link to="">Profil</router-link></li>
+                    <li><i class="fas fa-home"></i> <router-link to="">Početna</router-link></li>
+                    <li><i class="fas fa-user"></i> <router-link to="">Profil</router-link></li>
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
-            <a class="cta" href="#"><button class="btn">Izloguj se</button></a>
+            <a class="cta" href="#"><button class="btn">Odjavi se</button></a>
         </div>
     </div>
     `,
