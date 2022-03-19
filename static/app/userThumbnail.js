@@ -5,8 +5,7 @@ Vue.component("user-thumbnail", {
     },
     template: `
     <div class="container user-thumbnail-container">
-        <img :src="user.profilePic" alt="Profilna slika"></img>
-        {{user.profilePic}}
+        <img :src="user.profilePic" alt="Profilna slika">
         <h2>{{user.name}}</h2>
         <h2>{{user.surname}}</h2>
     </div>
