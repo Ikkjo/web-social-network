@@ -49,7 +49,7 @@ Vue.component("user-search-dropdown", {
                 <i class="fas fa-user"></i>
                 <input v-model="surname" type="text" placeholder="Prezime" name="surname"/>
             </div>
-            <date-picker :lang="lang" v-model="dateRange" range class="date-picker"></date-picker>
+            <date-picker :lang="lang" v-model="dateRange" range format="DD.MM.YYYY" range-separator=" - " class="date-picker"></date-picker>
             <button @click="search" class="btn">Pretraži</button>
         </div>
     </div>
