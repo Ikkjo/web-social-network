@@ -6,7 +6,7 @@ Vue.component("user-search-result-page", {
     },
     template: `
     <div class="container">
-        <user-search-result v-for="user in users"></user-search-result>            
+        <user-search-result v-for="u in users" :user="u" :key="u.username"></user-search-result>            
     </div>
     `,
     methods: {},
@@ -14,7 +14,7 @@ Vue.component("user-search-result-page", {
         let params = this.$route.params;
         axios.get("/user-search/", {
             params: params
-        }).then(response => users = response.data)
+        }).then(response => this.users = response.data)
         .catch(error => alert("Pretraga neuspješna."));
     },
 });

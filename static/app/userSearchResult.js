@@ -1,5 +1,10 @@
 Vue.component("user-search-result", {
-    props: ["user", "isFriend"],
+    props: ["user"],
+    data() {
+        return {
+            isFriend: true,
+        }
+    },
     template: `
     <div class="container user-search-result-container">
         <user-thumbnail :user="user">01.01.2000.</user-thumbnail>
