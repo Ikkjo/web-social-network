@@ -1,13 +1,13 @@
 package controllers;
 
+import beans.models.User;
 import com.google.gson.Gson;
 import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class SearchController {
 
@@ -19,8 +19,8 @@ public class SearchController {
 
     public static Route userSearch = (Request request, Response response) -> {
         response.type("application/json");
-        userService.userSearch(request.queryMap().toMap());
-        return null;
+        List<User> users = userService.userSearch(request.queryMap().toMap());
+        return new Gson().toJson(users);
     };
 
 }
