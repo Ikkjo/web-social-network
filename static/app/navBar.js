@@ -1,6 +1,10 @@
 Vue.component("nav-bar", {
     data() {
-        return {}
+        return {
+            user: {
+                guest: true,
+            }
+        }
     },
     template: `
     <div class="container">
@@ -9,7 +13,7 @@ Vue.component("nav-bar", {
             <nav>
                 <ul class="nav-links">
                     <li><i class="fas fa-home"></i> <router-link to="">Početna</router-link></li>
-                    <li><i class="fas fa-user"></i> <router-link to="">Profil</router-link></li>
+                    <li v-if="!user.guest"><i class="fas fa-user"></i> <router-link to="">Profil</router-link></li>
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
