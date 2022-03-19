@@ -3,6 +3,7 @@ package services;
 import beans.models.User;
 import dao.UserDAO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public class UserService {
         userDAO.addUser(user);
     }
 
-    public HashMap<String, User> userSearch(Map<String, String[]> params) {
+    public ArrayList<User> userSearch(Map<String, String[]> params) {
         HashMap<String, User> map = new HashMap<>();
         if (params.containsKey("name") && !Objects.equals(params.get("name")[0], ""))
             map = this.userDAO.getUsersByName(params.get("name")[0]);
@@ -52,6 +53,6 @@ public class UserService {
             else
                 map.keySet().retainAll(this.userDAO.getUsersByDateRange(params.get("dateRange")[0]).keySet());
         }
-        return map;
+        return new ArrayList<User>(map.values());
     }
 }
