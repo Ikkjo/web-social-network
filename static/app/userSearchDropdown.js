@@ -2,9 +2,11 @@ Vue.component("user-search-dropdown", {
     components: {},
     data() {
         return {
-            name: '',
-            surname: '',
-            dateRange: null,
+            params: {
+                name: null,
+                surname: null,
+                dateRange: null,
+            },
             lang: {
                 formatLocale: {
                     // MMMM
@@ -43,13 +45,13 @@ Vue.component("user-search-dropdown", {
         <div id="dropdown" class="dropdown-content">
             <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input v-model="name" type="text" placeholder="Ime" name="name"/>
+                <input v-model="params.name" type="text" placeholder="Ime" name="name"/>
             </div>
             <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input v-model="surname" type="text" placeholder="Prezime" name="surname"/>
+                <input v-model="params.surname" type="text" placeholder="Prezime" name="surname"/>
             </div>
-            <date-picker :lang="lang" v-model="dateRange" range format="DD.MM.YYYY" range-separator=" - " class="date-picker"></date-picker>
+            <date-picker :lang="lang" v-model="params.dateRange" range format="DD.MM.YYYY" range-separator=" - " class="date-picker"></date-picker>
             <button @click="search" class="btn">Pretraži</button>
         </div>
     </div>
@@ -61,20 +63,13 @@ Vue.component("user-search-dropdown", {
         },
         search() {
             let date = null;
-            if (this.dateRange && !this.dateRange.every(x => x === null)){
-                date = JSON.stringify([this.dateRange[0].getTime(), this.dateRange[1].getTime()]);
+            if (this.params.dateRange && !this.params.dateRange.every(x => x === null)){
+                this.params.dateRange = JSON.stringify([this.params.dateRange[0].getTime(), this.params.dateRange[1].getTime()]);
             }
-            if (!this.name && !this.surname && !this.dateRange)
+            if (!this.params.name && !this.params.surname && !this.params.dateRange)
                 alert("Unesite bar jedan parametar pretrage");
             else {
-                axios.get("/user-search/", {
-                    params: {
-                        name: this.name,
-                        surname: this.surname,
-                        dateRange: date
-                    }
-                }).then(response => router.push("/user-search-result/:response"))
-                .catch(error => alert("Pretraga neuspješna."));
+                router.push({path: '/user-search-result', name: 'UserSearch', params: this.params});
             }
         }
     },

@@ -11,6 +11,10 @@ Vue.component("user-search-result-page", {
     `,
     methods: {},
     mounted() {
-       this.users = router.params.users
+        let params = this.$route.params;
+        axios.get("/user-search/", {
+            params: params
+        }).then(response => users = response.data)
+        .catch(error => alert("Pretraga neuspješna."));
     },
 });
