@@ -16,7 +16,7 @@ Vue.component("user-profile", {
         <div class="inner-container">
             <div class="user-profile-container">
                 <div class="profile ">
-                    <img src="./img/profile_pic.svg " alt=" " class="profile-thumbnail ">
+                    <img src="./img/profile_pic.svg" alt=" " class="profile-thumbnail ">
                     <h2 class="user-fullname">{{ user.name}} {{user.surname }}</h2>
                     <div class="dob">{{ user.dateOfBirth }}</div>
                 </div>
