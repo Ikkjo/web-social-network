@@ -7,4 +7,13 @@
 
 .user-thumbnail-container img {
     width: 60px;
+    border-radius: 50%;
+}
+
+.user-thumbnail-container h3 {
+    margin-left: 10px !important;
+}
+
+.user-thumbnail-container span {
+    margin-left: 5px;
 }
