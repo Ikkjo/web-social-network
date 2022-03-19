@@ -7,7 +7,7 @@ Vue.component("user-search-result", {
     },
     template: `
     <div class="container user-search-result-container">
-        <user-thumbnail :user="user">01.01.2000.</user-thumbnail>
+        <user-thumbnail :user="user"></user-thumbnail>
         <button v-if="!isFriend" @click="sendFriendRequest" class="btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
         <button v-if="isFriend" @click="sendMessage" class="btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
     </div>
