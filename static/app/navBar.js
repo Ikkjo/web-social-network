@@ -2,7 +2,7 @@ Vue.component("nav-bar", {
     data() {
         return {
             user: {
-                guest: true,
+                guest: false,
             }
         }
     },
@@ -12,8 +12,8 @@ Vue.component("nav-bar", {
             <img class="logo" src="./img/logo.svg" alt="logo">
             <nav>
                 <ul class="nav-links">
-                    <li><i class="fas fa-home"></i> <router-link to="">Početna</router-link></li>
-                    <li v-if="!user.guest"><i class="fas fa-user"></i> <router-link to="">Profil</router-link></li>
+                    <li><i class="fas fa-home"></i> <router-link to="/feed">Početna</router-link></li>
+                    <li v-if="!user.guest"><i class="fas fa-user"></i> <router-link to="/user/profile">Profil</router-link></li>
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
