@@ -1,0 +1,10 @@
+.user-thumbnail-container {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.user-thumbnail-container img {
+    width: 60px;
+}
