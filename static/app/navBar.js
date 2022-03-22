@@ -7,7 +7,7 @@ Vue.component("nav-bar", {
         }
     },
     template: `
-    <div class="container">
+    <div class="nav-container">
         <div class="nav-div">
             <img class="logo" src="./img/logo.svg" alt="logo">
             <nav>

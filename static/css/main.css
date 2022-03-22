@@ -158,3 +158,8 @@ select {
 .picture-container span {
     margin-right: 20%;
 }
+
+nav-bar {
+    position: fixed;
+    top: 0px;
+}
