@@ -8,4 +8,13 @@
 .user-search-inner-container {
     width: 50%;
     padding: 10px;
+    background-color: #acacac;
+    border-radius: 25px;
+}
+
+.sort-continer {
+    padding: 5px;
+    width: fit-content;
+    margin-left: auto;
+    font-size: 1.1rem;
 }
