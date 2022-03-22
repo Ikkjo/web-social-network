@@ -6,7 +6,12 @@ Vue.component("user-search-result-page", {
     },
     template: `
     <div class="container">
-        <user-search-result v-for="u in users" :user="u" :key="u.username"></user-search-result>            
+        <nav-bar></nav-bar>
+        <div class="user-search-result-page-container">
+            <div class="user-search-inner-container">
+                <user-search-result v-for="u in users" :user="u" :key="u.username"></user-search-result>            
+            </div>
+        </div>
     </div>
     `,
     methods: {},

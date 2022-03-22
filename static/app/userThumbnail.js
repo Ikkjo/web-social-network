@@ -4,7 +4,7 @@ Vue.component("user-thumbnail", {
         return {}
     },
     template: `
-    <div class="container user-thumbnail-container">
+    <div class="flex-container user-thumbnail-container">
         <img :src="user.profilePic" alt="Profilna slika">
         <h3>{{user.name}} {{user.surname}}</h3>
         <span>(01.01.2000.)</span>
