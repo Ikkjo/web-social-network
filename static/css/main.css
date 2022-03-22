@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     background-color: #fff;
@@ -18,4 +22,8 @@ body {
 
 a {
     text-decoration: none;
+}
+
+#wrapper {
+    height: 100%;
 }
