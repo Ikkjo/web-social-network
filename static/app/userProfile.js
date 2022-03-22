@@ -12,7 +12,7 @@ Vue.component("user-profile", {
         }
     },
     template: `
-    <div class="container">
+    <div class="container flex-container">
         <div class="inner-container">
             <div class="user-profile-container">
                 <div class="profile ">

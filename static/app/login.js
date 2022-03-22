@@ -13,10 +13,10 @@ Vue.component("login", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container login-container">
+    <div class="container flex-container">
         <div class="inner-container">
             <div class="form-container">
-                <form class="login-form">
+                <form>
                     <h2 class="title">Uloguj se</h2>
                     <div class="form-element">
                         <div class="input-field">

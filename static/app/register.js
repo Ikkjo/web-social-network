@@ -23,11 +23,11 @@ Vue.component("register", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container register-container">
+    <div class="container flex-container">
 
-        <div class="inner-container register-container">
-            <div class="form-container">
-                <form @submit.prevent class="register-form">
+        <div class="inner-container">
+            <div class="register-form-container">
+                <form @submit.prevent>
                     <h2 class="title">Registruj se</h2>
                     <div class="name-surname">
                         <div class="form-element">
