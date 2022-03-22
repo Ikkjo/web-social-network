@@ -1,13 +1,15 @@
 Vue.component("user-thumbnail", {
     props: ["user"],
     data() {
-        return {}
+        return {
+            date: null,
+        }
     },
     template: `
     <div class="flex-container user-thumbnail-container">
         <img :src="user.profilePic" alt="Profilna slika">
         <h3>{{user.name}} {{user.surname}}</h3>
-        <span>(01.01.2000.)</span>
+        <span>{{date}}</span>
     </div>
     `,
     methods: {
@@ -18,5 +20,8 @@ Vue.component("user-thumbnail", {
             console.log("Sending message...");
         },
     },
-    mounted() {},
+    mounted() {
+        this.date = JSON.stringify(new Date(this.user.dateOfBirth)).split("-");
+        this.date = date[2].split("T")[0] + "." + date[1] + "." + date[0].substring(1)+".";
+    },
 });

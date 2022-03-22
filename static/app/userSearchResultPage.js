@@ -2,7 +2,6 @@ Vue.component("user-search-result-page", {
     data() {
         return {
             users: null,
-            params: null,
         }
     },
     template: `
@@ -12,10 +11,10 @@ Vue.component("user-search-result-page", {
             <div class="user-search-inner-container">
                 <div class="sort-continer">
                     <label for="sort">Kriterijum sortiranja:</label>
-                    <select name="sort" id="sort">
-                        <option v-if="this.params.name" value="name">Ime</option>
-                        <option v-if="this.params.surname" value="surname">Prezime</option>
-                        <option v-if="this.params.date" value="date">Datum rođenja</option>
+                    <select name="sort" id="sort" @change="sort($event)">
+                        <option value="name">Ime</option>
+                        <option value="surname">Prezime</option>
+                        <option value="dateOfBirth">Datum rođenja</option>
                     </select>
                 </div>
                 <user-search-result v-for="u in users" :user="u" :key="u.username"></user-search-result>            
@@ -23,12 +22,17 @@ Vue.component("user-search-result-page", {
         </div>
     </div>
     `,
-    methods: {},
+    methods: {
+        sort(event) {
+            let sortBy = event.target.value;
+            this.users.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : (a[sortBy] < b[sortBy] ? -1 : 0));
+        },
+    },
     mounted() {
-        this.params = this.$route.params;
+        let params = this.$route.params;
         axios.get("/user-search/", {
-            params: this.params
-        }).then(response => this.users = response.data)
+            params: params
+        }).then(response => this.users = response.data.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0)))
         .catch(error => alert("Pretraga neuspješna."));
     },
 });
