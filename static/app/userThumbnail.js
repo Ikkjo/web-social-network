@@ -21,7 +21,8 @@ Vue.component("user-thumbnail", {
         },
     },
     mounted() {
-        this.date = JSON.stringify(new Date(this.user.dateOfBirth)).split("-");
-        this.date = date[2].split("T")[0] + "." + date[1] + "." + date[0].substring(1)+".";
+        this.date = JSON.stringify(new Date(this.user.dateOfBirth.year + '-' + this.user.dateOfBirth.month + '-' +this.user.dateOfBirth.day));
+        this.date = this.date.replace(/\"|T.*/g, "").split("-");
+        this.date = this.date[2] + "." + this.date[1] + "." + this.date[0];
     },
 });
