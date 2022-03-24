@@ -16,7 +16,7 @@ public class User {
     private String profilePic;
     private List<Post> posts;
     private List<FriendRequest> friendRequests;
-    private List<User> friends;
+    private transient List<User> friends;
     private Boolean isPrivate;
     private Boolean deleted;
 	private String jwt;
@@ -150,6 +150,8 @@ public class User {
 	public void setFriends(List<User> friends) {
 		this.friends = friends;
 	}
+
+	public void addFriend(User newFriend) { this.friends.add(newFriend);}
 	
 	public Boolean isPrivate() {
 	
