@@ -28,6 +28,7 @@ public class Main {
 
         SearchController searchController = new SearchController(userService);
         get("/user-search/", searchController.userSearch);
+        get("/are-friends", searchController.areFriends);
 
 
     }
