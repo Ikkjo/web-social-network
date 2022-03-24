@@ -55,4 +55,10 @@ public class UserService {
         }
         return new ArrayList<User>(map.values());
     }
+
+    public boolean areFriends(Map<String, String[]> params) {
+
+        return getUser(params.get("username1")[0]).getFriends().contains(getUser(params.get("username2")[0]))
+                && getUser(params.get("username2")[0]).getFriends().contains(getUser(params.get("username1")[0]));
+    }
 }
