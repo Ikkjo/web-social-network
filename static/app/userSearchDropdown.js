@@ -64,7 +64,7 @@ Vue.component("user-search-dropdown", {
         search() {
             let date = null;
             if (this.params.dateRange && !this.params.dateRange.every(x => x === null)){
-                this.params.dateRange = JSON.stringify([this.params.dateRange[0].getTime(), this.params.dateRange[1].getTime()]);
+                this.params.dateRange = JSON.stringify([this.params.dateRange[0], this.params.dateRange[1]]);
             }
             if (!this.params.name && !this.params.surname && !this.params.dateRange)
                 alert("Unesite bar jedan parametar pretrage");
