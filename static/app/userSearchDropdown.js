@@ -69,9 +69,16 @@ Vue.component("user-search-dropdown", {
             if (!this.params.name && !this.params.surname && !this.params.dateRange)
                 alert("Unesite bar jedan parametar pretrage");
             else {
-                router.push({path: '/user-search-result', name: 'UserSearch', params: this.params});
+                if (router.currentRoute.path === "/user-search-result")
+                    router.go({path: '/user-search-result', name: 'UserSearch', params: this.params});
+                else 
+                    router.push({path: '/user-search-result', name: 'UserSearch', params: this.params});
             }
         }
     },
-    mounted() {},
+    mounted() {
+        this.params.name = null;
+        this.params.surname = null;
+        this.params.dateRange = null;
+    },
 });
