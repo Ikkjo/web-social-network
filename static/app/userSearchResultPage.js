@@ -25,7 +25,14 @@ Vue.component("user-search-result-page", {
     methods: {
         sort(event) {
             let sortBy = event.target.value;
-            this.users.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : (a[sortBy] < b[sortBy] ? -1 : 0));
+            switch(sortBy) {
+                case 'name':
+                    this.users.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0);
+                case 'surname':
+                    this.users.sort((a, b) => (a.surname > b.surname) ? 1 : (a.surname < b.surname) ? -1 : 0);
+                case 'dateOfBirth':
+                    this.users.sort((a, b) => new Date(a.dateOfBirth.year + '-' + a.dateOfBirth.month + '-' + a.dateOfBirth.day) - new Date(b.dateOfBirth.year + '-' + b.dateOfBirth.month + '-' + b.dateOfBirth.day));
+            }
         },
     },
     mounted() {
