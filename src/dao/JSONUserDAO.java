@@ -5,10 +5,7 @@ import beans.models.User;
 import utils.DateUtils;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JSONUserDAO implements UserDAO{
 
@@ -92,6 +89,9 @@ public class JSONUserDAO implements UserDAO{
         u3.setDateOfBirth(LocalDate.of(1998, 2, 12));
         u4.setDateOfBirth(LocalDate.of(1999, 2, 12));
         u5.setDateOfBirth(LocalDate.of(2000, 10, 20));
+
+        u1.setFriends(Arrays.asList(u2));
+        u2.setFriends(Arrays.asList(u1));
 
         users.put(u1.getUsername(), u1);
         users.put(u2.getUsername(), u2);
