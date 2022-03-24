@@ -8,7 +8,7 @@ Vue.component("user-search-result-page", {
     <div class="container">
         <nav-bar></nav-bar>
         <div class="user-search-result-page-container">
-            <div class="user-search-inner-container">
+            <div v-if="users" class="user-search-inner-container">
                 <div class="sort-continer">
                     <label for="sort">Kriterijum sortiranja:</label>
                     <select name="sort" id="sort" @change="sort($event)">
