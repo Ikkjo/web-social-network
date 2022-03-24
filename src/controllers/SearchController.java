@@ -23,4 +23,9 @@ public class SearchController {
         return new Gson().toJson(users);
     };
 
+    public static Route areFriends = (Request request, Response response) -> {
+        response.type("application/json");
+        return new Gson().toJson(userService.areFriends(request.queryMap().toMap()));
+    };
+
 }
