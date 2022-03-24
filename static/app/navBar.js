@@ -1,9 +1,7 @@
 Vue.component("nav-bar", {
     data() {
         return {
-            user: {
-                guest: false,
-            }
+            user: null
         }
     },
     template: `
@@ -13,7 +11,7 @@ Vue.component("nav-bar", {
             <nav>
                 <ul class="nav-links">
                     <li><i class="fas fa-home"></i> <router-link to="/feed">Početna</router-link></li>
-                    <li v-if="!user.guest"><i class="fas fa-user"></i> <router-link to="/user/profile">Profil</router-link></li>
+                    <li v-if="user"><i class="fas fa-user"></i> <router-link :to="/user/+user.username">Profil</router-link></li>
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
@@ -22,25 +20,14 @@ Vue.component("nav-bar", {
     </div>
     `,
     methods: {
-        isFocused(field) {
-            return this.infocus[field]
-        },
-        inFocus(field) {
-            this.infocus[field] = true
-        },
-        outFocus(field) {
-            this.infocus[field] = false
-        },
         signOut() {
             window.sessionStorage.removeItem("user");
             router.push("/login")
         },
      },
-    mounted() {},
-    validations: {
-        form: {
-            username: { required: validators.required, },
-            password: { required: validators.required, },
-        }
-    }
+    mounted() {
+        if (window.sessionStorage.getItem("user"))
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+
+    },
 });

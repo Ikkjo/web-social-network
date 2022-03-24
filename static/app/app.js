@@ -12,7 +12,7 @@ const router = new VueRouter({
         { path: '/login/', component: LoginForm },
         { path: '/register/', component: RegisterForm },
         { path: '/login/forgot', component: ForgotPasswordForm },
-        { path: '/user/profile', component: UserProfilePage },
+        { path: '/user/:username', component: UserProfilePage },
         { path: '/user-search-result/',  name: 'UserSearch', component: UserSearchResultPage },
         { path: '/nav', component: NavBar }
     ]
