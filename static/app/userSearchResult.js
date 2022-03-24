@@ -20,5 +20,23 @@ Vue.component("user-search-result", {
             console.log("Sending message...");
         },
     },
-    mounted() {},
+    mounted() {
+        // Add check for isFriend parameter using the logged in user
+        if (window.sessionStorage.getItem("user")) {
+            username = JSON.parse(window.sessionStorage.getItem("user")).username;
+            token = JSON.parse(window.sessionStorage.getItem("user")).jwt
+            axios.get("/are-friends", {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+                params: {
+                    username1: username,
+                    username2: this.user.username,
+                }
+            }).then((response) => this.isFriend = response.data)
+            .catch(() => alert("Greška."));
+        }
+        else
+            this.isFriend = false;
+    },
 });
