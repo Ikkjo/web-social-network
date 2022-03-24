@@ -7,9 +7,9 @@ Vue.component("user-thumbnail", {
     },
     template: `
     <div class="flex-container user-thumbnail-container">
-        <img :src="user.profilePic" alt="Profilna slika">
-        <h3>{{user.name}} {{user.surname}}</h3>
-        <span>{{date}}</span>
+        <router-link :to="/user/+user.username"><img :src="user.profilePic" alt="Profilna slika"></router-link>
+        <router-link :to="/user/+user.username" class="fullname">{{user.name}} {{user.surname}}</router-link>
+        <span>({{date}})</span>
     </div>
     `,
     methods: {

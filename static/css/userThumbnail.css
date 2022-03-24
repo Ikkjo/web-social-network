@@ -17,3 +17,10 @@
 .user-thumbnail-container span {
     margin-left: 5px;
 }
+
+.fullname {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+}
