@@ -2,6 +2,7 @@ package dao;
 
 import beans.models.Gender;
 import beans.models.User;
+import utils.DateUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -64,7 +65,13 @@ public class JSONUserDAO implements UserDAO{
 
     @Override
     public HashMap<String, User> getUsersByDateRange(String dateRange) {
-        return null;
+        HashMap<String, User> usersMap = new HashMap<>();
+        List<LocalDate> dates = DateUtils.toDateList(dateRange);
+        for (User u: users.values()) {
+                if (DateUtils.isWithinRange(u.getDateOfBirth(), dates.get(0), dates.get(1)))
+                    usersMap.put(u.getUsername(), u);
+        }
+        return usersMap;
     }
 
     public void generateTestData() {
