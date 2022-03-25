@@ -1,24 +1,36 @@
-Vue.component("user-search-result-page", {
+Vue.component("user-search-page", {
+    data() {
+        return {};
+    },
+    template: `
+    <div class="container">
+        <nav-bar></nav-bar>
+        <user-search :key="this.$route.query"></user-search>
+    </div>
+    `,
+    methods: {},
+    mounted() {
+    },
+});
+
+Vue.component("user-search", {
     data() {
         return {
             users: null,
         }
     },
     template: `
-    <div class="container">
-        <nav-bar></nav-bar>
-        <div class="user-search-result-page-container">
-            <div v-if="users" class="user-search-inner-container">
-                <div class="sort-continer">
-                    <label for="sort">Kriterijum sortiranja:</label>
-                    <select name="sort" id="sort" @change="sort($event)">
-                        <option value="name">Ime</option>
-                        <option value="surname">Prezime</option>
-                        <option value="dateOfBirth">Datum rođenja</option>
-                    </select>
-                </div>
-                <user-search-result v-for="u in users" :user="u" :key="u.username"></user-search-result>            
+    <div class="user-search-result-container">
+        <div v-if="users" class="user-search-inner-container">
+            <div class="sort-continer">
+                <label for="sort">Kriterijum sortiranja:</label>
+                <select name="sort" id="sort" @change="sort($event)">
+                    <option value="name">Ime</option>
+                    <option value="surname">Prezime</option>
+                    <option value="dateOfBirth">Datum rođenja</option>
+                </select>
             </div>
+            <user-search-result v-for="u in users" :user="u" :key="u.username"></user-search-result>            
         </div>
     </div>
     `,
