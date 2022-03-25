@@ -14,10 +14,29 @@ Vue.component("user-search-result", {
     `,
     methods: {
         sendFriendRequest() {
-            console.log("Friend request sent...");
+            if (window.sessionStorage.getItem("user")) {
+                username = JSON.parse(window.sessionStorage.getItem("user")).username;
+                token = JSON.parse(window.sessionStorage.getItem("user")).jwt
+                axios.post("/send-friend-request", {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                    params: {
+                        sender: username,
+                        receiver: this.user.username,
+                    }
+                }).then((response) => {})
+                .catch(() => alert("Greška."));
+            }
+            else
+                alert("Morate biti prijavljeni kako bi poslali zahtev.")
         },
         sendMessage() {
-            console.log("Sending message...");
+            if (window.sessionStorage.getItem("user")) {
+                router.push({path: '/message/'+this.user.username});
+            }
+            else
+                alert("Morate biti prijavljeni kako bi poslali poruku.")
         },
     },
     mounted() {
