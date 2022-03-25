@@ -61,4 +61,8 @@ public class UserService {
         return getUser(params.get("username1")[0]).getFriends().contains(getUser(params.get("username2")[0]))
                 && getUser(params.get("username2")[0]).getFriends().contains(getUser(params.get("username1")[0]));
     }
+
+    public void addFriendRequest(String sender, String receiver) {
+        // friendRequestDAO.addFriendRequest(userDAO.getUserByUsername(sender), userDAO.getUserByUsername(receiver));
+    }
 }
