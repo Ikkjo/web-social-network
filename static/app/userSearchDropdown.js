@@ -70,9 +70,10 @@ Vue.component("user-search-dropdown", {
                 alert("Unesite bar jedan parametar pretrage");
             else {
                 if (router.currentRoute.path === "/user-search-result")
-                    router.go({path: '/user-search-result', name: 'UserSearch', params: this.params});
+                    // router.go({path: '/user-search-result', name: 'UserSearch', params: this.params});
+                    router.push({path: '/user-search-result', name: 'UserSearch', query: this.params});
                 else 
-                    router.push({path: '/user-search-result', name: 'UserSearch', params: this.params});
+                    router.push({path: '/user-search-result', name: 'UserSearch', query: this.params});
             }
         }
     },

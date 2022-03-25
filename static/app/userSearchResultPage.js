@@ -36,7 +36,7 @@ Vue.component("user-search-result-page", {
         },
     },
     mounted() {
-        let params = this.$route.params;
+        let params = this.$route.query;
         axios.get("/user-search/", {
             params: params
         }).then(response => this.users = response.data.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0)))
