@@ -13,10 +13,10 @@ Vue.component("login", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container">
+    <div class="container flex-container">
         <div class="inner-container">
             <div class="form-container">
-                <form class="login-form">
+                <form @submit.prevent>
                     <h2 class="title">Uloguj se</h2>
                     <div class="form-element">
                         <div class="input-field">
@@ -62,7 +62,10 @@ Vue.component("login", {
             axios.post("/login/", {
                 username: this.form.username,
                 password: this.form.password,
-            }).then(() => router.push("/profile/"))
+            }).then((response) =>{
+                window.sessionStorage.setItem("user", JSON.stringify(response.data));
+                router.push("/nav");
+            })
             .catch(() => alert("Login neuspješan."))
         }
     },

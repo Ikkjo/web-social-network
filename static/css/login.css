@@ -1,151 +1,23 @@
-    .container {
-        display: flex;
-        height: 100vh;
-    }
-    
-    .container .inner-container {
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-width: 30vw;
-    }
-    
-    form {
-        padding: 0rem 5rem;
-        overflow: hidden;
-    }
-    
-    .title {
-        font-size: 2.2rem;
-        color: #444;
-        margin-bottom: 10px;
-    }
-    
-    .form-element {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .alert-danger {
-        color: red;
-        width: 100%;
-        font-size: 0.8rem;
-    }
-    
-    .input-field {
-        background-color: #f0f0f0;
-        margin: 10px 0;
-        height: 55px;
-        border-radius: 55px;
-        /* positions the icon and input */
-        display: grid;
-        grid-template-columns: 15% 85%;
-        padding: 0 0.4rem;
-    }
-    
-    .input-field i {
-        text-align: center;
-        line-height: 55px;
-        color: #acacac;
-        transition: 0.5s;
-        font-size: 1.1rem;
-    }
-    
-    .input-field input {
-        background: none;
-        outline: none;
-        border: none;
-        line-height: 1;
-        font-weight: 600;
-        font-size: 1.1rem;
-        color: #333;
-        min-width: 380px;
-    }
-    
-    select {
-        background: none;
-        outline: none;
-        border: none;
-        line-height: 1;
-        font-weight: 600;
-        font-size: 1.1rem;
-        color: #333;
-    }
-    
-    .input-field input::placeholder {
-        color: #aaa;
-        font-weight: 500;
-    }
-    
-    .name-surname {
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .name-surname .form-element {
-        width: 49%;
-    }
-    
-    .links {
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .btn {
-        background-color: var(--light-blue, #5995fd);
-        border: none;
-        outline: none;
-        height: 49px;
-        border-radius: 49px;
-        color: #fff;
-        text-transform: uppercase;
-        font-weight: 600;
-        margin: 10px 0;
-        cursor: pointer;
-        transition: 0.5s;
-    }
-    
-    .btn:hover {
-        background-color: #4d84e2;
-    }
-    
-    .btn.transparent {
-        background-color: transparent;
-        color: var(--light-blue, #5995fd);
-        border: 2px solid var(--light-blue, #5995fd);
-    }
-    
-    .btn.transparent:hover {
-        background-color: var(--light-blue, #5995fd);
-        color: #fff;
-    }
-    
-    .btn.unfriend {
-        color: red;
-        border: 2px solid red;
-    }
-    
-    .btn.unfriend:hover {
-        background-color: red;
-        color: #fff;
-    }
-    
-    .buttons-div {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .picture-container span {
-        margin-right: 20%;
-    }
-    
-    @media (max-width: 870px) {}
-    
-    @media (max-width: 570px) {}
+.name-surname {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name-surname .form-element {
+    width: 49%;
+}
+
+
+.btn.unfriend {
+    color: red;
+    border: 2px solid red;
+}
+
+.btn.unfriend:hover {
+    background-color: red;
+    color: #fff;
+}
+
+@media (max-width: 870px) {}
+
+@media (max-width: 570px) {}
