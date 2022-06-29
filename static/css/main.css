@@ -93,7 +93,6 @@ form {
     font-weight: 600;
     font-size: 1.1rem;
     color: #333;
-    min-width: 380px;
     text-overflow: ellipsis;
     /* Required for text-overflow to do anything */
     white-space: nowrap;
@@ -153,6 +152,12 @@ select {
 .buttons-div {
     display: flex;
     flex-direction: column;
+}
+
+.picture-container {
+    background-repeat: no-repeat;
+    background-position: center; 
+    /* background-size: cover; */
 }
 
 .picture-container span {

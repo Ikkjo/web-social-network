@@ -23,8 +23,7 @@ Vue.component("register", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container flex-container">
-
+    <div id="register" class="container flex-container">
         <div class="inner-container">
             <div class="register-form-container">
                 <form @submit.prevent>
@@ -94,7 +93,6 @@ Vue.component("register", {
             </div>
         </div>
     <div class="inner-container picture-container">
-        <span><img src="./img/undraw_explore.svg" alt=""></span>
     </div>
 </div>	 	 
 `,

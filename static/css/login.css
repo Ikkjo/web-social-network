@@ -3,6 +3,11 @@
     justify-content: space-between;
 }
 
+#login .picture-container {
+    background-image: url("../img/login.svg");
+    margin-right: 100px;
+}
+
 .name-surname .form-element {
     width: 49%;
 }

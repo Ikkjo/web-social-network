@@ -1,3 +1,9 @@
 .register-form-container {
     width: 80%;
 }
+
+#register .picture-container {
+    background-image: url("../img/undraw_explore.svg");
+    background-position: bottom;
+    margin-bottom: 150px;
+}

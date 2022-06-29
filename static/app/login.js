@@ -13,7 +13,7 @@ Vue.component("login", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container flex-container">
+    <div id="login" class="container flex-container">
         <div class="inner-container">
             <div class="form-container">
                 <form @submit.prevent>
@@ -44,7 +44,6 @@ Vue.component("login", {
             </div>
         </div>
         <div class="inner-container picture-container">
-            <span><img src="./img/login.svg" alt=""></span>
         </div>
     </div>	 
 `,
