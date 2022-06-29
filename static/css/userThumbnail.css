@@ -18,6 +18,10 @@
     margin-left: 5px;
 }
 
+.user-thumbnail-container .profile-pic {
+    display: flex;
+}
+
 .fullname {
     font-size: 1.2rem;
     text-decoration: none;

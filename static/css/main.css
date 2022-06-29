@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 :root {
     /* variables */
-    --light-blue: #5995fd
+    --light-blue: #5995fd;
+    --bg-white: #f0f0f0;
 }
 
 * {
@@ -17,7 +18,7 @@ html, body {
 
 body {
     font-family: "Poppins", sans-serif;
-    background-color: #fff;
+    background-color: var(--bg-white);
 }
 
 a {
@@ -97,6 +98,13 @@ form {
     /* Required for text-overflow to do anything */
     white-space: nowrap;
     overflow: hidden;
+}
+
+textarea {
+    font-family: "Poppins";
+    outline: none;
+    border: none;
+    background-color: #f0f0f0;
 }
 
 select {
