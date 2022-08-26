@@ -10,8 +10,8 @@ import com.google.gson.Gson;
 
 public class JsonDatabase implements Database{
 	
-	private Object data;
-	private File jsonFile;
+	protected Object data;
+	protected File jsonFile;
 	
 	public JsonDatabase() {
 		
@@ -54,11 +54,11 @@ public class JsonDatabase implements Database{
 	}
 
 	@Override
-	public void Save(Object obj) {
+	public void Save() {
 		try (FileWriter fw = new FileWriter(this.jsonFile)) {
 			
 			Gson json = new Gson();
-			String jsonStr = json.toJson(obj);
+			String jsonStr = json.toJson(this.data);
 			
 			fw.write(jsonStr);
 			
