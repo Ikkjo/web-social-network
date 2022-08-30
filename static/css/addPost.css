@@ -8,6 +8,10 @@
     padding-bottom: 0px;
 }
 
+#add-post .user-thumbnail {
+    margin-bottom: 10px;
+}
+
 #add-post textarea {
     padding: 0.5rem;
     width: 100%;
@@ -66,6 +70,7 @@
     text-align: center;
     align-items: center;
     padding-top: 12px !important;
+    margin: 0px !important;
 }
 
 #add-post .post-container {
@@ -74,7 +79,7 @@
 }
 
 #add-post .post-photo {
-    margin-top: 10px;
+    margin: 10px 0px;
     border-radius: 10px;
     object-fit: contain;
     width: 100%;
