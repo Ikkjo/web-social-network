@@ -12,7 +12,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -127,7 +128,6 @@ select {
     justify-content: space-between;
 }
 
-
 .btn {
     background-color: var(--light-blue, #5995fd);
     border: none;
@@ -144,6 +144,10 @@ select {
 
 .btn:hover {
     background-color: #4d84e2;
+}
+
+.btn:disabled {
+    background-color: lightgray !important;
 }
 
 .btn.transparent {
@@ -164,7 +168,7 @@ select {
 
 .picture-container {
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     /* background-size: cover; */
 }
 

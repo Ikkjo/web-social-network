@@ -5,6 +5,7 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
+    padding-bottom: 0px;
 }
 
 #add-post textarea {
@@ -25,10 +26,57 @@
 }
 
 #add-post .button-div {
-    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 #add-post .btn-right {
-    position: absolute;
-    right: 0;
+    width: 50%;
+}
+
+#add-post .post-type-div {
+    display: flex;
+}
+
+#add-post .post-type-div .btn {
+    width: 50%;
+}
+
+#add-post .post-type-div .type-btn-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#add-post .post-type-div .type-btn-right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#add-post .inactive {
+    background-color: aliceblue;
+}
+
+#add-post input {
+    display: none;
+}
+
+#add-post label {
+    cursor: pointer;
+    width: 160px;
+    text-align: center;
+    align-items: center;
+    padding-top: 12px !important;
+}
+
+#add-post .post-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-post .post-photo {
+    margin-top: 10px;
+    border-radius: 10px;
+    object-fit: contain;
+    width: 100%;
+    max-height: 1000px;
 }
