@@ -1,12 +1,12 @@
 Vue.component("main-feed", {
     data() {
-        return {
-        }
+        return {}
     },
     template: ` 
     <div id="main-feed">
     <nav-bar></nav-bar>
     <div class="container">
+        <add-post></add-post>
         <div class="posts">
             <post></post>
             <post></post>
