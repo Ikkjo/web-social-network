@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 :root {
     /* variables */
-    --light-blue: #5995fd
+    --light-blue: #5995fd;
+    --bg-white: #f0f0f0;
 }
 
 * {
@@ -11,13 +12,14 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
 body {
     font-family: "Poppins", sans-serif;
-    background-color: #fff;
+    background-color: var(--bg-white);
 }
 
 a {
@@ -99,6 +101,13 @@ form {
     overflow: hidden;
 }
 
+textarea {
+    font-family: "Poppins";
+    outline: none;
+    border: none;
+    background-color: #f0f0f0;
+}
+
 select {
     background: none;
     outline: none;
@@ -119,7 +128,6 @@ select {
     justify-content: space-between;
 }
 
-
 .btn {
     background-color: var(--light-blue, #5995fd);
     border: none;
@@ -136,6 +144,10 @@ select {
 
 .btn:hover {
     background-color: #4d84e2;
+}
+
+.btn:disabled {
+    background-color: lightgray !important;
 }
 
 .btn.transparent {
@@ -156,7 +168,7 @@ select {
 
 .picture-container {
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     /* background-size: cover; */
 }
 
