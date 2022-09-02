@@ -1,0 +1,23 @@
+#friend-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 300px;
+    width: 650px;
+    max-width: 1000px;
+    background-color: white;
+}
+
+#friend-card .user-thumbnail {}
+
+#friend-card i {
+    color: red;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+#friend-card i:hover {
+    color: darkred;
+    transition: 0.4s;
+}

@@ -34,7 +34,7 @@ Vue.component("my-profile", {
                                 </div>
                                 <div class="link-group">
                                 <i class="fas fa-user-friends"></i>
-                                <router-link to="/mutual-friends">Prijatelji</router-link>
+                                <router-link to="/friend-list">Prijatelji</router-link>
                                 </div>
                         </div>
                         <div class="links-bottom">
