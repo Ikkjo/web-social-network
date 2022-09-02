@@ -1,23 +1,30 @@
-.nav-container {
+header {
+    position: fixed;
     width: 100%;
-}
-
-.nav-div {
-    width: 100%;
+    height: 77px;
+    top: 0;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 1px 8px var(--bg-white);
     display: flex;
     justify-content: space-between;
+    padding: 10px 10%;
+    display: flex;
     align-items: center;
-    padding: 5px 10%;
 }
 
-.nav-div ul {
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
     text-align: center;
 }
 
-.nav-div li,
-.nav-div a,
-.nav-div button 
-{
+nav li,
+nav a,
+.nav-btn {
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
@@ -41,14 +48,13 @@
 .nav-links li a {
     transition: all 0.3s ease 0s;
     color: black;
-
 }
 
 .nav-links li a:hover {
     color: var(--light-blue);
 }
 
-.nav-div .btn {
+.nav-btn {
     padding: 9px 25px;
     text-transform: initial;
     margin: 0;

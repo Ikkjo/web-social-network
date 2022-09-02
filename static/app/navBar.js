@@ -5,8 +5,7 @@ Vue.component("nav-bar", {
         }
     },
     template: `
-    <div class="nav-container">
-        <div class="nav-div">
+    <header id="nav-header">
             <img class="logo" src="./img/logo.svg" alt="logo">
             <nav>
                 <ul class="nav-links">
@@ -15,16 +14,15 @@ Vue.component("nav-bar", {
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
-            <button @click="signOut" class="btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
-        </div>
-    </div>
+            <button @click="signOut" class="btn nav-btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>
+    </header>
     `,
     methods: {
         signOut() {
             window.sessionStorage.removeItem("user");
             router.push("/login")
         },
-     },
+    },
     mounted() {
         if (window.sessionStorage.getItem("user"))
             this.user = JSON.parse(window.sessionStorage.getItem("user"))
