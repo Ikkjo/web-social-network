@@ -2,9 +2,11 @@ package beans.models;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public class User {
 
+	private UUID id;
     private String username;
     private String password;
     private String email;
@@ -43,7 +45,29 @@ public class User {
 		this.friends = friends;
 		this.isPrivate = isPrivate;
 	}
-	
+
+	public User(UUID id, String username, String password, String email, String name, String surname,
+				LocalDate dateOfBirth, Gender gender, UserRole role, String profilePic, List<Post> posts,
+				List<FriendRequest> friendRequests, List<User> friends, Boolean isPrivate, Boolean deleted,
+				String jwt) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+		this.role = role;
+		this.profilePic = profilePic;
+		this.posts = posts;
+		this.friendRequests = friendRequests;
+		this.friends = friends;
+		this.isPrivate = isPrivate;
+		this.deleted = deleted;
+		this.jwt = jwt;
+	}
+
 	public User(String username, String password, String email, String name, String surname, Gender gender) {
 		super();
 		this.username = username;
@@ -176,5 +200,9 @@ public class User {
 
 	public String getJwt() {
 		return jwt;
+	}
+
+	public UUID getId() {
+		return id;
 	}
 }
