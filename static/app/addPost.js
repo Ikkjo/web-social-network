@@ -1,5 +1,8 @@
 Vue.use(vuelidate.default)
 Vue.component("add-post", {
+    props: {
+        defaultType: String,
+    },
     data() {
         return {
             post: {
@@ -19,7 +22,7 @@ Vue.component("add-post", {
     },
     template: ` 
     <div id="add-post">
-        <div class="post-type-div">
+        <div v-if="defaultType==='all'" class="post-type-div">
             <button @click="toggle('text')" class="btn type-btn-left" :class="{ inactive: post.type !== 'text' }"><i class="fas fa-comment"></i> Tekst</button></a>
             <button @click="toggle('photo')" class="btn type-btn-right" :class="{inactive: post.type !== 'photo'}"><i class="fas fa-image"></i> Slika</button></a>
         </div>
@@ -28,7 +31,7 @@ Vue.component("add-post", {
             :useDate="false" 
             class="user-thumbnail"/>
 
-        <div class="post-container" v-if="post.type === 'text'">
+        <div class="post-container" v-if="(post.type === 'text' && defaultType==='all') || defaultType==='text'">
             <textarea
                 @focus="inFocus('text')"
                 @blur="outFocus('text')"
@@ -51,7 +54,7 @@ Vue.component("add-post", {
             </div>
         </div>
 
-        <div class="post-container" v-if="post.type === 'photo'">
+        <div class="post-container" v-if="(post.type === 'photo' && defaultType==='all') || defaultType==='photo'">
                 <img class="post-photo" :src="post.photo">
                 <label class="btn" for="photo-input"><i class="fas fa-image"></i> Dodaj sliku</label>
                 <input type="file"

@@ -7,7 +7,7 @@ Vue.component("post", {
                     surname: 'Testic',
                     profilePic: "../img/female_avatar.svg"
                 },
-                type: 'photo',
+                type: 'text',
                 photo: "../img/avatar1.jpg",
                 text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas repellendus enim doloremque rem doloribus commodi fugit nam quisquam sequi corporis?'
             },
@@ -16,6 +16,7 @@ Vue.component("post", {
     template: ` 
     <div id="post">
         <div class="post-container">
+            <i class="fas fa-trash-alt delete-post"></i>
             <img v-if="post.type==='photo'" class="image-div picture-container" :src="post.photo" alt="" srcset="">
             <div class="post-content">
                 <user-thumbnail

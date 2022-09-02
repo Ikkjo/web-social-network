@@ -6,6 +6,7 @@ const MyProfile = { template: '<my-profile></my-profile>' }
 const NavBar = { template: '<nav-bar></nav-bar>' }
 const UserSearchResultPage = { template: '<user-search-page></user-search-page>' }
 const MainFeed = { template: '<main-feed></main-feed>' }
+const AllPosts = { template: '<posts></posts>' }
 
 const router = new VueRouter({
     mode: 'hash',
@@ -18,6 +19,7 @@ const router = new VueRouter({
         { path: '/my-profile', component: MyProfile },
         { path: '/user-search-page', name: 'UserSearch', component: UserSearchResultPage },
         { path: '/nav', component: NavBar },
+        { path: '/posts', component: AllPosts },
     ]
 });
 
