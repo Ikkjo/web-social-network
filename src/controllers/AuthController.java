@@ -33,7 +33,8 @@ public class AuthController {
 
     public static Route register = (Request request, Response response) -> {
         response.type("application/json");
-        User user = new Gson().fromJson(request.body(), User.class);
+        String requestBody = request.body();
+        User user = new Gson().fromJson(requestBody, User.class);
         if (userService.isValidUsername(user.getUsername()) && userService.isValidEmail(user.getEmail())) {
             userService.addUser(user);
             return new Gson().toJson(user);
@@ -41,32 +42,5 @@ public class AuthController {
         response.status(401);
         return response;
     };
-
-    public static void run(final UserService userService) {
-
-        post("/login/", (request, response) -> {
-            response.type("application/json");
-            User user = new Gson().fromJson(request.body(), User.class);
-            if(userService.isValidUser(user)) {
-                user = userService.getUser(user.getUsername());
-                // create login token
-                return new Gson().toJson(user);
-            }
-            response.status(401);
-            return response;
-        });
-
-        post("/register/", (request, response) -> {
-            response.type("application/json");
-            User user = new Gson().fromJson(request.body(), User.class);
-            if (userService.isValidUsername(user.getUsername()) && userService.isValidEmail(user.getEmail())) {
-                userService.addUser(user);
-                return new Gson().toJson(user);
-            }
-            response.status(401);
-            return response;
-        });
-
-    }
 
 }

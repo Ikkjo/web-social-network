@@ -7,16 +7,16 @@ import java.util.List;
 
 public class DateUtils {
 
-    public static List<LocalDate> toDateList(String dateRange) {
-        List<LocalDate> dates = new ArrayList<>();
+    public static List<Long> toDateList(String dateRange) {
+        List<Long> dates = new ArrayList<>();
         String[] tokens = dateRange.replaceAll("\\[|\\]|\"", "").split(",");
         for (String token : tokens)
-            dates.add(LocalDate.parse(token.replaceAll("T.*", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            dates.add(LocalDate.parse(token.replaceAll("T.*", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd")).toEpochDay());
         return dates;
     }
 
-    public static boolean isWithinRange(LocalDate date, LocalDate startDate, LocalDate endDate) {
-        return !(date.isBefore(startDate) || date.isAfter(endDate));
+    public static boolean isWithinRange(Long date, Long startDate, Long endDate) {
+        return !(date < startDate || date > (endDate));
     }
 
 }

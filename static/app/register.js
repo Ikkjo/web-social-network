@@ -9,7 +9,8 @@ Vue.component("register", {
                 username: '',
                 email: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                gender: ''
             },
             infocus: {
                 name: true,
@@ -75,7 +76,7 @@ Vue.component("register", {
                     </div>
                     <div class="input-field">
                         <i class="fas fa-venus-mars"></i>
-                        <select name="gender">
+                        <select name="gender" v-model="form.gender">
                             <option value="male">Muško</option>
                             <option value="female">Žensko</option>
                         </select>
@@ -113,6 +114,7 @@ Vue.component("register", {
                 username: this.form.username,
                 email: this.form.email,
                 password: this.form.password,
+                gender: this.form.gender
             }).then(response => router.push("/login/"))
             .catch(error => alert("Registracija neuspješna. Korisničko ime ili email već iskorišten."))
         }

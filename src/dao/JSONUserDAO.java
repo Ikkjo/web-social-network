@@ -63,7 +63,7 @@ public class JSONUserDAO implements UserDAO{
     @Override
     public HashMap<String, User> getUsersByDateRange(String dateRange) {
         HashMap<String, User> usersMap = new HashMap<>();
-        List<LocalDate> dates = DateUtils.toDateList(dateRange);
+        List<Long> dates = DateUtils.toDateList(dateRange);
         for (User u: users.values()) {
                 if (DateUtils.isWithinRange(u.getDateOfBirth(), dates.get(0), dates.get(1)))
                     usersMap.put(u.getUsername(), u);
@@ -84,11 +84,11 @@ public class JSONUserDAO implements UserDAO{
         u4.setProfilePic("./img/female_avatar.svg");
         u5.setProfilePic("./img/female_avatar.svg");
 
-        u1.setDateOfBirth(LocalDate.of(1996, 2, 12));
-        u2.setDateOfBirth(LocalDate.of(1997, 2, 12));
-        u3.setDateOfBirth(LocalDate.of(1998, 2, 12));
-        u4.setDateOfBirth(LocalDate.of(1999, 2, 12));
-        u5.setDateOfBirth(LocalDate.of(2000, 10, 20));
+        u1.setDateOfBirth(LocalDate.of(1996, 2, 12).toEpochDay());
+        u2.setDateOfBirth(LocalDate.of(1997, 2, 12).toEpochDay());
+        u3.setDateOfBirth(LocalDate.of(1998, 2, 12).toEpochDay());
+        u4.setDateOfBirth(LocalDate.of(1999, 2, 12).toEpochDay());
+        u5.setDateOfBirth(LocalDate.of(2000, 10, 20).toEpochDay());
 
         u1.setFriends(Arrays.asList(u2));
         u2.setFriends(Arrays.asList(u1));

@@ -18,7 +18,11 @@ public class UserService {
 
 
     public boolean isValidUser(User user) {
-         return userDAO.getUserByUsername(user.getUsername()).getPassword().equals(user.getPassword());
+        User u = userDAO.getUserByUsername(user.getUsername());
+        if (u != null){
+            return u.getPassword().equals(user.getPassword());
+        }
+        return false;
     }
 
     public beans.models.User getUser(String username) {
