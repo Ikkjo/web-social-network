@@ -2,6 +2,14 @@
     background-color: #fff;
 }
 
+#login .inner-container .form-container {
+    min-width: 300px;
+}
+
+#login form {
+    padding: 0px !important;
+}
+
 .name-surname {
     display: flex;
     justify-content: space-between;
@@ -15,7 +23,6 @@
 .name-surname .form-element {
     width: 49%;
 }
-
 
 .btn.unfriend {
     color: red;
