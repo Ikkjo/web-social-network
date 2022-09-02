@@ -8,6 +8,9 @@ const UserSearchResultPage = { template: '<user-search-page></user-search-page>'
 const MainFeed = { template: '<main-feed></main-feed>' }
 const AllPosts = { template: '<posts></posts>' }
 const AllPhotos = { template: '<photos></photos>' }
+const FriendList = { template: '<friend-list></friend-list>' }
+const FriendRequestList = { template: '<friend-request-list></friend-request-list>' }
+const MutualFriendsList = { template: '<mutual-friends-list></mutual-friends-list>' }
 
 const router = new VueRouter({
     mode: 'hash',
@@ -22,6 +25,9 @@ const router = new VueRouter({
         { path: '/nav', component: NavBar },
         { path: '/posts', component: AllPosts },
         { path: '/photos', component: AllPhotos },
+        { path: '/friend-list', component: FriendList },
+        { path: '/mutual-friends', component: MutualFriendsList },
+        { path: '/friend-request-list', component: FriendRequestList },
     ]
 });
 

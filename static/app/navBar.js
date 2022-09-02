@@ -11,6 +11,7 @@ Vue.component("nav-bar", {
                 <ul class="nav-links">
                     <li><i class="fas fa-home"></i> <router-link to="/">Početna</router-link></li>
                     <li v-if="user"><i class="fas fa-user"></i> <router-link to="/my-profile">Profil</router-link></li>
+                    <li v-if="user"><i class="fas fa-users"></i><router-link to="/friend-request-list"> Zahtevi za prijateljstvo</router-link></li>
                     <li><user-search-dropdown></user-search-dropdown></li>
                 </ul>
             </nav>
