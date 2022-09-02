@@ -1,33 +1,38 @@
 package beans.models;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class User {
-
-	private UUID id;
     private String username;
     private String password;
     private String email;
     private String name;
     private String surname;
-    private LocalDate dateOfBirth;
+    private Long dateOfBirth;
     private Gender gender;
     private UserRole role;
     private String profilePic;
-    private List<Post> posts;
-    private List<FriendRequest> friendRequests;
+	private transient List<Post> posts;
+    private transient List<FriendRequest> friendRequests;
     private transient List<User> friends;
     private Boolean isPrivate;
     private Boolean deleted;
 	private String jwt;
 
 	public User() {
-    	
+		this.dateOfBirth = new Date().getTime();
+		this.role = UserRole.ORDINARY;
+		this.isPrivate = false;
+		this.deleted = false;
+		this.friends = new ArrayList<>();
+		this.friendRequests = new ArrayList<>();
+		this.posts = new ArrayList<>();
+		this.profilePic = "default_profile_pic.jpg";
     }
     
-	public User(String username, String password, String email, String name, String surname, LocalDate dateOfBirth,
+	public User(String username, String password, String email, String name, String surname, Long dateOfBirth,
 			Gender gender, UserRole role, String profilePic, List<Post> posts, List<FriendRequest> friendRequests,
 			List<User> friends, Boolean isPrivate) {
 		super();
@@ -46,28 +51,6 @@ public class User {
 		this.isPrivate = isPrivate;
 	}
 
-	public User(UUID id, String username, String password, String email, String name, String surname,
-				LocalDate dateOfBirth, Gender gender, UserRole role, String profilePic, List<Post> posts,
-				List<FriendRequest> friendRequests, List<User> friends, Boolean isPrivate, Boolean deleted,
-				String jwt) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.name = name;
-		this.surname = surname;
-		this.dateOfBirth = dateOfBirth;
-		this.gender = gender;
-		this.role = role;
-		this.profilePic = profilePic;
-		this.posts = posts;
-		this.friendRequests = friendRequests;
-		this.friends = friends;
-		this.isPrivate = isPrivate;
-		this.deleted = deleted;
-		this.jwt = jwt;
-	}
-
 	public User(String username, String password, String email, String name, String surname, Gender gender) {
 		super();
 		this.username = username;
@@ -76,6 +59,14 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.gender = gender;
+		this.dateOfBirth = new Date().getTime();
+		this.role = UserRole.ORDINARY;
+		this.isPrivate = false;
+		this.deleted = false;
+		this.friends = new ArrayList<>();
+		this.friendRequests = new ArrayList<>();
+		this.posts = new ArrayList<>();
+		this.profilePic = "default_profile_pic.jpg";
 	}
 
 
@@ -119,11 +110,11 @@ public class User {
 		this.surname = surname;
 	}
 	
-	public LocalDate getDateOfBirth() {
+	public Long getDateOfBirth() {
 		return dateOfBirth;
 	}
-	
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+
+	public void setDateOfBirth(Long dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
@@ -176,12 +167,9 @@ public class User {
 	}
 
 	public void addFriend(User newFriend) { this.friends.add(newFriend);}
-	
-	public Boolean isPrivate() {
-	
+	public Boolean getPrivate() {
 		return isPrivate;
 	}
-	
 	public void setPrivate(Boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
@@ -200,9 +188,5 @@ public class User {
 
 	public String getJwt() {
 		return jwt;
-	}
-
-	public UUID getId() {
-		return id;
 	}
 }
