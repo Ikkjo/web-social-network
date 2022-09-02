@@ -1,10 +1,11 @@
 package main;
 
 import controllers.AuthController;
+import controllers.ProfilePageController;
 import controllers.SearchController;
 import dao.JSONUserDAO;
-import dao.UserDAO;
 import services.UserService;
+import utils.SecurityUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,13 +23,18 @@ public class Main {
 
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
+        before(SecurityUtils.addTrailingSlashes);
+
         AuthController authController = new AuthController(userService);
-        post("/login/", authController.login);
-        post("/register/", authController.register);
+        post("/login/", AuthController.login);
+        post("/register/", AuthController.register);
 
         SearchController searchController = new SearchController(userService);
-        get("/user-search/", searchController.userSearch);
-        get("/are-friends", searchController.areFriends);
+        get("/user-search/", SearchController.userSearch);
+        get("/are-friends", SearchController.areFriends);
+
+        ProfilePageController profilePageController = new ProfilePageController(userService);
+        get("/user/:username", ProfilePageController.getUser);
 
 
     }
