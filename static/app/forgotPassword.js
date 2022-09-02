@@ -11,8 +11,8 @@ Vue.component("forgot-password", {
     },
     props: ["submitForm"],
     template: ` 
-    <div class="container">
-    <div class="forgot-container">
+    <div id="forgot-password" class="container flex-container">
+    <div class="inner-container forgot-container">
         <form class="forgot-form">
             <h2 class="title">Promeni lozinku</h2>
             <div class="input-field">
@@ -28,8 +28,7 @@ Vue.component("forgot-password", {
             </div>
         </form>
     </div>
-    <div class="picture-container">
-        <span><img src="./img/forgot_password.svg" alt=""></span>
+    <div class="inner-container picture-container">
     </div>
 </div>	 
 `,

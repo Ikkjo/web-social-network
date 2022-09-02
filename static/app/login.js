@@ -59,13 +59,13 @@ Vue.component("login", {
         },
         login() {
             axios.post("/login/", {
-                username: this.form.username,
-                password: this.form.password,
-            }).then((response) =>{
-                window.sessionStorage.setItem("user", JSON.stringify(response.data));
-                router.push("/nav");
-            })
-            .catch(() => alert("Login neuspješan."))
+                    username: this.form.username,
+                    password: this.form.password,
+                }).then((response) => {
+                    window.sessionStorage.setItem("user", JSON.stringify(response.data));
+                    router.push("/nav");
+                })
+                .catch(() => alert("Login neuspješan."))
         }
     },
     mounted() {},
