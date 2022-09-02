@@ -1,12 +1,12 @@
-Vue.component("main-feed", {
+Vue.component("photos", {
     data() {
         return {}
     },
     template: ` 
-    <div id="main-feed">
+    <div id="photos">
     <nav-bar></nav-bar>
     <div class="container">
-        <add-post defaultType="all"></add-post>
+        <add-post defaultType="photo"></add-post>
         <div class="posts">
             <post></post>
             <post></post>

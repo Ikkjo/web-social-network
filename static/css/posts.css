@@ -1,4 +1,4 @@
-#main-feed .container {
+#posts .container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,7 @@
     padding-top: 97px;
 }
 
-#main-feed .posts {
+#posts .posts {
     display: flex;
     align-items: center;
     justify-content: center;
