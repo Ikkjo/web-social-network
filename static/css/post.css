@@ -15,14 +15,30 @@
     color: red;
     position: absolute;
     top: 0;
+    left: 0;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#post .post-container .post-toggle {
+    color: lightgray;
+    position: absolute;
+    top: 0;
     right: 0;
     padding: 10px;
     font-size: 1.5rem;
     cursor: pointer;
 }
 
+#post .post-container .post-toggle:hover {
+    color: gray;
+    transition: 0.4s;
+}
+
 #post .post-container .delete-post:hover {
     color: darkred;
+    transition: 0.4s;
 }
 
 #post .post-content {
@@ -46,6 +62,10 @@
     padding: 10px 0px;
 }
 
+#post .text-div-collapsed {
+    padding: 10px;
+}
+
 #post .comments-div {}
 
 #post textarea {
@@ -53,6 +73,14 @@
     width: 100%;
     border-radius: 18px;
     resize: none;
+}
+
+#post .user-thumbnail-text {
+    margin-top: 40px;
+}
+
+#post .user-thumbnail-collapsed {
+    padding: 5px 0px 0px 10px;
 }
 
 #post .user-thumbnail img {
