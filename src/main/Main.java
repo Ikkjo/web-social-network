@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         port(8080);
         JSONUserDAO userDAO = new JSONUserDAO();
-        userDAO.generateTestData();
+        userDAO.load();
         UserService userService = new UserService(userDAO);
 
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
