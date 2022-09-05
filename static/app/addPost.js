@@ -50,7 +50,7 @@ Vue.component("add-post", {
                 name="photo-input"
                 accept="image/png, image/jpeg">
             <div class="button-div">
-                <button :disabled="post.text === ''" @click="uploadPost" class="btn btn-right"><i class="fas fa-plus-circle"></i> Objavi</button></a>
+                <button :disabled="post.text.replace(/^\s+|\s+$/g, '')" @click="uploadPost" class="btn btn-right"><i class="fas fa-plus-circle"></i> Objavi</button></a>
             </div>
         </div>
 
