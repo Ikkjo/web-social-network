@@ -1,24 +1,22 @@
 Vue.component("friend-card", {
-    data() {
-        return {
-            user: {
-                name: 'Test',
-                surname: 'Testic',
-                profilePic: "../img/female_avatar.svg",
-                username: "nekoime"
-            },
-        }
+    props: {
+        friend: Object
     },
     template: ` 
     <div id="friend-card">
             <user-thumbnail
-                :user="user"
+                :user="friend.user"
                 :useDate="false" 
                 class="user-thumbnail"/>
-            <i class="fas fa-user-minus"></i>
+            <i @click="removeFriend" class="fas fa-user-minus"></i>
     </div>	 
 `,
-    methods: {},
+    methods: {
+        removeFriend() {
+            // TODO: Add delete request
+            this.$emit("removeFriend", this.friend.id)
+        }
+    },
     mounted() {},
 });
 
