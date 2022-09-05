@@ -5,3 +5,16 @@
 #comment .user-thumbnail .fullname {
     font-size: 1rem;
 }
+
+#comment .delete-comment {
+    color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#comment .delete-comment-div {
+    position: relative;
+}

@@ -6,9 +6,7 @@ Vue.component("post", {
     data() {
         return {
             detailedView: false,
-            user: {
-                username: "nekoime"
-            },
+            user: null,
             newComment: null,
             infocus: {
                 newComment: true
@@ -20,7 +18,7 @@ Vue.component("post", {
         <div class="post-container">
             <i v-if="!detailedView" @click="detailedView=!detailedView" class="fas fa-arrow-down post-toggle"></i>
             <i v-if="detailedView" @click="detailedView=!detailedView" class="fas fa-arrow-up post-toggle"></i>
-            <i v-if="post.user.username === user.username && detailedView" class="fas fa-trash-alt delete-post"></i>
+            <i @click="deletePost" v-if="user && post.user.username === user.username && detailedView" class="fas fa-trash-alt delete-post"></i>
             
             <div v-if="!detailedView">
                 <user-thumbnail
@@ -50,7 +48,7 @@ Vue.component("post", {
                     type="text"
                     placeholder="Komentariši" name="add-comment"/>
                     <div v-show="!isFocused('newComment') && $v.newComment.$invalid" class="alert alert-danger">Tekst je obavezan.</div>
-                    <comment v-for="(comment, i) in post.comments" :key="i" :comment="post.comments[i]"/>
+                    <comment v-for="(comment, i) in post.comments" :key="i" :comment="post.comments[i]" @deleteComment="deleteComment"/>
                 </div>
             </div>
         </div>
@@ -69,6 +67,16 @@ Vue.component("post", {
             this.post.comments.push(comment);
             this.newComment = null;
             // TODO: add post request
+        },
+        deletePost() {
+            // TODO: add delete request
+            this.$emit("deletePost", this.post.id)
+        },
+        deleteComment(id) {
+            console.log("ovde " + id)
+            for (let i = 0; i < this.post.comments.length; i++)
+                if (this.post.comments[i].id === id)
+                    this.post.comments.splice(i, 1);
         },
         isFocused(field) {
             return this.infocus[field]

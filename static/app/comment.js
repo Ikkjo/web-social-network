@@ -3,7 +3,9 @@ Vue.component("comment", {
         comment: Object
     },
     data() {
-        return {}
+        return {
+            user: null
+        }
     },
     template: ` 
     <div id="comment">
@@ -11,11 +13,22 @@ Vue.component("comment", {
             :user="comment.user"
             :useDate="false" 
             class="user-thumbnail"/>
+        <div v-if="user && user.username === comment.user.username" class="delete-comment-div">
+            <i @click="deleteComment" class="fas fa-trash-alt delete-comment"></i>
+        </div>
         <div class="text-div">{{comment.text}}</div>
     </div>	 
 `,
-    methods: {},
-    mounted() {},
+    methods: {
+        deleteComment() {
+            console.log(this.comment.id)
+                // add delete request (use comment id)
+            this.$emit("deleteComment", this.comment.id)
+        }
+    },
+    mounted() {
+        // TODO: get user from localstorage
+    },
 });
 
 // new Vue({}).$mount("#wrapper")
