@@ -1,9 +1,9 @@
 package main;
 
-import controllers.AuthController;
-import controllers.ProfilePageController;
-import controllers.SearchController;
+import controllers.*;
+import dao.JSONPostDAO;
 import dao.JSONUserDAO;
+import services.PostService;
 import services.UserService;
 import utils.SecurityUtils;
 
@@ -18,8 +18,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         port(8080);
         JSONUserDAO userDAO = new JSONUserDAO();
-        userDAO.load();
+        JSONPostDAO postDAO = new JSONPostDAO();
+
         UserService userService = new UserService(userDAO);
+        PostService postService = new PostService(postDAO, userDAO);
 
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
@@ -36,6 +38,12 @@ public class Main {
         ProfilePageController profilePageController = new ProfilePageController(userService);
         get("/user/:username", ProfilePageController.getUser);
 
+        MainFeedController mainFeedController = new MainFeedController(postService);
+        get("/post/main-feed/", MainFeedController.getMainFeedPosts);
+
+        PostController postController = new PostController(postService);
+        post("/post/add/", PostController.addPost);
+        delete("/post/delete/", PostController.deletePost);
 
     }
 

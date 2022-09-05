@@ -13,9 +13,11 @@ public class Post {
 	private String text;
 	private List<Comment> comments;
 	private Long timestamp;
+	private Boolean deleted;
 	
 	public Post() {
 		this.comments = new ArrayList<>();
+		this.deleted = false;
 	}
 
 	public Post(UUID id, String user, String picture, String text, List<Comment> comments, Long timestamp) {
@@ -25,6 +27,7 @@ public class Post {
 		this.text = text;
 		this.comments = comments;
 		this.timestamp = timestamp;
+		this.deleted = false;
 	}
 
 	public Post(String user, String picture, String text, List<Comment> comments, Long timestamp) {
@@ -33,11 +36,13 @@ public class Post {
 		this.text = text;
 		this.comments = comments;
 		this.timestamp = timestamp;
+		this.deleted = false;
 	}
 
 	public Post(String picture, String text) {
 		this.picture = picture;
 		this.text = text;
+		this.deleted = false;
 	}
 
 	public Post(UUID id, String picture, String text) {
@@ -52,12 +57,14 @@ public class Post {
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
+		this.deleted = false;
 	}
 
 	public Post(String user, String picture, String text) {
 		this.user = user;
 		this.picture = picture;
 		this.text = text;
+		this.deleted = false;
 	}
 
 	public Post(String user, String picture, String text, List<Comment> comments) {
@@ -65,6 +72,7 @@ public class Post {
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
+		this.deleted = false;
 	}
 
 	public Post(String picture, String text, List<Comment> comments) {
@@ -72,6 +80,7 @@ public class Post {
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
+		this.deleted = false;
 	}
 
 	public Post(UUID id, String picture, String text, List<Comment> comments) {
@@ -79,6 +88,18 @@ public class Post {
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
+		this.deleted = false;
+	}
+
+	public Post(UUID id, String user, String picture, String text, List<Comment> comments,
+				Long timestamp, Boolean deleted) {
+		this.id = id;
+		this.user = user;
+		this.picture = picture;
+		this.text = text;
+		this.comments = comments;
+		this.timestamp = timestamp;
+		this.deleted = deleted;
 	}
 
 	public String getPicture() {
@@ -119,5 +140,13 @@ public class Post {
 
 	public String getUser() {
 		return user;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 }

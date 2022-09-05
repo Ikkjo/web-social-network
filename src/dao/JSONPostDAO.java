@@ -31,13 +31,13 @@ public class JSONPostDAO implements PostDAO {
 
     @Override
     public void deletePost(Post post) {
-        this.posts.remove(post.getId());
+        this.posts.get(post.getId()).setDeleted(true);
         saveChanges();
     }
 
     @Override
     public void deletePost(UUID id) {
-        this.posts.remove(id);
+        this.posts.get(id).setDeleted(true);
         saveChanges();
     }
 
