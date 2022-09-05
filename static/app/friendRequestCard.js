@@ -1,25 +1,32 @@
 Vue.component("friend-request-card", {
+    props: {
+        friendRequest: Object
+    },
     data() {
         return {
-            user: {
-                name: 'Test',
-                surname: 'Testic',
-                profilePic: "../img/female_avatar.svg",
-                username: "nekoime"
-            },
+
         }
     },
     template: ` 
     <div id="friend-request-card">
             <user-thumbnail
-                :user="user"
+                :user="friendRequest.user"
                 :useDate="false" 
                 class="user-thumbnail"/>
-            <i class="fas fa-user-check accept"></i>
-            <i class="fas fa-user-alt-slash decline"></i>
+            <i @click="acceptRequest" class="fas fa-user-check accept"></i>
+            <i @click="declineRequest" class="fas fa-user-alt-slash decline"></i>
     </div>	 
 `,
-    methods: {},
+    methods: {
+        acceptRequest() {
+            // TODO: add backend request (acceptRequest)
+            this.$emit("removeRequest", this.friendRequest.id)
+        },
+        declineRequest() {
+            // TODO: add backend request (declineRequest)
+            this.$emit("removeRequest", this.friendRequest.id)
+        },
+    },
     mounted() {},
 });
 
