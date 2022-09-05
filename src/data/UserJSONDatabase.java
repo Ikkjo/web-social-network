@@ -35,8 +35,13 @@ public class UserJSONDatabase extends JsonDatabase implements UserDatabase{
     }
 
     public void saveDB() {
-        this.data = this.users;
+        Object data = this.users;
         this.Save();
+    }
+
+    @Override
+    public void Save() {
+
     }
 
     @Override
@@ -122,5 +127,10 @@ public class UserJSONDatabase extends JsonDatabase implements UserDatabase{
             }
         }
         return sameRole;
+    }
+
+    @Override
+    public Object Load() {
+        return null;
     }
 }

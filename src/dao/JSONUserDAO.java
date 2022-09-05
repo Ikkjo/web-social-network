@@ -2,8 +2,14 @@ package dao;
 
 import beans.models.Gender;
 import beans.models.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import data.JsonDatabase;
 import utils.DateUtils;
+import utils.FilePathUtil;
 
+import java.io.*;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -12,9 +18,41 @@ public class JSONUserDAO implements UserDAO{
     private Map<String, User> users;
 
     public JSONUserDAO() {
-        users = new HashMap<>();
+        load();
     }
 
+    @Override
+    public void saveChanges() {
+        JsonDatabase.save(new File(FilePathUtil.USER_DATA_FILEPATH), this.users);
+    }
+
+    @Override
+    public void load() {
+        File f = new File(FilePathUtil.USER_DATA_FILEPATH);
+
+        if (!f.exists()){
+            try {
+                f.createNewFile();
+                this.users = new HashMap<>();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+
+            Type usersTypeToken = new TypeToken<HashMap<String, User>>() {}.getType();
+
+                this.users = new Gson().fromJson(br, usersTypeToken);
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            this.users = new HashMap<>();
+        }
+
+    }
     @Override
     public List<User> getUsers() {
         return new ArrayList<>(users.values());
@@ -23,7 +61,11 @@ public class JSONUserDAO implements UserDAO{
     @Override
     public void addUser(User user) {
         users.put(user.getUsername(), user);
+        saveChanges();
     }
+
+
+
 
     @Override
     public User getUserByUsername(String username) {

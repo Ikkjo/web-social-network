@@ -1,5 +1,7 @@
 /bin/
 
+static/img
+
 .idea/
 
 # Compiled source #
@@ -19,7 +21,7 @@
 *.dmg
 *.gz
 *.iso
-#*.jar
+*.jar
 *.rar
 *.tar
 *.zip
