@@ -1,20 +1,17 @@
+Vue.use(vuelidate.default)
 Vue.component("post", {
+    props: {
+        post: Object,
+    },
     data() {
         return {
-            post: {
-                user: {
-                    name: 'Test',
-                    surname: 'Testic',
-                    profilePic: "../img/female_avatar.svg",
-                    username: "nekoime"
-                },
-                type: 'text',
-                photo: "../img/avatar1.jpg",
-                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas repellendus enim doloremque rem doloribus commodi fugit nam quisquam sequi corporis?'
-            },
             detailedView: false,
             user: {
                 username: "nekoime"
+            },
+            newComment: null,
+            infocus: {
+                newComment: true
             }
         }
     },
@@ -45,12 +42,15 @@ Vue.component("post", {
                 <img v-if="post.type==='text' && post.photo" class="image-div picture-container" :src="post.photo" alt="" srcset="">
                 <div class="comments-div">
                     <textarea
+                    v-model="newComment"
+                    @focus="inFocus('newComment')"
+                    @blur="outFocus('newComment')"
+                    @keyup.enter="addComment"
                     @keyup="textAreaAdjust"   
                     type="text"
                     placeholder="Komentariši" name="add-comment"/>
-                    <comment/>
-                    <comment/>
-                    <comment/>
+                    <div v-show="!isFocused('newComment') && $v.newComment.$invalid" class="alert alert-danger">Tekst je obavezan.</div>
+                    <comment v-for="(comment, i) in post.comments" :key="i" :comment="post.comments[i]"/>
                 </div>
             </div>
         </div>
@@ -61,9 +61,35 @@ Vue.component("post", {
             let area = event.target;
             area.style.height = "1px";
             area.style.height = (25 + area.scrollHeight) + "px";
+        },
+        addComment() {
+            if (!this.newComment.replace(/^\s+|\s+$/g, ''))
+                return
+            let comment = { user: this.user, text: this.newComment };
+            this.post.comments.push(comment);
+            this.newComment = null;
+            // TODO: add post request
+        },
+        isFocused(field) {
+            return this.infocus[field]
+        },
+        inFocus(field) {
+            this.infocus[field] = true
+        },
+        outFocus(field) {
+            this.infocus[field] = false
+        },
+    },
+    mounted() {
+        // TODO: set user to logged in user (from local storage)
+    },
+    validations: {
+        newComment: {
+            required: validators.required,
+            minLength: validators.minLength(1),
+            maxLength: validators.maxLength(1000)
         }
     },
-    mounted() {},
 });
 
 // new Vue({}).$mount("#wrapper")

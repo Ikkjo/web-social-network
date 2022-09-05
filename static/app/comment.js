@@ -1,15 +1,9 @@
 Vue.component("comment", {
+    props: {
+        comment: Object
+    },
     data() {
-        return {
-            comment: {
-                user: {
-                    name: 'Test',
-                    surname: 'Testic',
-                    profilePic: "../img/female_avatar.svg"
-                },
-                text: 'Lor ectetur adipisicing elit. Tempore animi alias laboriosam fugiat, suscipit ipsum! Porro ducimus veritatis laboriosam eveniet.'
-            },
-        }
+        return {}
     },
     template: ` 
     <div id="comment">
@@ -20,8 +14,7 @@ Vue.component("comment", {
         <div class="text-div">{{comment.text}}</div>
     </div>	 
 `,
-    methods: {
-    },
+    methods: {},
     mounted() {},
 });
 
