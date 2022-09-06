@@ -1,11 +1,8 @@
 Vue.component("user-profile", {
     data() {
         return {
-            user: {
-                name: "Neko",
-                surname: "Prezime",
-                isPublic: true,
-            },
+            user: null,
+            loggedInUser: null,
             isFriend: true,
             isAdmin: false,
             loggedUser: true,
@@ -25,11 +22,11 @@ Vue.component("user-profile", {
 
                     <div class="user-links" v-bind:class="{'user-links-50' : user.isPublic && !isFriend}">
                         <div class="links-top">
-                            <div v-if="isFriend || user.isPublic" class="link-group">
+                            <div v-if="isFriend || user.isPublic || loggedInUser.type === 'admin'" class="link-group">
                                 <i class="fas fa-book-open"></i>
                                 <router-link to="/posts">Objave</router-link>
                             </div>
-                            <div v-if="isFriend || user.isPublic" class="link-group">
+                            <div v-if="isFriend || user.isPublic || loggedInUser.type === 'admin'" class="link-group">
                                 <i class="fas fa-images"></i>
                                 <router-link to="/photos">Fotografije</router-link>
                             </div>
@@ -47,8 +44,10 @@ Vue.component("user-profile", {
                                 </label>
                             </div>
                             <div> -->
-                            <button v-if="isFriend || isAdmin" class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
+                            <button v-if="isFriend || loggedInUser.type === 'admin'" class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
                             <button v-if="loggedUser" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
+                            <button v-if="loggedInUser && loggedInUser.type==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
+                            <button v-if="loggedInUser && loggedInUser.type==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
                         </div>
                     </div>
                 </div>
@@ -59,6 +58,18 @@ Vue.component("user-profile", {
         </div>
     </div>
     `,
-    methods: {},
-    mounted() {},
+    methods: {
+        block() {
+            // TODO: PUT request for blocking user
+            this.user.blocked = true;
+        },
+        unban() {
+            // TODO: PUT request for unblocking user
+            this.user.blocked = false;
+        }
+    },
+    mounted() {
+        // TODO: set loggedInUser to logged in user 
+        // Add GET request using $route.params.username and set this.user
+    },
 });

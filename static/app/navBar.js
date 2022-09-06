@@ -10,9 +10,9 @@ Vue.component("nav-bar", {
             <nav>
                 <ul class="nav-links">
                     <li><i class="fas fa-home"></i> <router-link to="/">Početna</router-link></li>
-                    <li v-if="user"><i class="fas fa-user"></i> <router-link to="/my-profile">Profil</router-link></li>
-                    <li v-if="user"><i class="fas fa-users"></i><router-link to="/friend-request-list"> Zahtevi za prijateljstvo</router-link></li>
-                    <li><user-search-dropdown></user-search-dropdown></li>
+                    <li v-if="user && user.type === 'regular'"><i class="fas fa-user"></i> <router-link to="/my-profile">Profil</router-link></li>
+                    <li v-if="user && user.type === 'regular'"><i class="fas fa-users"></i><router-link to="/friend-request-list"> Zahtevi za prijateljstvo</router-link></li>
+                    <li><user-search-dropdown :useEmail="user.type==='admin'"/></li>
                 </ul>
             </nav>
             <button v-if="user" @click="signOut" class="btn nav-btn"><i class="fas fa-sign-out-alt"></i> Odjavi se</button></a>

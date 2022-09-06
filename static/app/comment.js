@@ -13,7 +13,7 @@ Vue.component("comment", {
             :user="comment.user"
             :useDate="false" 
             class="user-thumbnail"/>
-        <div v-if="user && user.username === comment.user.username" class="delete-comment-div">
+        <div v-if="user && (user.username === comment.user.username || user.type === 'admin')" class="delete-comment-div">
             <i @click="deleteComment" class="fas fa-trash-alt delete-comment"></i>
         </div>
         <div class="text-div">{{comment.text}}</div>

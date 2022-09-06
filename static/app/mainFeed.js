@@ -1,14 +1,15 @@
 Vue.component("main-feed", {
     data() {
         return {
-            posts: []
+            posts: [],
+            user: null,
         }
     },
     template: ` 
     <div id="main-feed">
     <nav-bar></nav-bar>
     <div class="container">
-        <add-post defaultType="all"></add-post>
+        <add-post v-if="user && user.type==='regular'" defaultType="all"></add-post>
         <div class="posts">
             <post v-for="(post, i) in posts" :key="i" :post="posts[i]" @deletePost="deletePost"/>
         </div>
@@ -245,6 +246,8 @@ Vue.component("main-feed", {
     },
     mounted() {
         this.posts = this.getPosts();
+        if (window.sessionStorage.getItem("user"))
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
     },
 });
 
