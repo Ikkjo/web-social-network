@@ -6,6 +6,10 @@ Vue.component("user-thumbnail", {
         useDate: {
             type: Boolean,
             default: true,
+        },
+        useEmail: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -14,9 +18,10 @@ Vue.component("user-thumbnail", {
         }
     },
     template: `
-    <div class="flex-container user-thumbnail-container">
+    <div id="user-thumbnail" class="flex-container user-thumbnail-container">
         <router-link :to="/user/+user.username" class="profile-pic"><img :src="user.profilePic" alt="Profilna slika"></router-link>
         <router-link :to="/user/+user.username" class="fullname">{{user.name}} {{user.surname}}</router-link>
+        <router-link v-if="useEmail" :to="/user/+user.username" class="email">{{user.email}}</router-link>
         <span v-if="useDate">({{date}})</span>
     </div>
     `,
@@ -30,7 +35,7 @@ Vue.component("user-thumbnail", {
     },
     mounted() {
         if (this.useDate) {
-            this.date = JSON.stringify(new Date(this.user.dateOfBirth.year + '-' + this.user.dateOfBirth.month + '-' +this.user.dateOfBirth.day));
+            this.date = JSON.stringify(new Date(this.user.dateOfBirth.year + '-' + this.user.dateOfBirth.month + '-' + this.user.dateOfBirth.day));
             this.date = this.date.replace(/\"|T.*/g, "").split("-");
             this.date = this.date[2] + "." + this.date[1] + "." + this.date[0];
         }

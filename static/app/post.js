@@ -18,7 +18,7 @@ Vue.component("post", {
         <div class="post-container">
             <i v-if="!detailedView" @click="detailedView=!detailedView" class="fas fa-arrow-down post-toggle"></i>
             <i v-if="detailedView" @click="detailedView=!detailedView" class="fas fa-arrow-up post-toggle"></i>
-            <i @click="deletePost" v-if="user && post.user.username === user.username && detailedView" class="fas fa-trash-alt delete-post"></i>
+            <i @click="deletePost" v-if="user && (post.user.username === user.username || user.type === 'admin') && detailedView" class="fas fa-trash-alt delete-post"></i>
             
             <div v-if="!detailedView">
                 <user-thumbnail
@@ -40,6 +40,7 @@ Vue.component("post", {
                 <img v-if="post.type==='text' && post.photo" class="image-div picture-container" :src="post.photo" alt="" srcset="">
                 <div class="comments-div">
                     <textarea
+                    v-if="user && user.type==='regular'"
                     v-model="newComment"
                     @focus="inFocus('newComment')"
                     @blur="outFocus('newComment')"
@@ -69,7 +70,11 @@ Vue.component("post", {
             // TODO: add post request
         },
         deletePost() {
-            // TODO: add delete request
+            // TODO: add post delete request for regular user
+            // TODO: add post delete request for admin user and send message to the post owner using deletionReason
+            if (this.user.type === 'admin') {
+                let deletionReason = prompt("Razlog brisanja objave: ")
+            }
             this.$emit("deletePost", this.post.id)
         },
         deleteComment(id) {

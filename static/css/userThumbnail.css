@@ -22,7 +22,8 @@
     display: flex;
 }
 
-.fullname {
+#user-thumbnail .fullname,
+#user-thumbnail .email {
     font-size: 1.2rem;
     text-decoration: none;
     color: black;

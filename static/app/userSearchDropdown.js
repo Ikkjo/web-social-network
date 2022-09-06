@@ -1,10 +1,17 @@
 Vue.component("user-search-dropdown", {
     components: {},
+    props: {
+        useEmail: {
+            type: Boolean,
+            default: false
+        },
+    },
     data() {
         return {
             params: {
                 name: null,
                 surname: null,
+                email: null,
                 dateRange: null,
             },
             lang: {
@@ -51,6 +58,10 @@ Vue.component("user-search-dropdown", {
                 <i class="fas fa-user"></i>
                 <input v-model="params.surname" type="text" placeholder="Prezime" name="surname"/>
             </div>
+            <div v-if="useEmail" class="input-field">
+                <i class="fas fa-envelope"></i>
+                <input v-model="params.email" type="text" placeholder="Email" name="email"/>
+            </div>
             <date-picker :lang="lang" v-model="params.dateRange" range format="DD.MM.YYYY" range-separator=" - " class="date-picker"></date-picker>
             <button @click="search" class="btn">Pretraži</button>
         </div>
@@ -66,7 +77,7 @@ Vue.component("user-search-dropdown", {
             if (this.params.dateRange && !this.params.dateRange.every(x => x === null)) {
                 this.params.dateRange = JSON.stringify([this.params.dateRange[0], this.params.dateRange[1]]);
             }
-            if (!this.params.name && !this.params.surname && !this.params.dateRange)
+            if (!this.params.name && !this.params.surname && !this.params.dateRange && (!useEmail || !this.params.email))
                 alert("Unesite bar jedan parametar pretrage");
             else {
                 router.push({ path: '/user-search-page', name: 'UserSearch', query: this.params });
