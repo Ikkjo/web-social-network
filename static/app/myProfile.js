@@ -40,6 +40,10 @@ Vue.component("my-profile", {
                                     <i class="fas fa-users"></i>
                                     <router-link to="/friend-request-list">Zahtevi</router-link>
                                 </div>
+                                <div class="link-group">
+                                    <i class="fas fa-edit"></i>
+                                    <router-link to="/edit-profile">Uredi profil</router-link>
+                                </div>
                         </div>
                         <div class="links-bottom">
                             <button class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruke</button>

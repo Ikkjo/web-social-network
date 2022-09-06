@@ -2,6 +2,7 @@ const LoginForm = { template: '<login></login>' }
 const RegisterForm = { template: '<register></register>' }
 const ForgotPasswordForm = { template: '<forgot-password></forgot-password>' }
 const UserProfilePage = { template: '<user-profile></user-profile>' }
+const EditProfile = { template: '<edit-profile></edit-profile>' }
 const MyProfile = { template: '<my-profile></my-profile>' }
 const NavBar = { template: '<nav-bar></nav-bar>' }
 const UserSearchResultPage = { template: '<user-search-page></user-search-page>' }
@@ -21,6 +22,7 @@ const router = new VueRouter({
         { path: '/login/forgot', component: ForgotPasswordForm },
         { path: '/user/:username', component: UserProfilePage },
         { path: '/my-profile', component: MyProfile },
+        { path: '/edit-profile', component: EditProfile },
         { path: '/user-search-page', name: 'UserSearch', component: UserSearchResultPage },
         { path: '/nav', component: NavBar },
         { path: '/posts', component: AllPosts },
