@@ -3,9 +3,7 @@ Vue.component("user-profile", {
         return {
             user: null,
             loggedInUser: null,
-            isFriend: true,
-            isAdmin: false,
-            loggedUser: true,
+            isFriend: false,
         }
     },
     template: `
@@ -24,15 +22,15 @@ Vue.component("user-profile", {
                         <div class="links-top">
                             <div v-if="isFriend || user.isPublic || loggedInUser.type === 'admin'" class="link-group">
                                 <i class="fas fa-book-open"></i>
-                                <router-link to="/posts">Objave</router-link>
+                                <router-link :to="'/user/'+user.username+'/posts'">Objave</router-link>
                             </div>
                             <div v-if="isFriend || user.isPublic || loggedInUser.type === 'admin'" class="link-group">
                                 <i class="fas fa-images"></i>
-                                <router-link to="/photos">Fotografije</router-link>
+                                <router-link :to="'/user/'+user.username+'/photos'">Fotografije</router-link>
                             </div>
                             <div v-if="isFriend" class="link-group">
                                 <i class="fas fa-user-friends"></i>
-                                <router-link to="/mutual-friends">Zajednički prijatelji/ce</router-link>
+                                <router-link :to="'/user/'+user.username+'/mutual-friends'">Zajednički prijatelji/ce</router-link>
                             </div>
                         </div>
 
@@ -45,7 +43,7 @@ Vue.component("user-profile", {
                             </div>
                             <div> -->
                             <button v-if="isFriend || loggedInUser.type === 'admin'" class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
-                            <button v-if="loggedUser" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
+                            <button v-if="loggedInUser && loggedInUser.type === 'regular'" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
                             <button v-if="loggedInUser && loggedInUser.type==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
                             <button v-if="loggedInUser && loggedInUser.type==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
                         </div>
@@ -66,10 +64,24 @@ Vue.component("user-profile", {
         unban() {
             // TODO: PUT request for unblocking user
             this.user.blocked = false;
-        }
+        },
     },
     mounted() {
-        // TODO: set loggedInUser to logged in user 
-        // Add GET request using $route.params.username and set this.user
+        if (window.sessionStorage.getItem("user")) {
+            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
+            let username = JSON.parse(window.sessionStorage.getItem("user")).username;
+            let token = JSON.parse(window.sessionStorage.getItem("user")).jwt
+            axios.get("/are-friends/" + this.$route.params.username, {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                }).then((response) => this.isFriend = response.data)
+                .catch(() => alert("Greška."));
+        }
+        axios.get("/user/" + this.$route.params.username).then((response) => {
+                console.log(response.data)
+                this.user = JSON.parse(JSON.stringify(response.data))
+            })
+            .catch(() => alert("Došlo je do greške."))
     },
 });

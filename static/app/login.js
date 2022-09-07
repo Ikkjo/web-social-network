@@ -63,7 +63,7 @@ Vue.component("login", {
                     password: this.form.password,
                 }).then((response) => {
                     window.sessionStorage.setItem("user", JSON.stringify(response.data));
-                    router.push("/nav");
+                    router.push("/");
                 })
                 .catch(() => alert("Login neuspješan."))
         }

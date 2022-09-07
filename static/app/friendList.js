@@ -22,7 +22,6 @@ Vue.component("friend-list", {
                     this.friends.splice(i, 1);
         },
         getFriends() {
-            // TODO: Add get friends
             return [{
                     user: {
                         name: 'Test',
@@ -46,7 +45,11 @@ Vue.component("friend-list", {
         }
     },
     mounted() {
-        this.friends = this.getFriends();
+        if (window.sessionStorage.getItem("user")) {
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+                // TODO: Add get friends
+            this.friends = this.getFriends() // remove this after completing TODO
+        }
     },
 });
 

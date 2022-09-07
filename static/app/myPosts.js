@@ -1,4 +1,4 @@
-Vue.component("posts", {
+Vue.component("my-posts", {
     data() {
         return {
             posts: []
@@ -24,15 +24,17 @@ Vue.component("posts", {
         },
     },
     mounted() {
-        let token = "";
-        if (window.sessionStorage.getItem("user"))
-            token = window.sessionStorage.getItem("user").jwt
-        axios.get("/post/user/" + this.$route.params.username, { // TODO: Update the request
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                },
-            }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
-            .catch(() => alert("Greška."));
+        if (window.sessionStorage.getItem("user")) {
+            let user = window.sessionStorage.getItem("user")
+            axios.get("/post/user/" + user.username, {
+                    headers: {
+                        Authorization: 'Bearer ' + user.jwt,
+                    },
+                }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška."));
+        } else {
+            alert("Greška.")
+        }
     },
 });
 

@@ -27,7 +27,9 @@ Vue.component("comment", {
         }
     },
     mounted() {
-        // TODO: get user from localstorage
+        if (window.sessionStorage.getItem("user")) {
+            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
+        }
     },
 });
 

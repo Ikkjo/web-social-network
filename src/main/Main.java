@@ -36,7 +36,7 @@ public class Main {
         get("/are-friends", SearchController.areFriends);
 
         ProfilePageController profilePageController = new ProfilePageController(userService);
-        get("/user/:username", ProfilePageController.getUser);
+        get("/user/:username/", ProfilePageController.getUser);
 
         MainFeedController mainFeedController = new MainFeedController(postService);
         get("/post/main-feed/", MainFeedController.getMainFeedPosts);
@@ -44,8 +44,8 @@ public class Main {
         PostController postController = new PostController(postService);
         post("/post/add/", PostController.addPost);
         delete("/post/delete/", PostController.deletePost);
-        get("/post/:postId", PostController.getPost);
-        get("/post/user/:username", PostController.getUserPosts);
+        get("/post/:postId/", PostController.getPost);
+        get("/post/user/:username/", PostController.getUserPosts); // TODO: Add different requests for post and photo
 
     }
 

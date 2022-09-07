@@ -122,7 +122,6 @@ Vue.component("edit-profile", {
 
     },
     mounted() {
-        // TODO: set user to logged in user from session
         if (window.sessionStorage.getItem("user"))
             this.user = JSON.parse(window.sessionStorage.getItem("user"))
         this.form.name = JSON.parse(JSON.stringify(this.user.name))
