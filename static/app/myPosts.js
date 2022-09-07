@@ -1,8 +1,6 @@
 Vue.component("my-posts", {
     data() {
-        return {
-            posts: []
-        }
+        return {}
     },
     template: ` 
     <div id="posts">
@@ -22,19 +20,22 @@ Vue.component("my-posts", {
                 if (this.posts[i].id === id)
                     this.posts.splice(i, 1);
         },
+        getPosts() {
+            if (window.sessionStorage.getItem("user")) {
+                let user = window.sessionStorage.getItem("user")
+                axios.get("/post/user/" + user.username, { // TODO: Change request path
+                        headers: {
+                            Authorization: 'Bearer ' + user.jwt,
+                        },
+                    }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
+                    .catch(() => alert("Greška."));
+            } else {
+                alert("Greška.")
+            }
+        },
     },
     mounted() {
-        if (window.sessionStorage.getItem("user")) {
-            let user = window.sessionStorage.getItem("user")
-            axios.get("/post/user/" + user.username, {
-                    headers: {
-                        Authorization: 'Bearer ' + user.jwt,
-                    },
-                }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
-                .catch(() => alert("Greška."));
-        } else {
-            alert("Greška.")
-        }
+        this.posts = this.getPosts();
     },
 });
 
