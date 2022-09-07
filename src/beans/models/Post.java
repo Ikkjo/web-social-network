@@ -6,18 +6,19 @@ public class Post {
 
 	UUID id;
 	String user;
-
-
-
 	private String picture;
 	private String text;
 	private List<Comment> comments;
 	private Long timestamp;
 	private Boolean deleted;
-	
+	private PostType type;
+
+
+
 	public Post() {
 		this.comments = new ArrayList<>();
 		this.deleted = false;
+		this.type = PostType.TEXT;
 	}
 
 	public Post(UUID id, String user, String picture, String text, List<Comment> comments, Long timestamp) {
@@ -148,5 +149,13 @@ public class Post {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public PostType getType() {
+		return type;
+	}
+
+	public void setType(PostType type) {
+		this.type = type;
 	}
 }
