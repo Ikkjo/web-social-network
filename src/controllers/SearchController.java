@@ -13,8 +13,8 @@ public class SearchController {
 
     private static UserService userService;
 
-    public SearchController(final UserService userService) {
-        this.userService = userService;
+    public SearchController(final UserService uS) {
+        userService = uS;
     }
 
     public static Route userSearch = (Request request, Response response) -> {

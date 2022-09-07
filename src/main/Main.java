@@ -44,6 +44,8 @@ public class Main {
         PostController postController = new PostController(postService);
         post("/post/add/", PostController.addPost);
         delete("/post/delete/", PostController.deletePost);
+        get("/post/:postId", PostController.getPost);
+        get("/post/user/:username", PostController.getUserPosts);
 
     }
 

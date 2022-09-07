@@ -29,6 +29,13 @@ public class PostService {
         return allPosts;
     }
 
+    public Post getPostById (UUID id) {
+        if (postExists(id)) {
+            return this.postDAO.getPostById(id);
+        }
+        return null;
+    }
+
     public void addPost(Post p){
         this.postDAO.addPost(p);
     }
@@ -41,10 +48,18 @@ public class PostService {
         this.postDAO.deletePost(id);
     }
 
-    public List<Post> getByUser(String username) {
+    public List<Post> getPostsByUser(String username) {
         return postDAO.getPostsByUserUsername(username);
     }
 
+    public boolean postExists(UUID id) {
+        try {
+            Post p = this.postDAO.getPostById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
+    }
 
 }
