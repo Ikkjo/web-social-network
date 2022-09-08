@@ -22,56 +22,17 @@ Vue.component("posts", {
                 if (this.posts[i].id === id)
                     this.posts.splice(i, 1);
         },
-        getPosts() {
-            // TODO: add get request for posts
-            return [{
-                id: 0,
-                user: {
-                    name: 'Test',
-                    surname: 'Testic',
-                    profilePic: "../img/female_avatar.svg",
-                    username: "nekoime"
-                },
-                type: 'text',
-                photo: "../img/avatar1.jpg",
-                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas repellendus enim doloremque rem doloribus commodi fugit nam quisquam sequi corporis?',
-                comments: [{
-                        id: 0,
-                        user: {
-                            name: 'Test',
-                            surname: 'Testic',
-                            profilePic: "../img/female_avatar.svg",
-                            username: "nekoime"
-                        },
-                        text: 'Lor ectetur adipisicing elit. Tempore animi alias laboriosam fugiat, suscipit ipsum! Porro ducimus veritatis laboriosam eveniet.'
-                    },
-                    {
-                        id: 1,
-                        user: {
-                            name: 'Test',
-                            surname: 'Testic',
-                            profilePic: "../img/female_avatar.svg",
-                            username: "nekoime"
-                        },
-                        text: 'Lor ectetur adipisicing elit. Tempore animi alias laboriosam fugiat, suscipit ipsum! Porro ducimus veritatis laboriosam eveniet.'
-                    },
-                    {
-                        id: 2,
-                        user: {
-                            name: 'Test',
-                            surname: 'Testic',
-                            profilePic: "../img/female_avatar.svg",
-                            username: "nekoime"
-                        },
-                        text: 'Lor ectetur adipisicing elit. Tempore animi alias laboriosam fugiat, suscipit ipsum! Porro ducimus veritatis laboriosam eveniet.'
-                    },
-                ],
-            }]
-        },
-
     },
     mounted() {
-        this.posts = this.getPosts();
+        let token = "";
+        if (window.sessionStorage.getItem("user"))
+            token = window.sessionStorage.getItem("user").jwt
+        axios.get("/post/user/" + this.$route.params.username, { // TODO: Update the request
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
+            .catch(() => alert("Greška."));
     },
 });
 

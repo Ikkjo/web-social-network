@@ -1,14 +1,8 @@
 Vue.component("my-profile", {
     data() {
         return {
-            user: {
-                name: "Neko",
-                surname: "Prezime",
-                isPublic: true,
-            },
-            isFriend: true,
-            isAdmin: false,
-            loggedUser: true,
+            user: null,
+            isFriend: false,
         }
     },
     template: `
@@ -26,11 +20,11 @@ Vue.component("my-profile", {
                         <div class="links-top">
                                 <div class="link-group">
                                     <i class="fas fa-book-open"></i>
-                                    <router-link to="/posts">Objave</router-link>
+                                    <router-link to="/my-posts">Objave</router-link>
                                 </div>
                                 <div class="link-group">
                                 <i class="fas fa-images"></i>
-                                <router-link to="/photos">Fotografije</router-link>
+                                <router-link to="/my-photos">Fotografije</router-link>
                                 </div>
                                 <div class="link-group">
                                 <i class="fas fa-user-friends"></i>
@@ -58,5 +52,22 @@ Vue.component("my-profile", {
     </div>
     `,
     methods: {},
-    mounted() {},
+    mounted() {
+        if (window.sessionStorage.getItem("user")) {
+            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
+            let username = JSON.parse(window.sessionStorage.getItem("user")).username;
+            let token = JSON.parse(window.sessionStorage.getItem("user")).jwt
+            axios.get("/are-friends/" + this.$route.params.username, {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                }).then((response) => this.isFriend = response.data)
+                .catch(() => alert("Greška."));
+        }
+        axios.get("/user/" + this.$route.params.username).then((response) => {
+                console.log(response.data)
+                this.user = JSON.parse(JSON.stringify(response.data))
+            })
+            .catch(() => alert("Došlo je do greške."))
+    },
 });

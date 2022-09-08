@@ -9,6 +9,8 @@ const UserSearchResultPage = { template: '<user-search-page></user-search-page>'
 const MainFeed = { template: '<main-feed></main-feed>' }
 const AllPosts = { template: '<posts></posts>' }
 const AllPhotos = { template: '<photos></photos>' }
+const MyPosts = { template: '<my-posts></my-posts>' }
+const MyPhotos = { template: '<my-photos></my-photos>' }
 const FriendList = { template: '<friend-list></friend-list>' }
 const FriendRequestList = { template: '<friend-request-list></friend-request-list>' }
 const MutualFriendsList = { template: '<mutual-friends-list></mutual-friends-list>' }
@@ -21,14 +23,16 @@ const router = new VueRouter({
         { path: '/register/', component: RegisterForm },
         { path: '/login/forgot', component: ForgotPasswordForm },
         { path: '/user/:username', component: UserProfilePage },
+        { path: '/user/:username/posts', component: AllPosts },
+        { path: '/user/:username/photos', component: AllPhotos },
+        { path: '/user/:username/mutual-friends', component: MutualFriendsList },
         { path: '/my-profile', component: MyProfile },
         { path: '/edit-profile', component: EditProfile },
         { path: '/user-search-page', name: 'UserSearch', component: UserSearchResultPage },
         { path: '/nav', component: NavBar },
-        { path: '/posts', component: AllPosts },
-        { path: '/photos', component: AllPhotos },
+        { path: '/my-posts', component: MyPosts },
+        { path: '/my-photos', component: MyPhotos },
         { path: '/friend-list', component: FriendList },
-        { path: '/mutual-friends', component: MutualFriendsList },
         { path: '/friend-request-list', component: FriendRequestList },
     ]
 });

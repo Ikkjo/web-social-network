@@ -70,11 +70,18 @@ Vue.component("post", {
             // TODO: add post request
         },
         deletePost() {
-            // TODO: add post delete request for regular user
-            // TODO: add post delete request for admin user and send message to the post owner using deletionReason
             if (this.user.type === 'admin') {
                 let deletionReason = prompt("Razlog brisanja objave: ")
+                    // TODO: send message to user with deletionReason 
             }
+            let token = window.sessionStorage.getItem("token")
+            axios.delete("/post/delete/" + this.post.id, {
+                    headers: {
+                        Authorization: 'Bearer ' + this.user.jwt,
+                    },
+                }).then(() => alert("Objava uspešno obrisana."))
+                .catch(() => alert("Greška."));
+
             this.$emit("deletePost", this.post.id)
         },
         deleteComment(id) {
@@ -94,7 +101,9 @@ Vue.component("post", {
         },
     },
     mounted() {
-        // TODO: set user to logged in user (from local storage)
+        if (window.sessionStorage.getItem("user")) {
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+        }
     },
     validations: {
         newComment: {
