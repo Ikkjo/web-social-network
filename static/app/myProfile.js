@@ -40,7 +40,7 @@ Vue.component("my-profile", {
                                 </div>
                         </div>
                         <div class="links-bottom">
-                            <button class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruke</button>
+                            <button class="btn btn-message" @click="openMessages"><i class="fas fa-comment-dots"></i>Poruke</button>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,11 @@ Vue.component("my-profile", {
         </div>
     </div>
     `,
-    methods: {},
+    methods: {
+        openMessages() {
+            this.$router.push("/chat/" + "");
+        }
+    },
     mounted() {
         if (window.sessionStorage.getItem("user")) {
             this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
