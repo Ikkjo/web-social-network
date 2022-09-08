@@ -41,13 +41,17 @@ Vue.component("chat", {
             area.style.height = (25 + area.scrollHeight) + "px";
         },
         getMessages(username) {
+            this.toUser = username
             return
             // TODO: Add this request to backend
             axios.get("/chat/messages/" + username, {
                     headers: {
                         Authorization: 'Bearer' + this.user.jwt
                     },
-                }).then((response) => this.messages = JSON.parse(JSON.stringify(response.data)))
+                }).then((response) => {
+                    this.messages = JSON.parse(JSON.stringify(response.data))
+                    this.toUser = username
+                })
                 .catch(() => alert("Greška."))
         },
         sendMessage(event) {
@@ -138,8 +142,13 @@ Vue.component("chat", {
                 }).then((response) => this.users = JSON.parse(JSON.stringify(response.data)))
                 .catch(() => alert("Greška."));
 
-            // Get messages from the first user in users list 
-            this.getMessages(this.users[0].username)
+            // Get messages from the first user in users list
+            let username = this.$route.params.username
+            if (username) {
+                this.getMessages(username);
+            } else {
+                this.getMessages(this.users[0].username)
+            }
         } else {
             this.$router.push("/")
         }

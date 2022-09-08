@@ -14,17 +14,24 @@
 #chat .users {
     width: 20%;
     min-width: 175px;
-    padding-left: 15px;
+    padding: 0 15px;
 }
 
 #chat .users .user-thumbnail-container {
-    padding: 10px 0px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#chat .users .user-thumbnail-container:hover {
+    background-color: white;
+    transition: 0.2s;
 }
 
 #chat .chat-area {
     width: 80%;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
 }
 
 #chat .chat-box {
@@ -32,6 +39,7 @@
     padding: 15px;
     overflow-x: auto;
     height: 90%;
+    border-top-left-radius: 15px;
 }
 
 #chat .chat-box .message {

@@ -35,7 +35,7 @@ const router = new VueRouter({
         { path: '/my-photos', component: MyPhotos },
         { path: '/friend-list', component: FriendList },
         { path: '/friend-request-list', component: FriendRequestList },
-        { path: '/chat', component: Chat },
+        { path: '/chat/:username', component: Chat },
     ]
 });
 

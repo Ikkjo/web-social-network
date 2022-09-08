@@ -42,7 +42,7 @@ Vue.component("user-profile", {
                                 </label>
                             </div>
                             <div> -->
-                            <button v-if="isFriend || loggedInUser.type === 'admin'" class="btn btn-message"><i class="fas fa-comment-dots"></i>Poruka</button>
+                            <button v-if="isFriend || loggedInUser.type === 'admin'" class="btn btn-message" @click="openMessages"><i class="fas fa-comment-dots"></i>Poruka</button>
                             <button v-if="loggedInUser && loggedInUser.type === 'regular'" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
                             <button v-if="loggedInUser && loggedInUser.type==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
                             <button v-if="loggedInUser && loggedInUser.type==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
@@ -65,6 +65,9 @@ Vue.component("user-profile", {
             // TODO: PUT request for unblocking user
             this.user.blocked = false;
         },
+        openMessages() {
+            this.$router.push("/chat/" + user.username);
+        }
     },
     mounted() {
         if (window.sessionStorage.getItem("user")) {
