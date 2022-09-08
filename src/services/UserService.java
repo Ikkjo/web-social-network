@@ -1,7 +1,10 @@
 package services;
 
+import beans.models.FriendRequest;
 import beans.models.User;
+import com.google.gson.Gson;
 import dao.UserDAO;
+import utils.AuthUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,17 +13,28 @@ import java.util.Objects;
 
 public class UserService {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
+    public String logIn(String username, String password){
+        if(isValidUser(username, password)) {
+            User user = getUser(username);
+            String jws = AuthUtils.createJWT(user.getUsername(), 800000);
+            user.setJwt(jws);
+            return new Gson().toJson(user);
+        }
+        return null;
+    }
 
-    public boolean isValidUser(User user) {
-        User u = userDAO.getUserByUsername(user.getUsername());
+    public boolean isValidUser(String username, String password) {
+        User u = userDAO.getUserByUsername(username);
         if (u != null){
-            return u.getPassword().equals(user.getPassword());
+            if (!u.getDeleted()){
+                return u.getPassword().equals(password);
+            }
         }
         return false;
     }
@@ -57,12 +71,21 @@ public class UserService {
             else
                 map.keySet().retainAll(this.userDAO.getUsersByDateRange(params.get("dateRange")[0]).keySet());
         }
-        return new ArrayList<User>(map.values());
+        return new ArrayList<>(map.values());
     }
 
     public boolean areFriends(Map<String, String[]> params) {
+        String username1 = params.get("username1")[0];
+        String username2 = params.get("username2")[0];
 
-        return getUser(params.get("username1")[0]).getFriends().contains(getUser(params.get("username2")[0]))
-                && getUser(params.get("username2")[0]).getFriends().contains(getUser(params.get("username1")[0]));
+        User u1 = getUser(username1);
+        User u2 = getUser(username2);
+
+        return u1.getFriends().contains(u2.getUsername()) &&
+                u2.getFriends().contains(u1.getUsername());
+    }
+
+    public void acceptFriendRequest(FriendRequest request) {
+        User sender = getUser(request.getFrom());
     }
 }

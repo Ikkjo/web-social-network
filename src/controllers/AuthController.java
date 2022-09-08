@@ -6,29 +6,26 @@ import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import utils.AuthUtils;
-
-import static spark.Spark.post;
 
 public class AuthController {
 
     private static UserService userService;
 
-    public AuthController(final UserService userService) {
-        this.userService = userService;
+    public AuthController(final UserService uS) {
+        userService = uS;
     }
 
     public static Route login = (Request request, Response response) -> {
         response.type("application/json");
-        User user = new Gson().fromJson(request.body(), User.class);
-        if(userService.isValidUser(user)) {
-            user = userService.getUser(user.getUsername());
-            String jws = AuthUtils.createJWT(user.getUsername(), 800000);
-            user.setJwt(jws);
-            return new Gson().toJson(user);
+        try {
+            String username = request.queryParams("username");
+            String password = request.queryParams("password");
+            response.status(200);
+            return userService.logIn(username, password);
+        } catch (Exception e) {
+            response.status(401);
+            return response;
         }
-        response.status(401);
-        return response;
     };
 
     public static Route register = (Request request, Response response) -> {
