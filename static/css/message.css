@@ -1,0 +1,26 @@
+#message .profile-pic {
+    display: block;
+}
+
+#message img {
+    width: 30px;
+    border-radius: 50%;
+}
+
+#message .message-text {
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+#message .message-primary {
+    background-color: var(--light-blue);
+    color: white;
+    padding: 7px;
+    border-radius: 15px;
+}
+
+#message .message-secondary {
+    background-color: var(--bg-white);
+    padding: 7px;
+    border-radius: 15px;
+}

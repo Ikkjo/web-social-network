@@ -14,6 +14,7 @@ const MyPhotos = { template: '<my-photos></my-photos>' }
 const FriendList = { template: '<friend-list></friend-list>' }
 const FriendRequestList = { template: '<friend-request-list></friend-request-list>' }
 const MutualFriendsList = { template: '<mutual-friends-list></mutual-friends-list>' }
+const Chat = { template: '<chat></chat>' }
 
 const router = new VueRouter({
     mode: 'hash',
@@ -34,6 +35,7 @@ const router = new VueRouter({
         { path: '/my-photos', component: MyPhotos },
         { path: '/friend-list', component: FriendList },
         { path: '/friend-request-list', component: FriendRequestList },
+        { path: '/chat', component: Chat },
     ]
 });
 
