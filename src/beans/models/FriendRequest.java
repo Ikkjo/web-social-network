@@ -9,7 +9,7 @@ public class FriendRequest {
 	private Long creationTimeStamp;
 	private Long editTimeStamp;
 	private transient User sender;
-	private transient User receiver;
+	private transient User recipient;
 	
 	public FriendRequest() {
 		super();
@@ -81,11 +81,11 @@ public class FriendRequest {
 		this.sender = sender;
 	}
 
-	public User getReceiver() {
-		return receiver;
+	public User getRecipient() {
+		return recipient;
 	}
 
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 }

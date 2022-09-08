@@ -1,15 +1,13 @@
 package services;
 
 import beans.models.FriendRequest;
+import beans.models.FriendRequestStatus;
 import beans.models.User;
 import com.google.gson.Gson;
 import dao.UserDAO;
 import utils.AuthUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class UserService {
 
@@ -85,7 +83,10 @@ public class UserService {
                 u2.getFriends().contains(u1.getUsername());
     }
 
-    public void acceptFriendRequest(FriendRequest request) {
-        User sender = getUser(request.getFrom());
+    public void sendFriendRequest() {
+
+    }
+    public void acceptFriendRequest(String loggedInUser, String sender) {
+
     }
 }

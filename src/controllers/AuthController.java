@@ -2,6 +2,7 @@ package controllers;
 
 import beans.models.User;
 import com.google.gson.Gson;
+import dto.LoginDetailsDTO;
 import services.UserService;
 import spark.Request;
 import spark.Response;
@@ -18,10 +19,9 @@ public class AuthController {
     public static Route login = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            String username = request.queryParams("username");
-            String password = request.queryParams("password");
+            LoginDetailsDTO login = new Gson().fromJson(request.body(), LoginDetailsDTO.class);
             response.status(200);
-            return userService.logIn(username, password);
+            return userService.logIn(login.getUsername(), login.getPassword());
         } catch (Exception e) {
             response.status(401);
             return response;

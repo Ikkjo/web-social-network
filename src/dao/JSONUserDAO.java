@@ -132,8 +132,8 @@ public class JSONUserDAO implements UserDAO{
         u4.setDateOfBirth(LocalDate.of(1999, 2, 12).toEpochDay());
         u5.setDateOfBirth(LocalDate.of(2000, 10, 20).toEpochDay());
 
-        u1.setFriends(Arrays.asList(u2));
-        u2.setFriends(Arrays.asList(u1));
+        u1.setFriends(Arrays.asList(u2.getUsername()));
+        u2.setFriends(Arrays.asList(u1.getUsername()));
 
         users.put(u1.getUsername(), u1);
         users.put(u2.getUsername(), u2);
