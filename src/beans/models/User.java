@@ -31,6 +31,7 @@ public class User {
 		this.friendRequests = new ArrayList<>();
 		this.posts = new ArrayList<>();
 		this.profilePic = "./img/profile_pic.svg";
+		this.blocked = false;
     }
 
 	public User(String username, String password, String email, String name, String surname, Long dateOfBirth,
