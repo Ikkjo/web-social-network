@@ -1,12 +1,14 @@
 Vue.component("my-posts", {
     data() {
-        return {}
+        return {
+            posts: []
+        }
     },
     template: ` 
     <div id="posts">
     <nav-bar></nav-bar>
     <div class="container">
-        <add-post defaultType="text"></add-post>
+        <add-post defaultType="text" @addedPost="addedPost"></add-post>
         <div class="posts">
             <post v-for="(post, i) in posts" :key="i" :post="posts[i]" @deletePost="deletePost"/>
         </div>
@@ -22,8 +24,8 @@ Vue.component("my-posts", {
         },
         getPosts() {
             if (window.sessionStorage.getItem("user")) {
-                let user = window.sessionStorage.getItem("user")
-                axios.get("/post/user/" + user.username, { // TODO: Change request path
+                let user = JSON.parse(window.sessionStorage.getItem("user"))
+                axios.get("/my-posts", {
                         headers: {
                             Authorization: 'Bearer ' + user.jwt,
                         },
@@ -33,6 +35,9 @@ Vue.component("my-posts", {
                 alert("Greška.")
             }
         },
+        addedPost(newPost) {
+            this.posts.splice(0, 0, newPost);
+        }
     },
     mounted() {
         this.posts = this.getPosts();

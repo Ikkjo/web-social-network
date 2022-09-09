@@ -19,12 +19,32 @@ Vue.component("friend-request-card", {
 `,
     methods: {
         acceptRequest() {
-            // TODO: add backend request (acceptRequest)
-            this.$emit("removeRequest", this.friendRequest.id)
+            if (window.sessionStorage.getItem("user")) {
+                let user = JSON.parse(window.sessionStorage.getItem("user"))
+                axios.put("/accept-request/" + this.friendRequest.from, {
+                        headers: {
+                            Authorization: 'Bearer ' + user.jwt,
+                        },
+                    }).then((response) => {})
+                    .catch(() => alert("Greška."));
+            } else {
+                alert("Greška.")
+            }
+            this.$emit("removeRequest", this.friendRequest.from)
         },
         declineRequest() {
-            // TODO: add backend request (declineRequest)
-            this.$emit("removeRequest", this.friendRequest.id)
+            if (window.sessionStorage.getItem("user")) {
+                let user = JSON.parse(window.sessionStorage.getItem("user"))
+                axios.delete("/decline-request/" + this.friendRequest.from, {
+                        headers: {
+                            Authorization: 'Bearer ' + user.jwt,
+                        },
+                    }).then((response) => {})
+                    .catch(() => alert("Greška."));
+            } else {
+                alert("Greška.")
+            }
+            this.$emit("removeRequest", this.friendRequest.from)
         },
     },
     mounted() {},

@@ -18,29 +18,29 @@ Vue.component("post", {
         <div class="post-container">
             <i v-if="!detailedView" @click="detailedView=!detailedView" class="fas fa-arrow-down post-toggle"></i>
             <i v-if="detailedView" @click="detailedView=!detailedView" class="fas fa-arrow-up post-toggle"></i>
-            <i @click="deletePost" v-if="user && (post.user.username === user.username || user.type === 'admin') && detailedView" class="fas fa-trash-alt delete-post"></i>
+            <i @click="deletePost" v-if="user && (post.user.username === user.username || user.role.toLowerCase() === 'admin') && detailedView" class="fas fa-trash-alt delete-post"></i>
             
             <div v-if="!detailedView">
                 <user-thumbnail
                         :user="post.user"
                         :useDate="false" 
                         class="user-thumbnail user-thumbnail-collapsed"/>
-                <img v-if="post.type==='photo'" class="image-div picture-container" :src="post.photo" alt="" srcset="">
-                <div v-if="post.type==='text'" class="text-div text-div-collapsed">{{post.text}}</div>
+                <img v-if="post.type.toLowerCase()==='photo'" class="image-div picture-container" :src="post.photo" alt="" srcset="">
+                <div v-if="post.type.toLowerCase()==='text'" class="text-div text-div-collapsed">{{post.text}}</div>
             </div>
 
-            <img v-if="post.type==='photo' && detailedView" class="image-div picture-container" :src="post.photo" alt="" srcset="">
+            <img v-if="post.type.toLowerCase()==='photo' && detailedView" class="image-div picture-container" :src="post.photo" alt="" srcset="">
             <div v-if="detailedView" class="post-content">
                 <user-thumbnail
                     :user="post.user"
                     :useDate="false" 
                     class="user-thumbnail"
-                    :class="{'user-thumbnail-text': (detailedView && post.type==='text')}"/>
+                    :class="{'user-thumbnail-text': (detailedView && post.type.toLowerCase()==='text')}"/>
                 <div class="text-div">{{post.text}}</div>
-                <img v-if="post.type==='text' && post.photo" class="image-div picture-container" :src="post.photo" alt="" srcset="">
+                <img v-if="post.type.toLowerCase()==='text' && post.photo" class="image-div picture-container" :src="post.photo" alt="" srcset="">
                 <div class="comments-div">
                     <textarea
-                    v-if="user && user.type==='regular'"
+                    v-if="user && user.role.toLowerCase()==='regular'"
                     v-model="newComment"
                     @focus="inFocus('newComment')"
                     @blur="outFocus('newComment')"
@@ -70,7 +70,7 @@ Vue.component("post", {
             // TODO: add post request
         },
         deletePost() {
-            if (this.user.type === 'admin') {
+            if (this.user.role.toLowerCase() === 'admin') {
                 let deletionReason = prompt("Razlog brisanja objave: ")
                     // TODO: send message to user with deletionReason 
             }

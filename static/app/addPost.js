@@ -7,11 +7,11 @@ Vue.component("add-post", {
         return {
             post: {
                 user: {
-                    name: 'Test',
-                    surname: 'Testic',
-                    profilePic: "../img/female_avatar.svg"
+                    name: '',
+                    surname: '',
+                    profilePic: ''
                 },
-                type: 'text',
+                type: '',
                 photo: '',
                 text: ''
             },
@@ -23,15 +23,15 @@ Vue.component("add-post", {
     template: ` 
     <div id="add-post">
         <div v-if="defaultType==='all'" class="post-type-div">
-            <button @click="toggle('text')" class="btn type-btn-left" :class="{ inactive: post.type !== 'text' }"><i class="fas fa-comment"></i> Tekst</button></a>
-            <button @click="toggle('photo')" class="btn type-btn-right" :class="{inactive: post.type !== 'photo'}"><i class="fas fa-image"></i> Slika</button></a>
+            <button @click="toggle('text')" class="btn type-btn-left" :class="{ inactive: post.type.toLowerCase() !== 'text' }"><i class="fas fa-comment"></i> Tekst</button></a>
+            <button @click="toggle('photo')" class="btn type-btn-right" :class="{inactive: post.type.toLowerCase() !== 'photo'}"><i class="fas fa-image"></i> Slika</button></a>
         </div>
         <user-thumbnail
             :user="post.user"
             :useDate="false" 
             class="user-thumbnail"/>
 
-        <div class="post-container" v-if="(post.type === 'text' && defaultType==='all') || defaultType==='text'">
+        <div class="post-container" v-if="(post.type.toLowerCase() === 'text' && defaultType==='all') || defaultType==='text'">
             <textarea
                 @focus="inFocus('text')"
                 @blur="outFocus('text')"
@@ -50,11 +50,11 @@ Vue.component("add-post", {
                 name="photo-input"
                 accept="image/png, image/jpeg">
             <div class="button-div">
-                <button :disabled="post.text.replace(/^\s+|\s+$/g, '')" @click="uploadPost" class="btn btn-right"><i class="fas fa-plus-circle"></i> Objavi</button></a>
+                <button :disabled="!post.text.replace(/^\s+|\s+$/g, '') || !post.text.replace(/\\n/g, '')" @click="uploadPost" class="btn btn-right"><i class="fas fa-plus-circle"></i> Objavi</button></a>
             </div>
         </div>
 
-        <div class="post-container" v-if="(post.type === 'photo' && defaultType==='all') || defaultType==='photo'">
+        <div class="post-container" v-if="(post.type.toLowerCase() === 'photo' && defaultType==='all') || defaultType==='photo'">
                 <img class="post-photo" :src="post.photo">
                 <label class="btn" for="photo-input"><i class="fas fa-image"></i> Dodaj sliku</label>
                 <input type="file"
@@ -92,14 +92,27 @@ Vue.component("add-post", {
             area.style.height = (25 + area.scrollHeight) + "px";
         },
         toggle(type) {
-            if (type !== this.post.type) {
+            if (type.toLowerCase() !== this.post.type.toLowerCase()) {
                 this.post.type = type;
                 this.post.text = '';
                 this.post.photo = '';
             }
         },
         uploadPost() {
-            if (this.post.type === 'text') {}
+            console.log(this.post.user.jwt)
+            axios.post("/add-post/", this.post, {
+                    headers: {
+                        Authorization: 'Bearer ' + this.post.user.jwt,
+                    },
+                })
+                .then((response) => {
+                    // Reset the inputs
+                    this.post.text = '';
+                    this.post.photo = '';
+                    this.resetPhotoUploader();
+                    this.$emit("addedPost", JSON.parse(JSON.stringify(response.data)));
+                })
+                .catch(() => alert("Greška."))
         },
         addPhoto(event) {
             console.log('here')
@@ -112,7 +125,10 @@ Vue.component("add-post", {
             this.$refs.photoUploader.value = '';
         },
     },
-    mounted() {},
+    created() {
+        this.post.user = JSON.parse(window.sessionStorage.getItem("user"));
+        console.log(this.post.user.jwt)
+    },
     validations: {
         post: {
             text: {

@@ -13,7 +13,7 @@ Vue.component("comment", {
             :user="comment.user"
             :useDate="false" 
             class="user-thumbnail"/>
-        <div v-if="user && (user.username === comment.user.username || user.type === 'admin')" class="delete-comment-div">
+        <div v-if="user && (user.username === comment.user.username || user.role.toLowerCase() === 'admin')" class="delete-comment-div">
             <i @click="deleteComment" class="fas fa-trash-alt delete-comment"></i>
         </div>
         <div class="text-div">{{comment.text}}</div>
@@ -28,7 +28,7 @@ Vue.component("comment", {
     },
     mounted() {
         if (window.sessionStorage.getItem("user")) {
-            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
         }
     },
 });

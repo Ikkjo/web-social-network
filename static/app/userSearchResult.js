@@ -8,11 +8,11 @@ Vue.component("user-search-result", {
     },
     template: `
     <div class="flex-container user-search-result-container">
-        <user-thumbnail :user="user" :useEmail="user && user.type='admin'"></user-thumbnail>
-        <button v-if="loggedInUser && loggedInUser.type==='regular' !isFriend" @click="sendFriendRequest" class="btn user-search-result-btn"><i class="fas fa-user-plus"></i></button></a>
-        <button v-if="loggedInUser && ((loggedInUser.type==='regular' && isFriend) || loggedInUser.type==='admin')" @click="sendMessage" class= "btn user-search-result-btn"><i class="fas fa-comment-dots"></i></button></a>
-        <button v-if="loggedInUser && loggedInUser.type==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
-        <button v-if="loggedInUser && loggedInUser.type==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
+        <user-thumbnail :user="user" :useEmail="user && user.role.toLowerCase()='admin'"></user-thumbnail>
+        <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='regular' !isFriend" @click="sendFriendRequest" class="btn user-search-result-btn"><i class="fas fa-user-plus"></i></button></a>
+        <button v-if="loggedInUser && ((loggedInUser.role.toLowerCase()==='regular' && isFriend) || loggedInUser.role.toLowerCase()==='admin')" @click="sendMessage" class= "btn user-search-result-btn"><i class="fas fa-comment-dots"></i></button></a>
+        <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
+        <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
     </div>
     `,
     methods: {

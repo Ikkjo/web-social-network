@@ -9,7 +9,7 @@ Vue.component("main-feed", {
     <div id="main-feed">
     <nav-bar></nav-bar>
     <div class="container">
-        <add-post v-if="user && user.type==='regular'" defaultType="all"></add-post>
+        <add-post v-if="user && user.role.toLowerCase()==='regular'" defaultType="all" @addedPost="addedPost"></add-post>
         <div class="posts">
             <post v-for="(post, i) in posts" :key="i" :post="posts[i]" @deletePost="deletePost"/>
         </div>
@@ -23,6 +23,9 @@ Vue.component("main-feed", {
                 if (this.posts[i].id === id)
                     this.posts.splice(i, 1);
         },
+        addedPost(newPost) {
+            this.posts.splice(0, 0, newPost);
+        }
     },
     mounted() {
         if (window.sessionStorage.getItem("user")) {
