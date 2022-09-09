@@ -64,7 +64,12 @@ public class JSONUserDAO implements UserDAO{
         saveChanges();
     }
 
-
+    @Override
+    public void addFriend(String user, String friend) {
+        users.get(user).addFriend(friend);
+        users.get(friend).addFriend(user);
+        saveChanges();
+    }
 
 
     @Override

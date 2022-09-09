@@ -1,9 +1,11 @@
 package services;
 
+import beans.models.Comment;
 import beans.models.FriendRequest;
 import beans.models.FriendRequestStatus;
 import beans.models.User;
 import com.google.gson.Gson;
+import dao.FriendRequestDAO;
 import dao.UserDAO;
 import utils.AuthUtils;
 
@@ -12,9 +14,11 @@ import java.util.*;
 public class UserService {
 
     private final UserDAO userDAO;
+    private final FriendRequestDAO friendRequestDAO;
 
-    public UserService(UserDAO userDAO) {
+    public UserService(UserDAO userDAO, FriendRequestDAO friendRequestDAO) {
         this.userDAO = userDAO;
+        this.friendRequestDAO = friendRequestDAO;
     }
 
     public String logIn(String username, String password){
@@ -83,10 +87,28 @@ public class UserService {
                 u2.getFriends().contains(u1.getUsername());
     }
 
-    public void sendFriendRequest() {
-
+    public void sendFriendRequest(String from, String to) {
+        friendRequestDAO.addRequest(new FriendRequest(
+                from,
+                to,
+                new Date().getTime()
+        ));
     }
     public void acceptFriendRequest(String loggedInUser, String sender) {
+        friendRequestDAO.changeRequestStatus(sender, loggedInUser, FriendRequestStatus.ACCEPTED);
+        userDAO.addFriend(loggedInUser, sender);
+    }
+
+    public void declineFriendRequest(String loggedInUser, String sender) {
+//        friendRequestDAO.changeRequestStatus(sender, loggedInUser, FriendRequestStatus.DECLINED);
+        friendRequestDAO.deleteRequest(sender, loggedInUser);
+    }
+
+    public void addComment(Comment comment){
+
+    }
+
+    public void deleteComment(UUID id){
 
     }
 }

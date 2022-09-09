@@ -1,8 +1,10 @@
 package main;
 
 import controllers.*;
+import dao.JSONFriendRequestDAO;
 import dao.JSONPostDAO;
 import dao.JSONUserDAO;
+import services.FriendRequestService;
 import services.PostService;
 import services.UserService;
 import utils.SecurityUtils;
@@ -17,11 +19,14 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         port(8080);
+
         JSONUserDAO userDAO = new JSONUserDAO();
         JSONPostDAO postDAO = new JSONPostDAO();
+        JSONFriendRequestDAO friendRequestDAO = new JSONFriendRequestDAO();
 
-        UserService userService = new UserService(userDAO);
+        UserService userService = new UserService(userDAO, friendRequestDAO);
         PostService postService = new PostService(postDAO, userDAO);
+        FriendRequestService friendRequestService = new FriendRequestService(friendRequestDAO);
 
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
@@ -45,7 +50,16 @@ public class Main {
         post("/post/add/", PostController.addPost);
         delete("/post/delete/", PostController.deletePost);
         get("/post/:postId/", PostController.getPost);
-        get("/post/user/:username/", PostController.getUserPosts);
+        get("/my-posts/", PostController.getUserPosts);
+
+        FriendRequestController friendRequestController = new FriendRequestController(friendRequestService);
+        get("/friend-requests/", FriendRequestController.getFriendRequests);
+        get("/sent-friend-requests/", FriendRequestController.getSentFriendRequests);
+
+        UserController userController = new UserController(userService);
+        post("/add-friend/", UserController.sendFriendRequest);
+        put("/accept-request/:sender/", UserController.acceptFriendRequest);
+        delete("/decline-request/:sender/", UserController.declineFriendRequest);
 
     }
 

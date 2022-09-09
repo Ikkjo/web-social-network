@@ -10,6 +10,8 @@ import utils.FilePathUtil;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class JSONFriendRequestDAO implements FriendRequestDAO{
@@ -57,6 +59,7 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
     public void changeRequestStatus(String from, String to, FriendRequestStatus status) {
         FriendRequest req = getFriendRequest(from, to);
         req.setStatus(status);
+        req.setEditTimeStamp(new Date().getTime());
         saveChanges();
     }
 

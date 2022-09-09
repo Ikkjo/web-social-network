@@ -7,6 +7,7 @@ import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import utils.AuthUtils;
 
 import java.util.*;
 
@@ -23,6 +24,7 @@ public class PostController {
         response.type("application/json");
         try {
             Post newPost =  new Gson().fromJson(request.body(), Post.class);
+            newPost.setUser(AuthUtils.getUsernameFromToken(request));
             postService.addPost(newPost);
             return new Gson().toJson(newPost);
         } catch (Exception e) {
@@ -60,8 +62,8 @@ public class PostController {
     public static Route getUserPosts = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            String username = request.params("username");
-            List<Post> userPosts =  postService.getPostsByUser(username);
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            List<Post> userPosts =  postService.getPostsByUser(loggedInUser);
             response.status(200);
             return userPosts;
         } catch (Exception e) {

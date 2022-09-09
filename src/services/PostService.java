@@ -37,7 +37,14 @@ public class PostService {
     }
 
     public void addPost(Post p){
-        this.postDAO.addPost(p);
+        Post newPost = new Post();
+
+        newPost.setUser(p.getUser());
+        newPost.setType(p.getType());
+        newPost.setText(p.getText());
+        newPost.setPicture(p.getPicture());
+
+        this.postDAO.addPost(newPost);
     }
 
     public void deletePost(Post p){
