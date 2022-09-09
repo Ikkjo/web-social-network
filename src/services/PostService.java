@@ -19,6 +19,7 @@ public class PostService {
         this.postDAO = postDAO;
         this.userDAO = userDAO;
         this.commentDAO = commentDAO;
+
     }
 
     public List<Post> getAllPosts(){
@@ -41,7 +42,7 @@ public class PostService {
     public void addPost(Post p){
         Post newPost = new Post();
 
-        newPost.setUser(p.getUser());
+        newPost.setUsername(p.getUsername());
         newPost.setType(p.getType());
         newPost.setText(p.getText());
         newPost.setPicture(p.getPicture());

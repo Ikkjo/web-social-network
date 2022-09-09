@@ -2,6 +2,7 @@ package dao;
 
 import beans.models.Comment;
 import beans.models.Post;
+import beans.models.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,4 +22,5 @@ public interface PostDAO {
     public boolean doesPostExist(UUID id);
     void saveChanges();
     void load();
+    void setPostUser(UUID postId, User u);
 }

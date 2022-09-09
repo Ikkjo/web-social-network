@@ -2,6 +2,7 @@ package dao;
 
 import beans.models.Comment;
 import beans.models.Post;
+import beans.models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import data.JsonDatabase;
@@ -53,7 +54,7 @@ public class JSONPostDAO implements PostDAO {
 
         if (!posts.isEmpty()){
                 query = posts.values()
-                    .stream().filter(x -> username.equals(x.getUser()))
+                    .stream().filter(x -> username.equals(x.getUsername()))
                     .toList();
         }
 
@@ -80,7 +81,7 @@ public class JSONPostDAO implements PostDAO {
         if (!posts.isEmpty()){
             query = posts.values()
                     .stream().filter(x -> (x.getTimestamp() >= to && x.getTimestamp()<= from
-                            && username.equals(x.getUser())))
+                            && username.equals(x.getUsername())))
                     .toList();
         }
 
@@ -152,5 +153,11 @@ public class JSONPostDAO implements PostDAO {
             System.out.println(e.getMessage());
             this.posts = new HashMap<>();
         }
+    }
+
+    @Override
+    public void setPostUser(UUID postId, User u) {
+        posts.get(postId).setUser(u);
+        saveChanges();
     }
 }

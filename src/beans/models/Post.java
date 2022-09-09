@@ -5,7 +5,8 @@ import java.util.*;
 public class Post {
 
 	private UUID id;
-	private String user;
+	private String username;
+	private User user;
 	private String picture;
 	private String text;
 	private List<Comment> comments;
@@ -23,9 +24,22 @@ public class Post {
 		this.timestamp = new Date().getTime();
 	}
 
-	public Post(UUID id, String user, String picture, String text, List<Comment> comments, Long timestamp,
+	public Post(UUID id, String username, String picture, String text, List<Comment> comments, Long timestamp,
 				Boolean deleted, PostType type) {
 		this.id = id;
+		this.username = username;
+		this.picture = picture;
+		this.text = text;
+		this.comments = comments;
+		this.timestamp = timestamp;
+		this.deleted = deleted;
+		this.type = type;
+	}
+
+	public Post(UUID id, String username, User user, String picture, String text, List<Comment> comments,
+				Long timestamp, Boolean deleted, PostType type) {
+		this.id = id;
+		this.username = username;
 		this.user = user;
 		this.picture = picture;
 		this.text = text;
@@ -34,6 +48,7 @@ public class Post {
 		this.deleted = deleted;
 		this.type = type;
 	}
+
 	public String getPicture() {
 		return picture;
 	}
@@ -70,8 +85,8 @@ public class Post {
 		this.timestamp = timestamp;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
 	public Boolean getDeleted() {
@@ -90,8 +105,8 @@ public class Post {
 		this.id = id;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public void setType(PostType type) {
@@ -99,4 +114,12 @@ public class Post {
 	}
 
 	public void addComment(Comment c) {this.comments.add(c);}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

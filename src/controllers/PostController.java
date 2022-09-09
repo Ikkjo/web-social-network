@@ -24,8 +24,10 @@ public class PostController {
     public static Route addPost = (Request request, Response response) -> {
         response.type("application/json");
         try {
+            String username = AuthUtils.getUsernameFromToken(request);
             Post newPost =  new Gson().fromJson(request.body(), Post.class);
-            newPost.setUser(AuthUtils.getUsernameFromToken(request));
+            newPost.setUsername(username);
+            newPost.setUser(userService.getUser(username));
             postService.addPost(newPost);
             return new Gson().toJson(newPost);
         } catch (Exception e) {
