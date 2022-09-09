@@ -53,6 +53,7 @@ public class PostController {
         response.type("application/json");
         try {
             Post post =  postService.getPostById(UUID.fromString(request.params("postId")));
+            addUserToPost(post);
             response.status(200);
             return post;
         } catch (Exception e) {
@@ -66,6 +67,11 @@ public class PostController {
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
             List<Post> userPosts =  postService.getPostsByUser(loggedInUser);
+
+            for(Post p : userPosts) {
+                addUserToPost(p);
+            }
+
             response.status(200);
             return userPosts;
         } catch (Exception e) {
@@ -78,9 +84,14 @@ public class PostController {
         response.type("application/json");
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
-            List<Post> userPosts =  postService.getPhotosByUser(loggedInUser);
+            List<Post> userPhotos =  postService.getPhotosByUser(loggedInUser);
+
+            for(Post p : userPhotos) {
+                addUserToPost(p);
+            }
+
             response.status(200);
-            return userPosts;
+            return userPhotos;
         } catch (Exception e) {
             response.status(401);
             return response;
@@ -128,4 +139,8 @@ public class PostController {
             return response;
         }
     };
+
+    private static void addUserToPost(Post p){
+        p.setUser(userService.getUser(p.getUsername()));
+    }
 }
