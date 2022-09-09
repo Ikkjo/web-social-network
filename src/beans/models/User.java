@@ -24,7 +24,7 @@ public class User {
 
 	public User() {
 		this.dateOfBirth = new Date().getTime();
-		this.role = UserRole.ORDINARY;
+		this.role = UserRole.REGULAR;
 		this.isPrivate = false;
 		this.deleted = false;
 		this.friends = new ArrayList<>();
@@ -82,7 +82,7 @@ public class User {
 		this.surname = surname;
 		this.gender = gender;
 		this.dateOfBirth = new Date().getTime();
-		this.role = UserRole.ORDINARY;
+		this.role = UserRole.REGULAR;
 		this.isPrivate = false;
 		this.deleted = false;
 		this.friends = new ArrayList<>();
