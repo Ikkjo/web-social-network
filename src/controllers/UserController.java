@@ -1,11 +1,15 @@
 package controllers;
 
+import beans.models.User;
+import beans.models.UserRole;
 import com.google.gson.Gson;
 import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import utils.AuthUtils;
+
+import java.util.Objects;
 
 public class UserController {
 
@@ -65,6 +69,74 @@ public class UserController {
             userService.removeFriend(loggedInUser, friend);
             response.status(200);
             return response;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route editProfile = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            User newUserDetails = new Gson().fromJson(request.body(), User.class);
+            if(Objects.equals(loggedInUser, newUserDetails.getUsername())){
+                userService.editProfile(newUserDetails);
+                response.status(200);
+            } else {
+                response.status(401);
+            }
+            return response;
+        } catch (Exception e) {
+            response.status(501);
+            return response;
+        }
+    };
+
+    public static Route blockUser = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            String userToBlock = request.params("user");
+            User user = userService.getUser(loggedInUser);
+            if(user.getRole().equals(UserRole.ADMIN)){
+                userService.blockUser(userToBlock);
+                response.status(200);
+            } else {
+                response.status(403);
+            }
+            return response;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route unblockUser = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            String userToBlock = request.params("user");
+            User user = userService.getUser(loggedInUser);
+            if(user.getRole().equals(UserRole.ADMIN)){
+                userService.unblockUser(userToBlock);
+                response.status(200);
+            } else {
+                response.status(403);
+            }
+            return response;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route mutualFriends = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String user1 = request.queryParams("user1");
+            String user2 = request.queryParams("user2");
+            return new Gson().toJson(userService.getMutualFriends(user1, user2));
         } catch (Exception e) {
             response.status(401);
             return response;

@@ -117,4 +117,40 @@ public class UserService {
             userDAO.removeFriend(loggedInUser, friend);
         }
     }
+
+    public void editProfile(User newProfileDetails) {
+        userDAO.editUser(newProfileDetails.getUsername(), newProfileDetails);
+    }
+
+    public void blockUser(String username) {
+        userDAO.blockUser(username);
+    }
+
+    public void unblockUser(String username) {
+        userDAO.unblockUser(username);
+    }
+
+    public boolean hasFriends(String user) {
+        User u = getUser(user);
+        if(u != null){
+            List<String> friends = u.getFriends();
+            return u.getFriends() != null && !u.getFriends().isEmpty();
+        }
+        return false;
+    }
+    public List<String> getMutualFriends(String user1, String user2){
+        User u1 = getUser(user1);
+        User u2 = getUser(user2);
+        List<String> mutual = new ArrayList<>();
+
+        if(hasFriends(user1) && hasFriends(user2)){
+            for(String friend : u1.getFriends()){
+                if(u2.getFriends().contains(friend)){
+                    mutual.add(friend);
+                }
+            }
+        }
+        return mutual;
+    }
+
 }

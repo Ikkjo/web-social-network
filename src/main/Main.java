@@ -50,6 +50,9 @@ public class Main {
         delete("/remove-post/", PostController.deletePost);
         get("/post/:postId/", PostController.getPost);
         get("/my-posts/", PostController.getUserPosts);
+        get("/my-photos/", PostController.getUserPhotos);
+        post("/add-comment/", PostController.addComment);
+        delete("/delete-comment/", PostController.deleteComment);
 
         FriendRequestController friendRequestController = new FriendRequestController(friendRequestService);
         get("/friend-requests/", FriendRequestController.getFriendRequests);
@@ -60,10 +63,10 @@ public class Main {
         put("/accept-request/:sender/", UserController.acceptFriendRequest);
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
         delete("/remove-friend/:friend", UserController.removeFriend);
-
-
-
-
+        put("/edit-profile/", UserController.editProfile);
+        put("/block-user/:user", UserController.blockUser);
+        put("/unblock-user/:user", UserController.unblockUser);
+        get("/mutual-friends/", UserController.mutualFriends);
         // todo komentari, chat
         // proveri sve sto si do sad odradio
         // povezi sa frontom (napravi api pozive)

@@ -16,6 +16,9 @@ public interface UserDAO {
     HashMap<String, User> getUsersByName(String name);
     HashMap<String, User> getUsersBySurname(String surname);
     HashMap<String, User> getUsersByDateRange(String dateRange);
+    void editUser(String username, User newDetails);
+    void blockUser(String username);
+    void unblockUser(String username);
     void saveChanges();
     void load();
 }

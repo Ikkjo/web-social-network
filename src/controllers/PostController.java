@@ -73,6 +73,19 @@ public class PostController {
         }
     };
 
+    public static Route getUserPhotos = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            List<Post> userPosts =  postService.getPhotosByUser(loggedInUser);
+            response.status(200);
+            return userPosts;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
     public static Route addComment = (Request request, Response response) -> {
         response.type("application/json");
         try {
@@ -92,7 +105,7 @@ public class PostController {
         }
     };
 
-    public static Route removeComment = (Request request, Response response) -> {
+    public static Route deleteComment = (Request request, Response response) -> {
         response.type("application/json");
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);

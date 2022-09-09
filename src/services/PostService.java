@@ -2,6 +2,7 @@ package services;
 
 import beans.models.Comment;
 import beans.models.Post;
+import beans.models.PostType;
 import dao.CommentDAO;
 import dao.PostDAO;
 import dao.UserDAO;
@@ -76,7 +77,30 @@ public class PostService {
     }
 
     public List<Post> getPostsByUser(String username) {
-        return postDAO.getPostsByUserUsername(username);
+        List<Post> posts = new ArrayList<>();
+        List<Post> all = postDAO.getPostsByUserUsername(username);
+
+        for (Post p: all) {
+            if(p.getType().equals(PostType.TEXT)){
+                posts.add(p);
+            }
+        }
+
+        return posts;
+    }
+
+
+    public List<Post> getPhotosByUser(String username) {
+        List<Post> photos = new ArrayList<>();
+        List<Post> all = postDAO.getPostsByUserUsername(username);
+
+        for (Post p: all) {
+            if(p.getType().equals(PostType.PHOTO)){
+                photos.add(p);
+            }
+        }
+
+        return photos;
     }
 
     public boolean postExists(UUID id) {
