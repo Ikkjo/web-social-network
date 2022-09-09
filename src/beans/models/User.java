@@ -15,26 +15,48 @@ public class User {
     private UserRole role;
     private String profilePic;
 	private transient List<Post> posts;
-    private transient List<FriendRequest> friendRequests;
-    private transient List<User> friends;
+    private List<FriendRequest> friendRequests;
+    private List<String> friends;
     private Boolean isPrivate;
     private Boolean deleted;
+	private Boolean blocked;
 	private String jwt;
 
 	public User() {
 		this.dateOfBirth = new Date().getTime();
-		this.role = UserRole.ORDINARY;
+		this.role = UserRole.REGULAR;
 		this.isPrivate = false;
 		this.deleted = false;
 		this.friends = new ArrayList<>();
 		this.friendRequests = new ArrayList<>();
 		this.posts = new ArrayList<>();
-		this.profilePic = "default_profile_pic.jpg";
+		this.profilePic = "./img/profile_pic.svg";
     }
-    
+
 	public User(String username, String password, String email, String name, String surname, Long dateOfBirth,
-			Gender gender, UserRole role, String profilePic, List<Post> posts, List<FriendRequest> friendRequests,
-			List<User> friends, Boolean isPrivate) {
+				Gender gender, UserRole role, String profilePic, List<Post> posts, List<FriendRequest> friendRequests,
+				List<String> friends, Boolean isPrivate, Boolean deleted, Boolean blocked, String jwt) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.dateOfBirth = dateOfBirth;
+		this.gender = gender;
+		this.role = role;
+		this.profilePic = profilePic;
+		this.posts = posts;
+		this.friendRequests = friendRequests;
+		this.friends = friends;
+		this.isPrivate = isPrivate;
+		this.deleted = deleted;
+		this.blocked = blocked;
+		this.jwt = jwt;
+	}
+
+	public User(String username, String password, String email, String name, String surname, Long dateOfBirth,
+				Gender gender, UserRole role, String profilePic, List<Post> posts, List<FriendRequest> friendRequests,
+				List<String> friends, Boolean isPrivate) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -60,13 +82,13 @@ public class User {
 		this.surname = surname;
 		this.gender = gender;
 		this.dateOfBirth = new Date().getTime();
-		this.role = UserRole.ORDINARY;
+		this.role = UserRole.REGULAR;
 		this.isPrivate = false;
 		this.deleted = false;
 		this.friends = new ArrayList<>();
 		this.friendRequests = new ArrayList<>();
 		this.posts = new ArrayList<>();
-		this.profilePic = "default_profile_pic.jpg";
+		this.profilePic = "./img/profile_pic.svg";
 	}
 
 
@@ -158,15 +180,19 @@ public class User {
 		this.friendRequests = friendRequests;
 	}
 	
-	public List<User> getFriends() {
+	public List<String> getFriends() {
 		return friends;
 	}
 	
-	public void setFriends(List<User> friends) {
+	public void setFriends(List<String> friends) {
 		this.friends = friends;
 	}
 
-	public void addFriend(User newFriend) { this.friends.add(newFriend);}
+	public void addFriend(String newFriend) { this.friends.add(newFriend);}
+
+	public void removeFriend(String friend) {
+		this.friends.remove(friend);
+	}
 	public Boolean getPrivate() {
 		return isPrivate;
 	}
@@ -184,6 +210,14 @@ public class User {
 
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
+	}
+
+	public Boolean getBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(Boolean blocked) {
+		this.blocked = blocked;
 	}
 
 	public String getJwt() {

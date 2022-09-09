@@ -1,6 +1,6 @@
 package beans.models;
 
 public enum UserRole {
-	ORDINARY,
+	REGULAR,
 	ADMIN
 }

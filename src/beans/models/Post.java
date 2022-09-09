@@ -4,8 +4,9 @@ import java.util.*;
 
 public class Post {
 
-	UUID id;
-	String user;
+	private UUID id;
+	private String username;
+	private User user;
 	private String picture;
 	private String text;
 	private List<Comment> comments;
@@ -16,91 +17,36 @@ public class Post {
 
 
 	public Post() {
+		this.id = UUID.randomUUID();
 		this.comments = new ArrayList<>();
 		this.deleted = false;
 		this.type = PostType.TEXT;
+		this.timestamp = new Date().getTime();
 	}
 
-	public Post(UUID id, String user, String picture, String text, List<Comment> comments, Long timestamp) {
+	public Post(UUID id, String username, String picture, String text, List<Comment> comments, Long timestamp,
+				Boolean deleted, PostType type) {
 		this.id = id;
-		this.user = user;
+		this.username = username;
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
 		this.timestamp = timestamp;
-		this.deleted = false;
+		this.deleted = deleted;
+		this.type = type;
 	}
 
-	public Post(String user, String picture, String text, List<Comment> comments, Long timestamp) {
-		this.user = user;
-		this.picture = picture;
-		this.text = text;
-		this.comments = comments;
-		this.timestamp = timestamp;
-		this.deleted = false;
-	}
-
-	public Post(String picture, String text) {
-		this.picture = picture;
-		this.text = text;
-		this.deleted = false;
-	}
-
-	public Post(UUID id, String picture, String text) {
+	public Post(UUID id, String username, User user, String picture, String text, List<Comment> comments,
+				Long timestamp, Boolean deleted, PostType type) {
 		this.id = id;
-		this.picture = picture;
-		this.text = text;
-	}
-
-	public Post(UUID id, String user, String picture, String text, List<Comment> comments) {
-		this.id = id;
-		this.user = user;
-		this.picture = picture;
-		this.text = text;
-		this.comments = comments;
-		this.deleted = false;
-	}
-
-	public Post(String user, String picture, String text) {
-		this.user = user;
-		this.picture = picture;
-		this.text = text;
-		this.deleted = false;
-	}
-
-	public Post(String user, String picture, String text, List<Comment> comments) {
-		this.user = user;
-		this.picture = picture;
-		this.text = text;
-		this.comments = comments;
-		this.deleted = false;
-	}
-
-	public Post(String picture, String text, List<Comment> comments) {
-		
-		this.picture = picture;
-		this.text = text;
-		this.comments = comments;
-		this.deleted = false;
-	}
-
-	public Post(UUID id, String picture, String text, List<Comment> comments) {
-		this.id = id;
-		this.picture = picture;
-		this.text = text;
-		this.comments = comments;
-		this.deleted = false;
-	}
-
-	public Post(UUID id, String user, String picture, String text, List<Comment> comments,
-				Long timestamp, Boolean deleted) {
-		this.id = id;
+		this.username = username;
 		this.user = user;
 		this.picture = picture;
 		this.text = text;
 		this.comments = comments;
 		this.timestamp = timestamp;
 		this.deleted = deleted;
+		this.type = type;
 	}
 
 	public String getPicture() {
@@ -139,8 +85,8 @@ public class Post {
 		this.timestamp = timestamp;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
 	public Boolean getDeleted() {
@@ -155,7 +101,25 @@ public class Post {
 		return type;
 	}
 
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public void setType(PostType type) {
 		this.type = type;
+	}
+
+	public void addComment(Comment c) {this.comments.add(c);}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

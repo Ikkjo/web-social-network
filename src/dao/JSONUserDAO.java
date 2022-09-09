@@ -64,7 +64,19 @@ public class JSONUserDAO implements UserDAO{
         saveChanges();
     }
 
+    @Override
+    public void addFriend(String user, String friend) {
+        users.get(user).addFriend(friend);
+        users.get(friend).addFriend(user);
+        saveChanges();
+    }
 
+    @Override
+    public void removeFriend(String user, String friend) {
+        users.get(user).removeFriend(friend);
+        users.get(friend).removeFriend(user);
+        saveChanges();
+    }
 
 
     @Override
@@ -113,6 +125,33 @@ public class JSONUserDAO implements UserDAO{
         return usersMap;
     }
 
+    @Override
+    public void editUser(String username, User newDetails) {
+        if(this.users.containsKey(username)) {
+            User u = this.users.get(username);
+            u.setDateOfBirth(newDetails.getDateOfBirth());
+            u.setName(newDetails.getName());
+            u.setSurname(newDetails.getSurname());
+            u.setEmail(newDetails.getEmail());
+            u.setGender(newDetails.getGender());
+            u.setPassword(newDetails.getPassword());
+            u.setPrivate(newDetails.getPrivate());
+            saveChanges();
+        }
+    }
+
+    @Override
+    public void blockUser(String username) {
+        this.users.get(username).setBlocked(true);
+        saveChanges();
+    }
+
+    @Override
+    public void unblockUser(String username) {
+        this.users.get(username).setBlocked(false);
+        saveChanges();
+    }
+
     public void generateTestData() {
         User u1 = new User("test1", "test1", "test1@gmail.com", "Test1", "Testic1", Gender.MALE);
         User u2 = new User("test2", "test2", "test2@gmail.com", "Test2", "Testic2", Gender.FEMALE);
@@ -132,8 +171,8 @@ public class JSONUserDAO implements UserDAO{
         u4.setDateOfBirth(LocalDate.of(1999, 2, 12).toEpochDay());
         u5.setDateOfBirth(LocalDate.of(2000, 10, 20).toEpochDay());
 
-        u1.setFriends(Arrays.asList(u2));
-        u2.setFriends(Arrays.asList(u1));
+        u1.setFriends(Arrays.asList(u2.getUsername()));
+        u2.setFriends(Arrays.asList(u1.getUsername()));
 
         users.put(u1.getUsername(), u1);
         users.put(u2.getUsername(), u2);

@@ -1,5 +1,6 @@
 package controllers;
 
+import beans.models.Comment;
 import beans.models.Post;
 import com.google.gson.Gson;
 import services.PostService;
@@ -7,6 +8,7 @@ import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import utils.AuthUtils;
 
 import java.util.*;
 
@@ -22,7 +24,10 @@ public class PostController {
     public static Route addPost = (Request request, Response response) -> {
         response.type("application/json");
         try {
+            String username = AuthUtils.getUsernameFromToken(request);
             Post newPost =  new Gson().fromJson(request.body(), Post.class);
+            newPost.setUsername(username);
+            newPost.setUser(userService.getUser(username));
             postService.addPost(newPost);
             return new Gson().toJson(newPost);
         } catch (Exception e) {
@@ -34,8 +39,8 @@ public class PostController {
     public static Route deletePost = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            Post post =  new Gson().fromJson(request.body(), Post.class);
-            postService.deletePost(post.getId());
+            String postId = request.params("postId");
+            postService.deletePost(UUID.fromString(postId));
             response.status(200);
             return response;
         } catch (Exception e) {
@@ -47,7 +52,6 @@ public class PostController {
     public static Route getPost = (Request request, Response response) -> {
         response.type("application/json");
         try {
-
             Post post =  postService.getPostById(UUID.fromString(request.params("postId")));
             response.status(200);
             return post;
@@ -60,12 +64,67 @@ public class PostController {
     public static Route getUserPosts = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            String username = request.params("username");
-            List<Post> userPosts =  postService.getPostsByUser(username);
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            List<Post> userPosts =  postService.getPostsByUser(loggedInUser);
             response.status(200);
             return userPosts;
         } catch (Exception e) {
             response.status(401);
+            return response;
+        }
+    };
+
+    public static Route getUserPhotos = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            List<Post> userPosts =  postService.getPhotosByUser(loggedInUser);
+            response.status(200);
+            return userPosts;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route addComment = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            Comment newComment = new Gson().fromJson(request.body(), Comment.class);
+            if(newComment.getUser().equals(loggedInUser)){
+                postService.addComment(newComment);
+                response.status(200);
+                return newComment;
+            } else {
+                response.status(401);
+                return response;
+            }
+        } catch (Exception e) {
+            response.status(501);
+            return response;
+        }
+    };
+
+    public static Route deleteComment = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            UUID commentId = UUID.fromString(request.params("commentId"));
+            Comment c = postService.getComment(commentId);
+
+            if(c.getUser().equals(loggedInUser)) {
+                if(postService.deleteComment(commentId)){
+                    response.status(200);
+                } else {
+                    response.status(401);
+                }
+            } else {
+                response.status(401);
+            }
+            return response;
+        } catch (Exception e) {
+            response.status(501);
             return response;
         }
     };

@@ -1,6 +1,8 @@
 package dao;
 
+import beans.models.Comment;
 import beans.models.Post;
+import beans.models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import data.JsonDatabase;
@@ -20,7 +22,7 @@ public class JSONPostDAO implements PostDAO {
 
     @Override
     public List<Post> getPosts() {
-        return null;
+        return this.posts.values().stream().toList();
     }
 
     @Override
@@ -52,7 +54,7 @@ public class JSONPostDAO implements PostDAO {
 
         if (!posts.isEmpty()){
                 query = posts.values()
-                    .stream().filter(x -> username.equals(x.getUser()))
+                    .stream().filter(x -> username.equals(x.getUsername()))
                     .toList();
         }
 
@@ -79,11 +81,46 @@ public class JSONPostDAO implements PostDAO {
         if (!posts.isEmpty()){
             query = posts.values()
                     .stream().filter(x -> (x.getTimestamp() >= to && x.getTimestamp()<= from
-                            && username.equals(x.getUser())))
+                            && username.equals(x.getUsername())))
                     .toList();
         }
 
         return query;
+    }
+
+    @Override
+    public boolean addCommentToPost(UUID id, Comment c) {
+        if(doesPostExist(id)){
+            Post p = posts.get(id);
+            if (p.getComments() != null){
+                p.addComment(c);
+            } else {
+                p.setComments(new ArrayList<>());
+                p.addComment(c);
+            }
+            saveChanges();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeCommentFromPost(UUID post, Comment c) {
+
+        if(doesPostExist(post)){
+            Post p = posts.get(post);
+            if(p.getComments() != null && !p.getComments().isEmpty() && p.getComments().contains(c)) {
+                p.getComments().remove(c);
+                saveChanges();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean doesPostExist(UUID id) {
+        return this.posts.containsKey(id);
     }
 
     @Override
@@ -116,5 +153,11 @@ public class JSONPostDAO implements PostDAO {
             System.out.println(e.getMessage());
             this.posts = new HashMap<>();
         }
+    }
+
+    @Override
+    public void setPostUser(UUID postId, User u) {
+        posts.get(postId).setUser(u);
+        saveChanges();
     }
 }
