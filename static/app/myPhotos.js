@@ -25,7 +25,7 @@ Vue.component("my-photos", {
         getPosts() {
             if (window.sessionStorage.getItem("user")) {
                 let user = JSON.parse(window.sessionStorage.getItem("user"))
-                axios.get("/my-photos", { // TODO: Change request path
+                axios.get("/my-photos", {
                         headers: {
                             Authorization: 'Bearer ' + user.jwt,
                         },
