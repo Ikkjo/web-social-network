@@ -61,7 +61,7 @@ public class Main {
         get("/sent-friend-requests/", FriendRequestController.getSentFriendRequests);
 
         UserController userController = new UserController(userService);
-        post("/add-friend/", UserController.sendFriendRequest);
+        post("/add-friend/:sender/", UserController.sendFriendRequest);
         put("/accept-request/:sender/", UserController.acceptFriendRequest);
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
         delete("/remove-friend/:friend/", UserController.removeFriend);
@@ -69,6 +69,7 @@ public class Main {
         put("/block-user/:user/", UserController.blockUser);
         put("/unblock-user/:user/", UserController.unblockUser);
         get("/mutual-friends/", UserController.mutualFriends);
+        get("/my-friends/", UserController.getFriends);
 
         ChatController chatController = new ChatController(chatService);
         post("/add-message/", ChatController.addMessage);

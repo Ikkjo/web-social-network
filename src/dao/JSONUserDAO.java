@@ -151,33 +151,4 @@ public class JSONUserDAO implements UserDAO{
         this.users.get(username).setBlocked(false);
         saveChanges();
     }
-
-    public void generateTestData() {
-        User u1 = new User("test1", "test1", "test1@gmail.com", "Test1", "Testic1", Gender.MALE);
-        User u2 = new User("test2", "test2", "test2@gmail.com", "Test2", "Testic2", Gender.FEMALE);
-        User u3 = new User("test3", "test3", "test3@gmail.com", "Test3", "Testic1", Gender.FEMALE);
-        User u4 = new User("test4", "test4", "test4@gmail.com", "Testnoime", "Testic1", Gender.FEMALE);
-        User u5 = new User("test5", "test5", "test5@gmail.com", "Testesteron", "Testic1", Gender.FEMALE);
-
-        u1.setProfilePic("./img/male_avatar.svg");
-        u2.setProfilePic("./img/female_avatar.svg");
-        u3.setProfilePic("./img/female_avatar.svg");
-        u4.setProfilePic("./img/female_avatar.svg");
-        u5.setProfilePic("./img/female_avatar.svg");
-
-        u1.setDateOfBirth(LocalDate.of(1996, 2, 12).toEpochDay());
-        u2.setDateOfBirth(LocalDate.of(1997, 2, 12).toEpochDay());
-        u3.setDateOfBirth(LocalDate.of(1998, 2, 12).toEpochDay());
-        u4.setDateOfBirth(LocalDate.of(1999, 2, 12).toEpochDay());
-        u5.setDateOfBirth(LocalDate.of(2000, 10, 20).toEpochDay());
-
-        u1.setFriends(Arrays.asList(u2.getUsername()));
-        u2.setFriends(Arrays.asList(u1.getUsername()));
-
-        users.put(u1.getUsername(), u1);
-        users.put(u2.getUsername(), u2);
-        users.put(u3.getUsername(), u3);
-        users.put(u4.getUsername(), u4);
-        users.put(u5.getUsername(), u5);
-    }
 }
