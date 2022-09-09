@@ -60,7 +60,9 @@ public class Main {
         post("/add-friend/", UserController.sendFriendRequest);
         put("/accept-request/:sender/", UserController.acceptFriendRequest);
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
-
+        // todo komentari, chat
+        // proveri sve sto si do sad odradio
+        // povezi sa frontom (napravi api pozive)
     }
 
 }
