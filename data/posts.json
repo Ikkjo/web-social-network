@@ -16,10 +16,11 @@
             "surname": "Burekic",
             "dateOfBirth": 1662165763807,
             "role": "REGULAR",
-            "profilePic": "default_profile_pic.jpg",
+            "profilePic": "./img/male_avatar.svg",
             "isPrivate": false,
             "deleted": false,
-            "blocked": false
+            "blocked": false,
+            "gender": "MALE"
         }
     }
 }
