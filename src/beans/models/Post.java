@@ -7,7 +7,7 @@ public class Post {
 	private UUID id;
 	private String username;
 	private User user;
-	private String picture;
+	private String photo;
 	private String text;
 	private List<Comment> comments;
 	private Long timestamp;
@@ -24,11 +24,11 @@ public class Post {
 		this.timestamp = new Date().getTime();
 	}
 
-	public Post(UUID id, String username, String picture, String text, List<Comment> comments, Long timestamp,
+	public Post(UUID id, String username, String photo, String text, List<Comment> comments, Long timestamp,
 				Boolean deleted, PostType type) {
 		this.id = id;
 		this.username = username;
-		this.picture = picture;
+		this.photo = photo;
 		this.text = text;
 		this.comments = comments;
 		this.timestamp = timestamp;
@@ -36,12 +36,12 @@ public class Post {
 		this.type = type;
 	}
 
-	public Post(UUID id, String username, User user, String picture, String text, List<Comment> comments,
+	public Post(UUID id, String username, User user, String photo, String text, List<Comment> comments,
 				Long timestamp, Boolean deleted, PostType type) {
 		this.id = id;
 		this.username = username;
 		this.user = user;
-		this.picture = picture;
+		this.photo = photo;
 		this.text = text;
 		this.comments = comments;
 		this.timestamp = timestamp;
@@ -49,12 +49,12 @@ public class Post {
 		this.type = type;
 	}
 
-	public String getPicture() {
-		return picture;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public String getText() {

@@ -45,7 +45,7 @@ public class PostService {
         newPost.setUsername(p.getUsername());
         newPost.setType(p.getType());
         newPost.setText(p.getText());
-        newPost.setPicture(p.getPicture());
+        newPost.setPhoto(p.getPhoto());
 
         this.postDAO.addPost(newPost);
     }
