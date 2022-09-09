@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TestData {
@@ -133,6 +134,18 @@ public class TestData {
         female4.setDateOfBirth(LocalDate.of(2003, 5, 15).toEpochSecond(LocalTime.MIDNIGHT, ZoneOffset.MIN));
         female5.setDateOfBirth(LocalDate.of(1989, 8, 20).toEpochSecond(LocalTime.MIDNIGHT, ZoneOffset.MIN));
         naocare.setDateOfBirth(LocalDate.of(2001, 6, 11).toEpochSecond(LocalTime.MIDNIGHT, ZoneOffset.MIN));
+
+        male1.setFriends(new ArrayList<>());
+        male2.setFriends(new ArrayList<>());
+        male3.setFriends(new ArrayList<>());
+        male4.setFriends(new ArrayList<>());
+        male5.setFriends(new ArrayList<>());
+        female1.setFriends(new ArrayList<>());
+        female2.setFriends(new ArrayList<>());
+        female3.setFriends(new ArrayList<>());
+        female4.setFriends(new ArrayList<>());
+        female5.setFriends(new ArrayList<>());
+        naocare.setFriends(new ArrayList<>());
 
         male1.addFriend(male3.getUsername());
         male1.addFriend(female5.getUsername());
