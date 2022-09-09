@@ -15,6 +15,10 @@ public class JSONCommentDAO implements CommentDAO{
     // Key: postId ; Value: Set of comments
     private HashMap<UUID, List<Comment>> comments;
 
+    public JSONCommentDAO(){
+        load();
+    }
+
     @Override
     public List<Comment> getComments() {
         List<Comment> all = new ArrayList<>();
@@ -84,6 +88,7 @@ public class JSONCommentDAO implements CommentDAO{
         saveChanges();
     }
 
+    @Override
     public boolean commentExists(UUID comment){
         for (Comment c : getComments()){
             if (c.getId().equals(comment)){
@@ -94,6 +99,7 @@ public class JSONCommentDAO implements CommentDAO{
         return false;
     }
 
+    @Override
     public boolean doesPostHaveComments(UUID post) {
         return this.comments.containsKey(post) && !this.comments.get(post).isEmpty();
     }

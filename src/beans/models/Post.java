@@ -97,4 +97,6 @@ public class Post {
 	public void setType(PostType type) {
 		this.type = type;
 	}
+
+	public void addComment(Comment c) {this.comments.add(c);}
 }

@@ -19,6 +19,10 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
     // Key: Sender username; Value: Set of friend requests that were sent by that user
     private Map<String, Set<FriendRequest>> requests;
 
+    public JSONFriendRequestDAO() {
+        load();
+    }
+
     @Override
     public List<FriendRequest> getAllRequests() {
         ArrayList<FriendRequest> all = new ArrayList<>();

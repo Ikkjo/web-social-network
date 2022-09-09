@@ -1,9 +1,7 @@
 package main;
 
 import controllers.*;
-import dao.JSONFriendRequestDAO;
-import dao.JSONPostDAO;
-import dao.JSONUserDAO;
+import dao.*;
 import services.FriendRequestService;
 import services.PostService;
 import services.UserService;
@@ -23,9 +21,10 @@ public class Main {
         JSONUserDAO userDAO = new JSONUserDAO();
         JSONPostDAO postDAO = new JSONPostDAO();
         JSONFriendRequestDAO friendRequestDAO = new JSONFriendRequestDAO();
+        JSONCommentDAO commentDAO = new JSONCommentDAO();
 
         UserService userService = new UserService(userDAO, friendRequestDAO);
-        PostService postService = new PostService(postDAO, userDAO);
+        PostService postService = new PostService(postDAO, userDAO, commentDAO);
         FriendRequestService friendRequestService = new FriendRequestService(friendRequestDAO);
 
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
@@ -47,8 +46,8 @@ public class Main {
         get("/post/main-feed/", MainFeedController.getMainFeedPosts);
 
         PostController postController = new PostController(postService);
-        post("/post/add/", PostController.addPost);
-        delete("/post/delete/", PostController.deletePost);
+        post("/add-post/", PostController.addPost);
+        delete("/remove-post/", PostController.deletePost);
         get("/post/:postId/", PostController.getPost);
         get("/my-posts/", PostController.getUserPosts);
 
@@ -60,6 +59,11 @@ public class Main {
         post("/add-friend/", UserController.sendFriendRequest);
         put("/accept-request/:sender/", UserController.acceptFriendRequest);
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
+        delete("/remove-friend/:friend", UserController.removeFriend);
+
+
+
+
         // todo komentari, chat
         // proveri sve sto si do sad odradio
         // povezi sa frontom (napravi api pozive)

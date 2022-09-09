@@ -22,4 +22,7 @@ public interface CommentDAO {
 
     void saveChanges();
 
+    public boolean doesPostHaveComments(UUID post);
+    public boolean commentExists(UUID comment);
+
 }

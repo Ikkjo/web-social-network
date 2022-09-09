@@ -10,6 +10,7 @@ public interface UserDAO {
     List<User> getUsers();
     void addUser(User user);
     void addFriend(String user, String friend);
+    void removeFriend(String user, String friend);
     User getUserByUsername(String username);
     User getUserByEmail(String email);
     HashMap<String, User> getUsersByName(String name);

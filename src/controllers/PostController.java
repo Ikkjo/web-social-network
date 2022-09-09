@@ -1,5 +1,6 @@
 package controllers;
 
+import beans.models.Comment;
 import beans.models.Post;
 import com.google.gson.Gson;
 import services.PostService;
@@ -68,6 +69,48 @@ public class PostController {
             return userPosts;
         } catch (Exception e) {
             response.status(401);
+            return response;
+        }
+    };
+
+    public static Route addComment = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            Comment newComment = new Gson().fromJson(request.body(), Comment.class);
+            if(newComment.getUser().equals(loggedInUser)){
+                postService.addComment(newComment);
+                response.status(200);
+                return newComment;
+            } else {
+                response.status(401);
+                return response;
+            }
+        } catch (Exception e) {
+            response.status(501);
+            return response;
+        }
+    };
+
+    public static Route removeComment = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            UUID commentId = UUID.fromString(request.params("commentId"));
+            Comment c = postService.getComment(commentId);
+
+            if(c.getUser().equals(loggedInUser)) {
+                if(postService.deleteComment(commentId)){
+                    response.status(200);
+                } else {
+                    response.status(401);
+                }
+            } else {
+                response.status(401);
+            }
+            return response;
+        } catch (Exception e) {
+            response.status(501);
             return response;
         }
     };

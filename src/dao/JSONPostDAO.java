@@ -1,5 +1,6 @@
 package dao;
 
+import beans.models.Comment;
 import beans.models.Post;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,7 +21,7 @@ public class JSONPostDAO implements PostDAO {
 
     @Override
     public List<Post> getPosts() {
-        return null;
+        return this.posts.values().stream().toList();
     }
 
     @Override
@@ -84,6 +85,41 @@ public class JSONPostDAO implements PostDAO {
         }
 
         return query;
+    }
+
+    @Override
+    public boolean addCommentToPost(UUID id, Comment c) {
+        if(doesPostExist(id)){
+            Post p = posts.get(id);
+            if (p.getComments() != null){
+                p.addComment(c);
+            } else {
+                p.setComments(new ArrayList<>());
+                p.addComment(c);
+            }
+            saveChanges();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeCommentFromPost(UUID post, Comment c) {
+
+        if(doesPostExist(post)){
+            Post p = posts.get(post);
+            if(p.getComments() != null && !p.getComments().isEmpty() && p.getComments().contains(c)) {
+                p.getComments().remove(c);
+                saveChanges();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean doesPostExist(UUID id) {
+        return this.posts.containsKey(id);
     }
 
     @Override

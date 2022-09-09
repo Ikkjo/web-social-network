@@ -71,6 +71,13 @@ public class JSONUserDAO implements UserDAO{
         saveChanges();
     }
 
+    @Override
+    public void removeFriend(String user, String friend) {
+        users.get(user).removeFriend(friend);
+        users.get(friend).removeFriend(user);
+        saveChanges();
+    }
+
 
     @Override
     public User getUserByUsername(String username) {

@@ -1,6 +1,8 @@
 package services;
 
+import beans.models.Comment;
 import beans.models.Post;
+import dao.CommentDAO;
 import dao.PostDAO;
 import dao.UserDAO;
 
@@ -10,23 +12,22 @@ public class PostService {
 
     private final PostDAO postDAO;
     private final UserDAO userDAO;
+    private final CommentDAO commentDAO;
 
-    public PostService(PostDAO postDAO, UserDAO userDAO) {
+    public PostService(PostDAO postDAO, UserDAO userDAO, CommentDAO commentDAO) {
         this.postDAO = postDAO;
         this.userDAO = userDAO;
+        this.commentDAO = commentDAO;
     }
 
     public List<Post> getAllPosts(){
-        List<Post> allPosts =  this.postDAO.getPosts();
+        return this.postDAO.getPosts();
+    }
 
-        if (allPosts == null) {
-            return new ArrayList<>();
-        }
-        // Sort posts by most recent
-        allPosts.sort(Comparator.comparing(Post::getTimestamp));
-        Collections.reverse(allPosts);
+    private List<Post> sortByDateDesc(List<Post> posts) {
+        List<Post> sorted = new ArrayList<>();
 
-        return allPosts;
+        return sorted;
     }
 
     public Post getPostById (UUID id) {
@@ -47,12 +48,31 @@ public class PostService {
         this.postDAO.addPost(newPost);
     }
 
-    public void deletePost(Post p){
-        this.postDAO.deletePost(p);
+    public Comment getComment(UUID id){
+        if(commentDAO.commentExists(id)){
+            return commentDAO.getComment(id);
+        }
+        return null;
+    };
+
+    public boolean doesCommentExist(UUID id){
+        return commentDAO.commentExists(id);
+    }
+
+    public boolean doesPostHaveComments(UUID id) {
+        return commentDAO.doesPostHaveComments(id);
+    }
+
+    public boolean doesPostExist(UUID id) {
+        return postDAO.doesPostExist(id);
     }
 
     public void deletePost(UUID id){
-        this.postDAO.deletePost(id);
+        if(postDAO.doesPostExist(id)){
+            Post p = getPostById(id);
+            List<Comment> comments = p.getComments();
+            this.postDAO.deletePost(p);
+        }
     }
 
     public List<Post> getPostsByUser(String username) {
@@ -67,6 +87,33 @@ public class PostService {
             return false;
         }
 
+    }
+
+    public boolean addComment(Comment c) {
+        try {
+            postDAO.addCommentToPost(c.getPostId(), c);
+            commentDAO.addComment(c);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean deleteComment(UUID comment){
+        try {
+            commentDAO.deleteComment(comment);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public List<Comment> getPostComments(UUID postId){
+        return commentDAO.getPostComments(postId);
+    }
+
+    public List<Comment> getCommentsByUser(String username) {
+        return commentDAO.getCommentsByUser(username);
     }
 
 }

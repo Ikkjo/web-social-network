@@ -30,7 +30,7 @@ public class User {
 		this.friends = new ArrayList<>();
 		this.friendRequests = new ArrayList<>();
 		this.posts = new ArrayList<>();
-		this.profilePic = "default_profile_pic.jpg";
+		this.profilePic = "./img/profile_pic.svg";
     }
 
 	public User(String username, String password, String email, String name, String surname, Long dateOfBirth,
@@ -88,7 +88,7 @@ public class User {
 		this.friends = new ArrayList<>();
 		this.friendRequests = new ArrayList<>();
 		this.posts = new ArrayList<>();
-		this.profilePic = "default_profile_pic.jpg";
+		this.profilePic = "./img/profile_pic.svg";
 	}
 
 
@@ -189,6 +189,10 @@ public class User {
 	}
 
 	public void addFriend(String newFriend) { this.friends.add(newFriend);}
+
+	public void removeFriend(String friend) {
+		this.friends.remove(friend);
+	}
 	public Boolean getPrivate() {
 		return isPrivate;
 	}

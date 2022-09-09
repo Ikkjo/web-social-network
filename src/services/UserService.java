@@ -87,6 +87,14 @@ public class UserService {
                 u2.getFriends().contains(u1.getUsername());
     }
 
+    public boolean areFriends(String user1, String user2) {
+        User u1 = getUser(user1);
+        User u2 = getUser(user2);
+
+        return u1.getFriends().contains(u2.getUsername()) &&
+                u2.getFriends().contains(u1.getUsername());
+    }
+
     public void sendFriendRequest(String from, String to) {
         friendRequestDAO.addRequest(new FriendRequest(
                 from,
@@ -104,11 +112,9 @@ public class UserService {
         friendRequestDAO.deleteRequest(sender, loggedInUser);
     }
 
-    public void addComment(Comment comment){
-
-    }
-
-    public void deleteComment(UUID id){
-
+    public void removeFriend(String loggedInUser, String friend) {
+        if(areFriends(loggedInUser, friend)){
+            userDAO.removeFriend(loggedInUser, friend);
+        }
     }
 }

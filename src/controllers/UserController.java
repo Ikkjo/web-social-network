@@ -57,4 +57,18 @@ public class UserController {
         }
     };
 
+    public static Route removeFriend = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String friend = request.params("friend");
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            userService.removeFriend(loggedInUser, friend);
+            response.status(200);
+            return response;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
 }
