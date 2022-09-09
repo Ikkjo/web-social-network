@@ -5,11 +5,11 @@ import beans.models.DirectMessage;
 import java.util.List;
 
 public interface DirectMessageDAO {
-    public void addMessage(DirectMessage m);
+    void addMessage(DirectMessage m);
 
-    public List<String>  getChats();
+    List<String>  getChats(String username);
 
-    public List<DirectMessage> getMessages();
+    List<DirectMessage> getMessages(String sender, String receiver);
 
     void saveChanges();
     void load();
