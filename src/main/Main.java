@@ -64,10 +64,10 @@ public class Main {
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
         delete("/remove-friend/:friend", UserController.removeFriend);
         put("/edit-profile/", UserController.editProfile);
-        put("/block-user/:user", UserController.blockUser);
-        put("/unblock-user/:user", UserController.unblockUser);
+        put("/block-user/:user/", UserController.blockUser);
+        put("/unblock-user/:user/", UserController.unblockUser);
         get("/mutual-friends/", UserController.mutualFriends);
-        // todo komentari, chat
+        // todo chat
         // proveri sve sto si do sad odradio
         // povezi sa frontom (napravi api pozive)
     }

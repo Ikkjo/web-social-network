@@ -34,7 +34,7 @@ public class UserService {
     public boolean isValidUser(String username, String password) {
         User u = userDAO.getUserByUsername(username);
         if (u != null){
-            if (!u.getDeleted()){
+            if (!u.getDeleted() && !u.getBlocked()){
                 return u.getPassword().equals(password);
             }
         }
