@@ -1,4 +1,6 @@
 #post {
+    min-width: 600px;
+    width: 1000px;
     max-width: 1000px;
     background-color: #fff;
     border-radius: 10px;

@@ -15,16 +15,16 @@ Vue.component("user-profile", {
                     <div class="profile ">
                         <img src="./img/profile_pic.svg" alt=" " class="profile-thumbnail ">
                         <h2 class="user-fullname">{{ user.name}} {{user.surname }}</h2>
-                        <div class="dob">{{ user.dateOfBirth }}</div>
+                        <div class="dob">{{new Date(user.dateOfBirth).toLocaleDateString()}}</div>
                     </div>
 
                     <div class="user-links" v-bind:class="{'user-links-50' : user.isPublic && !isFriend}">
                         <div class="links-top">
-                            <div v-if="isFriend || user.isPublic || loggedInUser.type === 'admin'" class="link-group">
+                            <div v-if="isFriend || user.isPublic || loggedInUser.role.toLowerCase() === 'admin'" class="link-group">
                                 <i class="fas fa-book-open"></i>
                                 <router-link :to="'/user/'+user.username+'/posts'">Objave</router-link>
                             </div>
-                            <div v-if="isFriend || user.isPublic || loggedInUser.type === 'admin'" class="link-group">
+                            <div v-if="isFriend || user.isPublic || loggedInUser.role.toLowerCase() === 'admin'" class="link-group">
                                 <i class="fas fa-images"></i>
                                 <router-link :to="'/user/'+user.username+'/photos'">Fotografije</router-link>
                             </div>
@@ -42,10 +42,10 @@ Vue.component("user-profile", {
                                 </label>
                             </div>
                             <div> -->
-                            <button v-if="isFriend || loggedInUser.type === 'admin'" class="btn btn-message" @click="openMessages"><i class="fas fa-comment-dots"></i>Poruka</button>
-                            <button v-if="loggedInUser && loggedInUser.type === 'regular'" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
-                            <button v-if="loggedInUser && loggedInUser.type==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
-                            <button v-if="loggedInUser && loggedInUser.type==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
+                            <button v-if="isFriend || loggedInUser.role.toLowerCase() === 'admin'" class="btn btn-message" @click="openMessages"><i class="fas fa-comment-dots"></i>Poruka</button>
+                            <button @click="updateFriend" v-if="loggedInUser && loggedInUser.role.toLowerCase() === 'regular'" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
+                            <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
+                            <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
                         </div>
                     </div>
                 </div>
@@ -66,10 +66,31 @@ Vue.component("user-profile", {
             this.user.blocked = false;
         },
         openMessages() {
-            this.$router.push("/chat/" + user.username);
+            this.$router.push("/chat/" + this.user.username);
+        },
+        updateFriend() {
+            if (!this.isFriend) {
+                axios.post("/add-friend/", this.user.username, {
+                    headers: {
+                        Authorization: 'Bearer ' + this.loggedInUser.jwt
+                    }
+                }).then((response) => {
+                    alert("Zahtev poslat")
+                }).catch(() => alert("Greška"))
+            } else {
+                axios.delete("/remove-friend/" + this.user.username, {
+                        headers: {
+                            Authorization: 'Bearer ' + this.loggedInUser.jwt,
+                        },
+                    }).then((response) => {
+                        this.isFriend = false;
+                    })
+                    .catch(() => alert("Greška."));
+
+            }
         }
     },
-    mounted() {
+    created() {
         if (window.sessionStorage.getItem("user")) {
             this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
             let username = JSON.parse(window.sessionStorage.getItem("user")).username;
@@ -78,7 +99,10 @@ Vue.component("user-profile", {
                     headers: {
                         Authorization: 'Bearer ' + token,
                     },
-                }).then((response) => this.isFriend = response.data)
+                }).then((response) => {
+                    console.log("Proslo")
+                    this.isFriend = JSON.parse(JSON.stringify(response.data))
+                })
                 .catch(() => alert("Greška."));
         }
         axios.get("/user/" + this.$route.params.username).then((response) => {

@@ -13,8 +13,8 @@ Vue.component("my-profile", {
                 <div class="my-profile-container">
                     <div class="profile ">
                         <img src="./img/profile_pic.svg" alt=" " class="profile-thumbnail ">
-                        <h2 class="user-fullname">{{ user.name}} {{user.surname }}</h2>
-                        <div class="dob">{{ user.dateOfBirth }}</div>
+                        <h2 class="user-fullname">{{user.name}} {{user.surname}}</h2>
+                        <div class="dob">{{new Date(user.dateOfBirth).toLocaleDateString()}}</div>
                     </div>
                     <div class="user-links" v-bind:class="{'user-links-50' : user.isPublic && !isFriend}">
                         <div class="links-top">
@@ -56,22 +56,9 @@ Vue.component("my-profile", {
             this.$router.push("/chat/" + "");
         }
     },
-    mounted() {
+    created() {
         if (window.sessionStorage.getItem("user")) {
-            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
-            let username = JSON.parse(window.sessionStorage.getItem("user")).username;
-            let token = JSON.parse(window.sessionStorage.getItem("user")).jwt
-            axios.get("/are-friends/" + this.$route.params.username, {
-                    headers: {
-                        Authorization: 'Bearer ' + token,
-                    },
-                }).then((response) => this.isFriend = response.data)
-                .catch(() => alert("Greška."));
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
         }
-        axios.get("/user/" + this.$route.params.username).then((response) => {
-                console.log(response.data)
-                this.user = JSON.parse(JSON.stringify(response.data))
-            })
-            .catch(() => alert("Došlo je do greške."))
-    },
+    }
 });

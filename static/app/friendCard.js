@@ -13,8 +13,7 @@ Vue.component("friend-card", {
 `,
     methods: {
         removeFriend() {
-            // TODO: Add delete request
-            this.$emit("removeFriend", this.friend.id)
+            this.$emit("removeFriend", this.friend.username)
         }
     },
     mounted() {},

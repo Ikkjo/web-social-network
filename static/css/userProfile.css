@@ -79,6 +79,7 @@
 }
 
 .links-bottom .btn {
+    padding: 10px;
     font-size: 1.2rem;
     text-transform: initial;
     width: 100%;

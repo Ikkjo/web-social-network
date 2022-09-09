@@ -15,38 +15,28 @@ Vue.component("friend-request-list", {
     </div>	 
 `,
     methods: {
-        removeRequest(id) {
-            console.log("id: " + id)
+        removeRequest(from) {
             for (let i = 0; i < this.friendRequests.length; i++)
-                if (this.friendRequests[i].id === id)
+                if (this.friendRequests[i].from === from)
                     this.friendRequests.splice(i, 1);
         },
         getFriendRequests() {
             // TODO: Add get friend requests
-            return [{
-                    user: {
-                        name: 'Test',
-                        surname: 'Testic',
-                        profilePic: "../img/female_avatar.svg",
-                        username: "nekoime"
-                    },
-                    id: 0,
-                },
-                {
-                    user: {
-                        name: 'Test',
-                        surname: 'Testic',
-                        profilePic: "../img/female_avatar.svg",
-                        username: "nekoime"
-                    },
-                    id: 1,
-                }
-            ]
-
+            if (window.sessionStorage.getItem("user")) {
+                let user = JSON.parse(window.sessionStorage.getItem("user"))
+                axios.get("/friend-requests", {
+                        headers: {
+                            Authorization: 'Bearer ' + user.jwt,
+                        },
+                    }).then((response) => this.friendRequests = JSON.parse(JSON.stringify(response.data)))
+                    .catch(() => alert("Greška."));
+            } else {
+                alert("Greška.")
+            }
         }
     },
     mounted() {
-        this.friendRequests = this.getFriendRequests();
+        this.getFriendRequests();
     },
 });
 

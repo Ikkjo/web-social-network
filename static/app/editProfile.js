@@ -60,9 +60,9 @@ Vue.component("edit-profile", {
             <div class="form-element">
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
-                    <input v-model="form.password" @focus="inFocus('password')" @blur="outFocus('password')" type="password" placeholder="Nova lozinka" name="password"/>
+                    <input v-model="form.newPassword" @focus="inFocus('newPassword')" @blur="outFocus('newPassword')" type="password" placeholder="Nova lozinka" name="newPassword"/>
                 </div>
-                <div v-show="!isFocused('password') && $v.form.password.$invalid" class="alert alert-danger">Lozinka je obavezna, minimum 4 karaktera.</div>
+                <div v-show="!isFocused('newPassword') && $v.form.newPassword.$invalid" class="alert alert-danger">Lozinka je obavezna, minimum 4 karaktera.</div>
             </div>
             <div class="form-element">
                 <div class="input-field">
@@ -78,8 +78,8 @@ Vue.component("edit-profile", {
                     <option value="female">Žensko</option>
                 </select>
             </div>
-            <button :disabled="saveChangesDisabled" @click="saveChanges" class="btn"><i class="fas fa-save"></i> Sačuvaj promene</button></a>
-            <button :disabled="discardChangesDisabled" @click="discardChanges" class="btn"><i class="fas fa-trash-restore"></i> Odbaci promene</button></a>
+            <button :disabled="buttonDisabled" @click="saveChanges" class="btn"><i class="fas fa-save"></i> Sačuvaj promene</button></a>
+            <button :disabled="buttonDisabled" @click="discardChanges" class="btn"><i class="fas fa-trash-restore"></i> Odbaci promene</button></a>
         </div>
     </div>	 
 `,
@@ -94,14 +94,12 @@ Vue.component("edit-profile", {
             this.infocus[field] = false
         },
         saveChanges() {
-            // TODO: add PUT request to save changes
-        },
-        saveChangesDisabled() {
-            return !(this.form.name !== this.user.name ||
-                this.form.surname !== this.user.name ||
-                this.form.email !== this.user.name ||
-                this.form.password && this.form.newPassword && this.form.confirmNewPassword ||
-                this.form.gender !== this.user.name);
+            axios.put("/edit-profile/", this.form, {
+                    headers: {
+                        Authorization: 'Bearer ' + user.jwt,
+                    },
+                }).then((response) => { alert("Podaci su uspešno ažurirani") })
+                .catch(() => alert("Greška."));
         },
         discardChanges() {
             this.form.name = JSON.parse(JSON.stringify(this.user.name))
@@ -111,15 +109,17 @@ Vue.component("edit-profile", {
             this.form.password = ""
             this.form.newPassword = ""
             this.form.confirmNewPassword = ""
+            window.location.reload();
         },
-        discardChangesDisabled() {
+    },
+    computed: {
+        buttonDisabled() {
             return this.form.name === this.user.name &&
                 this.form.surname === this.user.surname &&
                 this.form.email === this.user.email &&
                 !this.form.password && !this.form.newPassword && !this.form.confirmNewPassword &&
                 this.form.gender === this.user.gender;
         }
-
     },
     mounted() {
         if (window.sessionStorage.getItem("user"))
