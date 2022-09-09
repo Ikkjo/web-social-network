@@ -21,7 +21,7 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
     }
     @Override
     public void addMessage(DirectMessage m) {
-        this.messages.get(m.getSender()).add(m);
+        this.messages.get(m.getFrom()).add(m);
         saveChanges();
     }
 
@@ -30,7 +30,7 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
         List<String> chats = new ArrayList<>();
 
         for (DirectMessage dm : this.messages.get(user)){
-            chats.add(dm.getRecipient());
+            chats.add(dm.getTo());
         }
         return chats;
     }
@@ -45,12 +45,12 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
         allMessages.addAll(this.messages.get(receiver));
 
         for(DirectMessage dm : allMessages) {
-            if(dm.getRecipient().equals(sender) || dm.getRecipient().equals(receiver)){
+            if(dm.getTo().equals(sender) || dm.getTo().equals(receiver)){
                 messages.add(dm);
             }
         }
 
-        return null;
+        return messages;
     }
 
     @Override
