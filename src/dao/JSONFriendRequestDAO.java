@@ -90,7 +90,7 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
 
     @Override
     public void saveChanges() {
-        JsonDatabase.save(new File(FilePathUtil.POST_DATA_FILEPATH), this.requests);
+        JsonDatabase.save(new File(FilePathUtil.FRIEND_REQUEST_DATA_FILEPATH), this.requests);
     }
 
     @Override

@@ -153,4 +153,15 @@ public class UserService {
         return mutual;
     }
 
+    public List<User> getFriends(String username) {
+        List<User> friends = new ArrayList<>();
+        User u = getUser(username);
+
+        for (String friend : u.getFriends()){
+            friends.add(getUser(friend));
+        }
+
+        return friends;
+    }
+
 }

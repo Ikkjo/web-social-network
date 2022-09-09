@@ -106,7 +106,7 @@ public class JSONCommentDAO implements CommentDAO{
 
     @Override
     public void saveChanges() {
-        JsonDatabase.save(new File(FilePathUtil.POST_DATA_FILEPATH), this.comments);
+        JsonDatabase.save(new File(FilePathUtil.COMMENT_DATA_FILEPATH), this.comments);
     }
 
     @Override

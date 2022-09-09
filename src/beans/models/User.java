@@ -31,6 +31,7 @@ public class User {
 		this.friendRequests = new ArrayList<>();
 		this.posts = new ArrayList<>();
 		this.profilePic = "./img/profile_pic.svg";
+		this.blocked = false;
     }
 
 	public User(String username, String password, String email, String name, String surname, Long dateOfBirth,
@@ -81,7 +82,7 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.gender = gender;
-		this.dateOfBirth = new Date().getTime();
+		this.dateOfBirth = 0L;
 		this.role = UserRole.REGULAR;
 		this.isPrivate = false;
 		this.deleted = false;
@@ -91,6 +92,17 @@ public class User {
 		this.profilePic = "./img/profile_pic.svg";
 	}
 
+	public User(String username, String password, String email, String name, String surname, Gender gender,
+				UserRole role, String profilePic) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.gender = gender;
+		this.role = role;
+		this.profilePic = profilePic;
+	}
 
 	public String getUsername() {
 		return username;

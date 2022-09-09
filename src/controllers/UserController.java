@@ -80,7 +80,9 @@ public class UserController {
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
             User newUserDetails = new Gson().fromJson(request.body(), User.class);
-            if(Objects.equals(loggedInUser, newUserDetails.getUsername())){
+            User user = userService.getUser(loggedInUser);
+            if(newUserDetails.getUsername().equals(user.getUsername()) &&
+                    !newUserDetails.getPassword().equals(user.getPassword())){
                 userService.editProfile(newUserDetails);
                 response.status(200);
             } else {
@@ -137,6 +139,17 @@ public class UserController {
             String user1 = request.queryParams("user1");
             String user2 = request.queryParams("user2");
             return new Gson().toJson(userService.getMutualFriends(user1, user2));
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route getFriends = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            return new Gson().toJson(userService.getFriends(loggedInUser));
         } catch (Exception e) {
             response.status(401);
             return response;
