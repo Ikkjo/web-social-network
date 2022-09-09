@@ -2,9 +2,7 @@ package main;
 
 import controllers.*;
 import dao.*;
-import services.FriendRequestService;
-import services.PostService;
-import services.UserService;
+import services.*;
 import utils.SecurityUtils;
 
 import java.io.File;
@@ -22,10 +20,14 @@ public class Main {
         JSONPostDAO postDAO = new JSONPostDAO();
         JSONFriendRequestDAO friendRequestDAO = new JSONFriendRequestDAO();
         JSONCommentDAO commentDAO = new JSONCommentDAO();
+        JSONDirectMessageDAO directMessageDAO = new JSONDirectMessageDAO();
 
         UserService userService = new UserService(userDAO, friendRequestDAO);
         PostService postService = new PostService(postDAO, userDAO, commentDAO);
         FriendRequestService friendRequestService = new FriendRequestService(friendRequestDAO);
+        ChatService chatService = new ChatService(directMessageDAO);
+
+        webSocket("/ws", DirectMessageHandler.class);
 
         staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
@@ -47,12 +49,12 @@ public class Main {
 
         PostController postController = new PostController(postService);
         post("/add-post/", PostController.addPost);
-        delete("/remove-post/", PostController.deletePost);
+        delete("/remove-post/:postId/", PostController.deletePost);
         get("/post/:postId/", PostController.getPost);
         get("/my-posts/", PostController.getUserPosts);
         get("/my-photos/", PostController.getUserPhotos);
         post("/add-comment/", PostController.addComment);
-        delete("/delete-comment/", PostController.deleteComment);
+        delete("/delete-comment/:commentId/", PostController.deleteComment);
 
         FriendRequestController friendRequestController = new FriendRequestController(friendRequestService);
         get("/friend-requests/", FriendRequestController.getFriendRequests);
@@ -62,12 +64,16 @@ public class Main {
         post("/add-friend/", UserController.sendFriendRequest);
         put("/accept-request/:sender/", UserController.acceptFriendRequest);
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
-        delete("/remove-friend/:friend", UserController.removeFriend);
+        delete("/remove-friend/:friend/", UserController.removeFriend);
         put("/edit-profile/", UserController.editProfile);
         put("/block-user/:user/", UserController.blockUser);
         put("/unblock-user/:user/", UserController.unblockUser);
         get("/mutual-friends/", UserController.mutualFriends);
-        // todo chat
+
+        ChatController chatController = new ChatController(chatService);
+        post("/add-message/", ChatController.addMessage);
+        get("/get-chats/", ChatController.getChats);
+        get("/get-messages/", ChatController.getMessages);
         // proveri sve sto si do sad odradio
         // povezi sa frontom (napravi api pozive)
     }

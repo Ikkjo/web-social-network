@@ -37,8 +37,8 @@ public class PostController {
     public static Route deletePost = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            Post post =  new Gson().fromJson(request.body(), Post.class);
-            postService.deletePost(post.getId());
+            String postId = request.params("postId");
+            postService.deletePost(UUID.fromString(postId));
             response.status(200);
             return response;
         } catch (Exception e) {
@@ -50,7 +50,6 @@ public class PostController {
     public static Route getPost = (Request request, Response response) -> {
         response.type("application/json");
         try {
-
             Post post =  postService.getPostById(UUID.fromString(request.params("postId")));
             response.status(200);
             return post;

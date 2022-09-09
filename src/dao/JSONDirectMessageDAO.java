@@ -16,6 +16,9 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
 
     private HashMap<String, List<DirectMessage>> messages;
 
+    public JSONDirectMessageDAO(){
+        load();
+    }
     @Override
     public void addMessage(DirectMessage m) {
         this.messages.get(m.getSender()).add(m);
@@ -52,12 +55,12 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
 
     @Override
     public void saveChanges() {
-        JsonDatabase.save(new File(FilePathUtil.USER_DATA_FILEPATH), this.messages);
+        JsonDatabase.save(new File(FilePathUtil.DIRECT_MESSAGE_DATA_FILEPATH), this.messages);
     }
 
     @Override
     public void load() {
-        File f = new File(FilePathUtil.USER_DATA_FILEPATH);
+        File f = new File(FilePathUtil.DIRECT_MESSAGE_DATA_FILEPATH);
 
         if (!f.exists()){
             try {
