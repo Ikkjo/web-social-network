@@ -211,8 +211,8 @@ public class TestData {
 
         Post p3 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                male1.getUsername(),
+                male1,
                 "../img/photo2.png",
                 "Ut lobortis ultrices erat sit amet euismod.",
                 new ArrayList<>(),
@@ -222,8 +222,8 @@ public class TestData {
 
         Post p4 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                female2.getUsername(),
+                female2,
                 "../img/photo3.jpg",
                 "",
                 new ArrayList<>(),
@@ -233,8 +233,8 @@ public class TestData {
 
         Post p5 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                male4.getUsername(),
+                male4,
                 "",
                 "Mauris ullamcorper consectetur enim, eget volutpat nunc pharetra quis.",
                 new ArrayList<>(),
@@ -244,8 +244,8 @@ public class TestData {
 
         Post p6 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                female2.getUsername(),
+                female2,
                 "../img/photo4.jpeg",
                 "In et ex id lorem suscipit hendrerit eu nec dolor. Duis semper dolor feugiat tortor ornare, nec varius urna blandit.",
                 new ArrayList<>(),
@@ -255,8 +255,8 @@ public class TestData {
 
         Post p7 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                female4.getUsername(),
+                female4,
                 "../img/photo5.jpg",
                 "Cras dignissim mauris a bibendum sagittis. Mauris iaculis mauris vel convallis varius.",
                 new ArrayList<>(),
@@ -266,8 +266,8 @@ public class TestData {
 
         Post p8 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                male3.getUsername(),
+                male3,
                 "",
                 "Phasellus placerat, magna in hendrerit varius, purus purus vehicula sem, ut volutpat quam metus nec sapien.",
                 new ArrayList<>(),
@@ -288,8 +288,8 @@ public class TestData {
 
         Post p10 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                male1.getUsername(),
+                male1,
                 "../img/photo6.png",
                 "Nulla facilisi. Proin a elit eu diam blandit mollis.",
                 new ArrayList<>(),
@@ -299,8 +299,8 @@ public class TestData {
 
         Post p11 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                female2.getUsername(),
+                female2,
                 "",
                 "Nunc sagittis massa id ipsum vestibulum, quis dapibus nibh bibendum.",
                 new ArrayList<>(),
@@ -310,8 +310,8 @@ public class TestData {
 
         Post p12 = new Post(
                 UUID.randomUUID(),
-                female1.getUsername(),
-                female1,
+                female3.getUsername(),
+                female3,
                 "../img/MALE3.jpeg",
                 "",
                 new ArrayList<>(),
