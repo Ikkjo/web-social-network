@@ -8,6 +8,7 @@ import services.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import utils.AuthUtils;
 
 import java.util.*;
 
@@ -24,26 +25,20 @@ public class MainFeedController {
     public static Route getMainFeedPosts = (Request request, Response response) -> {
         response.type("application/json");
         List<Post> allPosts = postService.getAllPosts();
+        String loggedInUser = AuthUtils.getUsernameFromToken(request);
+
+        if(loggedInUser == null) {
+            allPosts = allPosts.subList(0, 5);
+        }
+
         for (Post p : allPosts) {
-            addUserToPost(p);
-            addCommentsToPost(p);
+            p.setUser(userService.getUser(p.getUsername()));
+            p.setComments(postService.getPostComments(p.getId()));
+            for(Comment c : p.getComments()){
+                c.setUser(userService.getUser(c.getUsername()));
+            }
         }
-        return new Gson().toJson(postService.getAllPosts());
+        return new Gson().toJson(allPosts);
     };
-
-    private static void addUserToPost(Post p){
-        p.setUser(userService.getUser(p.getUsername()));
-    }
-
-    private static void addCommentsToPost(Post p) {
-        p.setComments(postService.getPostComments(p.getId()));
-        addUserToPostComments(p);
-    }
-
-    private static void addUserToPostComments(Post p) {
-        for(Comment c : p.getComments()){
-            c.setUser(userService.getUser(c.getUsername()));
-        }
-    }
 
 }
