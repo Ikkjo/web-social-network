@@ -176,5 +176,12 @@ public class PostController {
 
     private static void addCommentsToPost(Post p) {
         p.setComments(postService.getPostComments(p.getId()));
+        addUserToPostComments(p);
+    }
+
+    private static void addUserToPostComments(Post p) {
+        for(Comment c : p.getComments()){
+            c.setUser(userService.getUser(c.getUsername()));
+        }
     }
 }

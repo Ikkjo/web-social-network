@@ -29,11 +29,6 @@ public class Comment {
 	}
 
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
 	public UUID getId() {
 		return id;
 	}
@@ -54,8 +49,16 @@ public class Comment {
 		return username;
 	}
 
-	public void setUser(String user) {
-		this.username = user;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getText() {
