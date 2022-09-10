@@ -108,7 +108,7 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
 
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 
-            Type requestsTypeToken = new TypeToken<Map<String, List<FriendRequest>>>() {}.getType();
+            Type requestsTypeToken = new TypeToken<Map<String, Set<FriendRequest>>>() {}.getType();
 
             this.requests = new Gson().fromJson(br, requestsTypeToken);
 

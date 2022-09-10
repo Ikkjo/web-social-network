@@ -1,26 +1,122 @@
 {
-    "d66688a6-0a59-4bed-9e23-2404ee268ed8": {
-        "id": "d66688a6-0a59-4bed-9e23-2404ee268ed8",
-        "username": "burekk",
-        "picture": "",
-        "text": "Ovo je prvi post",
-        "comments": [],
-        "timestamp": 1662687524320,
-        "deleted": false,
-        "type": "TEXT",
-        "user": {
-            "username": "burekk",
-            "password": "burekk",
-            "email": "burek@gmail.com",
-            "name": "Burek",
-            "surname": "Burekic",
-            "dateOfBirth": 1662165763807,
-            "role": "REGULAR",
-            "profilePic": "./img/male_avatar.svg",
-            "isPrivate": false,
-            "deleted": false,
-            "blocked": false,
-            "gender": "MALE"
-        }
-    }
+  "b32a7f2a-d331-4431-a555-f8638a4f0408": {
+    "id": "b32a7f2a-d331-4431-a555-f8638a4f0408",
+    "username": "test7",
+    "photo": "../img/photo3.jpg",
+    "text": "",
+    "comments": [],
+    "timestamp": 1662775161673,
+    "deleted": false,
+    "type": "PHOTO"
+  },
+  "ed1da600-0834-41b2-b7f4-37122e36d08a": {
+    "id": "ed1da600-0834-41b2-b7f4-37122e36d08a",
+    "username": "test7",
+    "photo": "../img/photo4.jpeg",
+    "text": "In et ex id lorem suscipit hendrerit eu nec dolor. Duis semper dolor feugiat tortor ornare, nec varius urna blandit.",
+    "comments": [],
+    "timestamp": 1662775161678,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "cc87d7e7-8d6c-4d9a-b75d-d55ba4c569c4": {
+    "id": "cc87d7e7-8d6c-4d9a-b75d-d55ba4c569c4",
+    "username": "test3",
+    "photo": "",
+    "text": "Phasellus placerat, magna in hendrerit varius, purus purus vehicula sem, ut volutpat quam metus nec sapien.",
+    "comments": [],
+    "timestamp": 1662775161682,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "e9401eff-e840-45c2-80e1-5b9142993e55": {
+    "id": "e9401eff-e840-45c2-80e1-5b9142993e55",
+    "username": "test7",
+    "photo": "",
+    "text": "Nunc sagittis massa id ipsum vestibulum, quis dapibus nibh bibendum.",
+    "comments": [],
+    "timestamp": 1662775161690,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "5b6ee841-3311-412d-bfdf-71564d8bb853": {
+    "id": "5b6ee841-3311-412d-bfdf-71564d8bb853",
+    "username": "admin2",
+    "photo": "../img/MALE3.jpeg",
+    "text": "",
+    "comments": [],
+    "timestamp": 1662775161693,
+    "deleted": false,
+    "type": "PHOTO"
+  },
+  "5c7e68c4-6168-43ee-9cdb-54d72b5f2ada": {
+    "id": "5c7e68c4-6168-43ee-9cdb-54d72b5f2ada",
+    "username": "test1",
+    "photo": "../img/photo2.png",
+    "text": "Ut lobortis ultrices erat sit amet euismod.",
+    "comments": [],
+    "timestamp": 1662775161671,
+    "deleted": false,
+    "type": "PHOTO"
+  },
+  "354621d2-356e-43d8-8cb5-851398e3ab8e": {
+    "id": "354621d2-356e-43d8-8cb5-851398e3ab8e",
+    "username": "test6",
+    "photo": "../img/photo1.jpeg",
+    "text": "Praesent elementum turpis ac nunc tempus, ut tincidunt metus porta. Suspendisse vitae lectus nulla.",
+    "comments": [],
+    "timestamp": 1662775161667,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "b8ae8c07-f72e-4676-afae-c3fc6667222d": {
+    "id": "b8ae8c07-f72e-4676-afae-c3fc6667222d",
+    "username": "test4",
+    "photo": "",
+    "text": "Mauris ullamcorper consectetur enim, eget volutpat nunc pharetra quis.",
+    "comments": [],
+    "timestamp": 1662775161676,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "0079e78a-a18d-400f-8eb2-c67c2bbce6fa": {
+    "id": "0079e78a-a18d-400f-8eb2-c67c2bbce6fa",
+    "username": "test6",
+    "photo": "",
+    "text": "Vestibulum imperdiet, augue id pulvinar ultricies, quam ipsum interdum risus, at sagittis enim nibh quis odio. Mauris auctor elit dui, ac fringilla lacus dictum in.",
+    "comments": [],
+    "timestamp": 1662775161685,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "cc890c0f-3f91-4b83-9eec-49b4da446213": {
+    "id": "cc890c0f-3f91-4b83-9eec-49b4da446213",
+    "username": "test1",
+    "photo": "",
+    "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
+    "comments": [],
+    "timestamp": 1662775161663,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "edca2532-8f06-4c04-a3ff-1a965ebd30c0": {
+    "id": "edca2532-8f06-4c04-a3ff-1a965ebd30c0",
+    "username": "test8",
+    "photo": "../img/photo5.jpg",
+    "text": "Cras dignissim mauris a bibendum sagittis. Mauris iaculis mauris vel convallis varius.",
+    "comments": [],
+    "timestamp": 1662775161680,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "4294d778-b36e-4471-b909-85e29deee9e9": {
+    "id": "4294d778-b36e-4471-b909-85e29deee9e9",
+    "username": "test1",
+    "photo": "../img/photo6.png",
+    "text": "Nulla facilisi. Proin a elit eu diam blandit mollis.",
+    "comments": [],
+    "timestamp": 1662775161688,
+    "deleted": false,
+    "type": "TEXT"
+  }
 }

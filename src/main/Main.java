@@ -44,7 +44,7 @@ public class Main {
         ProfilePageController profilePageController = new ProfilePageController(userService);
         get("/user/:username/", ProfilePageController.getUser);
 
-        MainFeedController mainFeedController = new MainFeedController(postService);
+        MainFeedController mainFeedController = new MainFeedController(postService, userService);
         get("/post/main-feed/", MainFeedController.getMainFeedPosts);
 
         PostController postController = new PostController(postService);
