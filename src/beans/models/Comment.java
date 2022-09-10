@@ -6,7 +6,8 @@ public class Comment {
 
 	private UUID id;
 	private UUID postId;
-	private String user;
+	private String username;
+	private User user;
 	private String text;
 	private Long timeStamp;
 	private Long editTimeStamp;
@@ -17,15 +18,21 @@ public class Comment {
 	public Comment() {
 	}
 
-	public Comment(UUID id, UUID postId, String user, String text, Long timeStamp, Long editTimeStamp, Boolean deleted) {
+	public Comment(UUID id, UUID postId, String username, String text, Long timeStamp, Long editTimeStamp, Boolean deleted) {
 		this.id = id;
 		this.postId = postId;
-		this.user = user;
+		this.username = username;
 		this.text = text;
 		this.timeStamp = timeStamp;
 		this.editTimeStamp = editTimeStamp;
 		this.deleted = deleted;
 	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	public UUID getId() {
 		return id;
@@ -43,12 +50,12 @@ public class Comment {
 		this.postId = postId;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
 	public void setUser(String user) {
-		this.user = user;
+		this.username = user;
 	}
 
 	public String getText() {
