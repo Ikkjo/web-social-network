@@ -148,6 +148,8 @@ Vue.component("edit-profile", {
                     this.form.email = JSON.parse(JSON.stringify(this.user.email))
                 })
                 .catch(() => alert("Greška"))
+        } else {
+            this.$router.push("/")
         }
 
     },

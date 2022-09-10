@@ -30,6 +30,8 @@ Vue.component("mutual-friends-list", {
                     }
                 }).then((response) => this.friends = JSON.parse(JSON.stringify(response.data)))
                 .catch(() => alert("Greška"))
+        } else {
+            this.$router.push("/")
         }
     },
 });

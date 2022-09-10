@@ -33,7 +33,7 @@ Vue.component("friend-request-list", {
                 }).then((response) => this.friendRequests = JSON.parse(JSON.stringify(response.data)))
                 .catch(() => alert("Greška."));
         } else {
-            alert("Greška.")
+            this.$router.push("/")
         }
     },
 });

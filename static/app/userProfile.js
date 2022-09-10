@@ -115,9 +115,13 @@ Vue.component("user-profile", {
                 })
                 .catch(() => alert("Greška."));
         }
-        axios.get("/user/" + this.$route.params.username).then((response) => {
+        if (this.user.isPrivate && !this.isFriend)
+            this.$router.push("/")
+        else
+            axios.get("/user/" + this.$route.params.username).then((response) => {
                 this.user = JSON.parse(JSON.stringify(response.data))
             })
             .catch(() => alert("Došlo je do greške."))
+
     },
 });

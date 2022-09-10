@@ -39,7 +39,10 @@ Vue.component("my-photos", {
         }
     },
     mounted() {
-        this.posts = this.getPosts();
+        if (!window.sessionStorage.getItem("jwt"))
+            this.$router.push("/")
+        else
+            this.posts = this.getPosts();
     },
 });
 
