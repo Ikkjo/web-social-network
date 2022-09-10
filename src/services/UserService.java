@@ -167,4 +167,7 @@ public class UserService {
         return friends;
     }
 
+    public String getProfilePic(String user) {
+        return userDAO.getProfilePicByUsername(user);
+    }
 }

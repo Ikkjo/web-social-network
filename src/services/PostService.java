@@ -6,6 +6,7 @@ import beans.models.PostType;
 import dao.CommentDAO;
 import dao.PostDAO;
 import dao.UserDAO;
+import dto.CommentDTO;
 
 import java.util.*;
 

@@ -22,4 +22,6 @@ public interface UserDAO {
     void unblockUser(String username);
     void saveChanges();
     void load();
+
+    String getProfilePicByUsername(String user);
 }

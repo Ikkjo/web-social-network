@@ -3,6 +3,7 @@ package controllers;
 import beans.models.Comment;
 import beans.models.Post;
 import com.google.gson.Gson;
+import dto.CommentDTO;
 import services.PostService;
 import services.UserService;
 import spark.Request;
@@ -132,9 +133,11 @@ public class PostController {
         response.type("application/json");
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
-            Comment newComment = new Gson().fromJson(request.body(), Comment.class);
+            CommentDTO newComment = new Gson().fromJson(request.body(), CommentDTO.class);
             if(newComment.getUsername().equals(loggedInUser)){
-                postService.addComment(newComment);
+                Comment comment = new Comment(newComment);
+                comment.setUser(userService.getUser(loggedInUser));
+                postService.addComment(comment);
                 response.status(200);
                 return newComment;
             } else {

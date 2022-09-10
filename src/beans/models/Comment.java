@@ -1,5 +1,10 @@
 package beans.models;
 
+import dto.CommentDTO;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.UUID;
 
 public class Comment {
@@ -16,6 +21,11 @@ public class Comment {
 
 
 	public Comment() {
+		this.id = UUID.randomUUID();
+		this.timeStamp = LocalDateTime.now().toEpochSecond(ZoneOffset.MIN);
+		this.editTimeStamp = 0L;
+		this.deleted = false;
+
 	}
 
 	public Comment(UUID id, UUID postId, String username, String text, Long timeStamp, Long editTimeStamp, Boolean deleted) {
@@ -28,6 +38,15 @@ public class Comment {
 		this.deleted = deleted;
 	}
 
+	public Comment(CommentDTO c) {
+		this.text = c.getText();
+		this.username = c.getUsername();
+		this.postId = c.getPostId();
+		this.id = UUID.randomUUID();
+		this.timeStamp = LocalDateTime.now().toEpochSecond(ZoneOffset.MIN);
+		this.editTimeStamp = 0L;
+		this.deleted = false;
+	}
 
 	public UUID getId() {
 		return id;

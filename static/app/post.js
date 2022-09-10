@@ -64,10 +64,17 @@ Vue.component("post", {
         addComment() {
             if (!this.newComment.replace(/^\s+|\s+$/g, ''))
                 return
-            let comment = { user: this.user, text: this.newComment };
+            let comment = { text: this.newComment, username: this.user.username, postId: this.post.id, user: this.user };
+            console.log(comment)
             this.post.comments.push(comment);
             this.newComment = null;
             // TODO: add post request
+            axios.post("/add-comment/", { text: this.newComment, username: this.user.username, postId: this.post.id }, {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
+                    },
+                }).then()
+                .catch(() => alert("Greška."));
         },
         deletePost() {
             if (this.user.role.toLowerCase() === 'admin') {
@@ -75,9 +82,9 @@ Vue.component("post", {
                     // TODO: send message to user with deletionReason 
             }
             let token = window.sessionStorage.getItem("token")
-            axios.delete("/post/delete/" + this.post.id, {
+            axios.delete("/post/delete" + this.post.id, {
                     headers: {
-                        Authorization: 'Bearer ' + window.sessionStorage.getItem("jwt"),
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                     },
                 }).then(() => alert("Objava uspešno obrisana."))
                 .catch(() => alert("Greška."));

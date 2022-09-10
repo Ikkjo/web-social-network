@@ -1,24 +1,36 @@
 package beans.models;
 
 
+import dto.MessageDTO;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.UUID;
 
 public class DirectMessage {
 	private UUID id;
 	private String from;
 	private String to;
-	private String messageContent;
+	private String message;
 	private Long timeStamp;
 	public DirectMessage() {
 		super();
 	}
 
-	public DirectMessage(UUID id, String from, String to, String messageContent, Long timeStamp) {
+	public DirectMessage(UUID id, String from, String to, String message, Long timeStamp) {
 		this.id = id;
 		this.from = from;
 		this.to = to;
-		this.messageContent = messageContent;
+		this.message = message;
 		this.timeStamp = timeStamp;
+	}
+
+	public DirectMessage(MessageDTO messageDTO) {
+		this.id = UUID.randomUUID();
+		this.from = messageDTO.getFrom();
+		this.to = messageDTO.getTo();
+		this.message = messageDTO.getMessage();
+		this.timeStamp = LocalDateTime.now().toEpochSecond(ZoneOffset.MIN);
 	}
 
 	public UUID getId() {
@@ -45,12 +57,12 @@ public class DirectMessage {
 		this.to = to;
 	}
 
-	public String getMessageContent() {
-		return messageContent;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMessageContent(String messageContent) {
-		this.messageContent = messageContent;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Long getTimeStamp() {

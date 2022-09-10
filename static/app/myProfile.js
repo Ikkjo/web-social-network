@@ -12,7 +12,7 @@ Vue.component("my-profile", {
             <div class="inner-container">
                 <div class="my-profile-container">
                     <div class="profile ">
-                        <img src="./img/profile_pic.svg" alt=" " class="profile-thumbnail ">
+                        <img :src="user.profilePic" alt=" " class="profile-thumbnail ">
                         <h2 class="user-fullname">{{user.name}} {{user.surname}}</h2>
                         <div class="dob">{{new Date(user.dateOfBirth).toLocaleDateString()}}</div>
                     </div>
@@ -53,7 +53,7 @@ Vue.component("my-profile", {
     `,
     methods: {
         openMessages() {
-            this.$router.push("/chat/" + "");
+            this.$router.push("/chat");
         }
     },
     mounted() {

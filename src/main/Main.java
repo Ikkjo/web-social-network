@@ -74,6 +74,7 @@ public class Main {
         get("/my-friends/", UserController.getFriends);
         get("/are-friends/:user/", UserController.areFriends);
         get("/user/", UserController.getLoggedInUser);
+        get("/user/:user/profile-pic/", UserController.getProfilePic);
 
         ChatController chatController = new ChatController(chatService);
         post("/add-message/", ChatController.addMessage);

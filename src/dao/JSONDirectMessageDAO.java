@@ -9,6 +9,7 @@ import utils.FilePathUtil;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +22,11 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
     }
     @Override
     public void addMessage(DirectMessage m) {
-        this.messages.get(m.getFrom()).add(m);
+        if (this.messages.containsKey(m.getFrom())) {
+            this.messages.get(m.getFrom()).add(m);
+        } else {
+            this.messages.put(m.getFrom(), new ArrayList<>(Collections.singleton(m)));
+        }
         saveChanges();
     }
 
@@ -29,8 +34,11 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
     public List<String> getChats(String user) {
         List<String> chats = new ArrayList<>();
 
-        for (DirectMessage dm : this.messages.get(user)){
-            chats.add(dm.getTo());
+        if (this.messages.containsKey(user)) {
+            for (DirectMessage dm : this.messages.get(user)) {
+                if (!chats.contains(dm.getTo()))
+                    chats.add(dm.getTo());
+            }
         }
         return chats;
     }
@@ -41,8 +49,10 @@ public class JSONDirectMessageDAO implements DirectMessageDAO{
 
         List<DirectMessage> allMessages = new ArrayList<>();
 
-        allMessages.addAll(this.messages.get(sender));
-        allMessages.addAll(this.messages.get(receiver));
+        if (this.messages.containsKey(sender))
+            allMessages.addAll(this.messages.get(sender));
+        if (this.messages.containsKey(receiver))
+            allMessages.addAll(this.messages.get(receiver));
 
         for(DirectMessage dm : allMessages) {
             if(dm.getTo().equals(sender) || dm.getTo().equals(receiver)){

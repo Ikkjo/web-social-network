@@ -16,7 +16,6 @@ Vue.component("user-thumbnail", {
         return {
             loggedInUser: null,
             date: null,
-            link: '',
         }
     },
     template: `
@@ -34,24 +33,30 @@ Vue.component("user-thumbnail", {
         sendMessage() {
             console.log("Sending message...");
         },
-        getLink() {
-            if (this.loggedInUser)
-                return this.loggedInUser.username === this.user.username ? '/my-profile' : '/user/' + this.user.username
-            return '/user/' + this.user.username
-
+    },
+    computed: {
+        link() {
+            if (this.loggedInUser) {
+                if (this.loggedInUser.username === this.user.username)
+                    return '/my-profile'
+                else
+                    return '/user/' + this.user.username
+            } else {
+                return '/user/' + this.user.username
+            }
         }
     },
     mounted() {
-        if (window.sessionStorage.getItem("jwt"))
+        if (window.sessionStorage.getItem("jwt")) {
             axios.get("/user", {
-                headers: {
-                    Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
-                }
-            }).then((response) => this.loggedInUser = JSON.parse(JSON.stringify(response.data)))
-            .catch(() => alert("Greška"))
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.loggedInUser = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
+        }
         if (this.useDate) {
             this.date = new Date(this.user.dateOfBirth).toLocaleDateString();
         }
-        this.link = this.getLink()
     },
 });

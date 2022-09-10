@@ -78,6 +78,16 @@ public class JSONUserDAO implements UserDAO{
         users.get(friend).removeFriend(user);
         saveChanges();
     }
+    @Override
+    public String getProfilePicByUsername(String user) {
+        for (User u : users.values()) {
+            if (u.getUsername().equals(user)) {
+                return u.getProfilePic();
+            }
+        }
+        return null;
+    }
+
 
 
     @Override

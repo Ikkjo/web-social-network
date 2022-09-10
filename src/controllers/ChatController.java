@@ -3,6 +3,7 @@ package controllers;
 import beans.models.DirectMessage;
 import beans.models.User;
 import com.google.gson.Gson;
+import dto.MessageDTO;
 import services.ChatService;
 import services.UserService;
 import spark.Request;
@@ -20,7 +21,8 @@ public class ChatController {
 
     public static Route addMessage = (Request request, Response response) -> {
         response.type("application/json");
-        DirectMessage message = new Gson().fromJson(request.body(), DirectMessage.class);
+        MessageDTO messageDTO = new Gson().fromJson(request.body(), MessageDTO.class);
+        DirectMessage message = new DirectMessage(messageDTO);
         chatService.addDirectMessage(message);
         return new Gson().toJson(message);
     };

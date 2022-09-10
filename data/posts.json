@@ -1,17 +1,23 @@
 {
-  "7cd078d6-7484-4b82-8034-8b78e2a368e2": {
-    "id": "7cd078d6-7484-4b82-8034-8b78e2a368e2",
-    "username": "test7",
-    "photo": "../img/photo3.jpg",
-    "text": "",
-    "comments": [],
-    "timestamp": 1662775161673,
-    "deleted": false,
-    "type": "PHOTO"
-  },
   "ed1da600-0834-41b2-b7f4-37122e36d08a": {
     "id": "ed1da600-0834-41b2-b7f4-37122e36d08a",
     "username": "test7",
+    "user": {
+      "username": "test7",
+      "password": "test7",
+      "email": "danam@gmail.com",
+      "name": "Dana",
+      "surname": "Makezić",
+      "dateOfBirth": 889466400,
+      "gender": "FEMALE",
+      "role": "REGULAR",
+      "profilePic": "../img/FEMALE2.jpeg",
+      "friendRequests": [],
+      "friends": [],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": true
+    },
     "photo": "../img/photo4.jpeg",
     "text": "In et ex id lorem suscipit hendrerit eu nec dolor. Duis semper dolor feugiat tortor ornare, nec varius urna blandit.",
     "comments": [],
@@ -19,19 +25,25 @@
     "deleted": false,
     "type": "TEXT"
   },
-  "cc87d7e7-8d6c-4d9a-b75d-d55ba4c569c4": {
-    "id": "cc87d7e7-8d6c-4d9a-b75d-d55ba4c569c4",
-    "username": "test3",
-    "photo": "",
-    "text": "Phasellus placerat, magna in hendrerit varius, purus purus vehicula sem, ut volutpat quam metus nec sapien.",
-    "comments": [],
-    "timestamp": 1662775161682,
-    "deleted": false,
-    "type": "TEXT"
-  },
   "e9401eff-e840-45c2-80e1-5b9142993e55": {
     "id": "e9401eff-e840-45c2-80e1-5b9142993e55",
     "username": "test7",
+    "user": {
+      "username": "test7",
+      "password": "test7",
+      "email": "danam@gmail.com",
+      "name": "Dana",
+      "surname": "Makezić",
+      "dateOfBirth": 889466400,
+      "gender": "FEMALE",
+      "role": "REGULAR",
+      "profilePic": "../img/FEMALE2.jpeg",
+      "friendRequests": [],
+      "friends": [],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": true
+    },
     "photo": "",
     "text": "Nunc sagittis massa id ipsum vestibulum, quis dapibus nibh bibendum.",
     "comments": [],
@@ -39,29 +51,29 @@
     "deleted": false,
     "type": "TEXT"
   },
-  "359562d7-e1ca-4d0a-bf7a-2fa1ff95555f": {
-    "id": "359562d7-e1ca-4d0a-bf7a-2fa1ff95555f",
-    "username": "admin2",
-    "photo": "../img/MALE3.jpeg",
-    "text": "",
-    "comments": [],
-    "timestamp": 1662775161693,
-    "deleted": false,
-    "type": "PHOTO"
-  },
-  "5c7e68c4-6168-43ee-9cdb-54d72b5f2ada": {
-    "id": "5c7e68c4-6168-43ee-9cdb-54d72b5f2ada",
-    "username": "test1",
-    "photo": "../img/photo2.png",
-    "text": "Ut lobortis ultrices erat sit amet euismod.",
-    "comments": [],
-    "timestamp": 1662775161671,
-    "deleted": false,
-    "type": "PHOTO"
-  },
   "354621d2-356e-43d8-8cb5-851398e3ab8e": {
     "id": "354621d2-356e-43d8-8cb5-851398e3ab8e",
     "username": "test6",
+    "user": {
+      "username": "test6",
+      "password": "test6",
+      "email": "fibili@gmail.com",
+      "name": "Fibija",
+      "surname": "Ilić",
+      "dateOfBirth": 908647200,
+      "gender": "FEMALE",
+      "role": "REGULAR",
+      "profilePic": "../img/FEMALE1.jpeg",
+      "friendRequests": [],
+      "friends": [
+        "test3",
+        "test9",
+        "test2"
+      ],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false
+    },
     "photo": "../img/photo1.jpeg",
     "text": "Praesent elementum turpis ac nunc tempus, ut tincidunt metus porta. Suspendisse vitae lectus nulla.",
     "comments": [],
@@ -72,6 +84,22 @@
   "b8ae8c07-f72e-4676-afae-c3fc6667222d": {
     "id": "b8ae8c07-f72e-4676-afae-c3fc6667222d",
     "username": "test4",
+    "user": {
+      "username": "test4",
+      "password": "test4",
+      "email": "sildu@gmail.com",
+      "name": "Dušan",
+      "surname": "Silbaš",
+      "dateOfBirth": 755200800,
+      "gender": "MALE",
+      "role": "REGULAR",
+      "profilePic": "../img/MALE4.jpeg",
+      "friendRequests": [],
+      "friends": [],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false
+    },
     "photo": "",
     "text": "Mauris ullamcorper consectetur enim, eget volutpat nunc pharetra quis.",
     "comments": [],
@@ -79,29 +107,136 @@
     "deleted": false,
     "type": "TEXT"
   },
-  "7fb77618-7029-48c4-943b-c625b7649b08": {
-    "id": "7fb77618-7029-48c4-943b-c625b7649b08",
-    "username": "test6",
-    "photo": "",
-    "text": "Vestibulum imperdiet, augue id pulvinar ultricies, quam ipsum interdum risus, at sagittis enim nibh quis odio. Mauris auctor elit dui, ac fringilla lacus dictum in.",
-    "comments": [],
-    "timestamp": 1662775161685,
+  "7cd078d6-7484-4b82-8034-8b78e2a368e2": {
+    "id": "7cd078d6-7484-4b82-8034-8b78e2a368e2",
+    "username": "test7",
+    "user": {
+      "username": "test7",
+      "password": "test7",
+      "email": "danam@gmail.com",
+      "name": "Dana",
+      "surname": "Makezić",
+      "dateOfBirth": 889466400,
+      "gender": "FEMALE",
+      "role": "REGULAR",
+      "profilePic": "../img/FEMALE2.jpeg",
+      "friendRequests": [],
+      "friends": [],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": true
+    },
+    "photo": "../img/photo3.jpg",
+    "text": "",
+    "comments": [
+      {
+        "id": "b9779b4b-657f-45a9-8842-902a51204c93",
+        "postId": "7cd078d6-7484-4b82-8034-8b78e2a368e2",
+        "username": "test3",
+        "user": {
+          "username": "test3",
+          "password": "test3",
+          "email": "baja.zoro@gmail.com",
+          "name": "Zoran",
+          "surname": "Bajić",
+          "dateOfBirth": 804708000,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE3.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test1",
+            "test2",
+            "test6"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false
+        },
+        "text": "Phasellus tempus leo in venenatis eleifend. Duis faucibus sapien eros, ut malesuada tellus rhoncus et.",
+        "timeStamp": 1662847162,
+        "editTimeStamp": 0,
+        "deleted": false
+      },
+      {
+        "id": "640bdaff-d181-4979-a66a-b9a1168635db",
+        "postId": "7cd078d6-7484-4b82-8034-8b78e2a368e2",
+        "username": "test7",
+        "user": {
+          "username": "test7",
+          "password": "test7",
+          "email": "danam@gmail.com",
+          "name": "Dana",
+          "surname": "Makezić",
+          "dateOfBirth": 889466400,
+          "gender": "FEMALE",
+          "role": "REGULAR",
+          "profilePic": "../img/FEMALE2.jpeg",
+          "friendRequests": [],
+          "friends": [],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": true
+        },
+        "text": "Nullam imperdiet scelerisque ex eget lacinia. Vivamus faucibus lorem congue sapien ornare consequat.",
+        "timeStamp": 1662847162,
+        "editTimeStamp": 0,
+        "deleted": false
+      },
+      {
+        "id": "901a7e10-26d9-40ca-9457-7896ed755fb7",
+        "postId": "7cd078d6-7484-4b82-8034-8b78e2a368e2",
+        "username": "test1",
+        "user": {
+          "username": "test1",
+          "password": "test1",
+          "email": "marez@gmail.com",
+          "name": "Marko",
+          "surname": "Zagorac",
+          "dateOfBirth": 821469600,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE1.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test3",
+            "test9",
+            "test2"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false,
+          "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+        },
+        "text": "Cras vestibulum magna dignissim turpis imperdiet, a tincidunt tellus venenatis.",
+        "timeStamp": 1662847162,
+        "editTimeStamp": 0,
+        "deleted": false
+      }
+    ],
+    "timestamp": 1662775161673,
     "deleted": false,
-    "type": "TEXT"
-  },
-  "cc890c0f-3f91-4b83-9eec-49b4da446213": {
-    "id": "cc890c0f-3f91-4b83-9eec-49b4da446213",
-    "username": "test1",
-    "photo": "",
-    "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
-    "comments": [],
-    "timestamp": 1662775161663,
-    "deleted": false,
-    "type": "TEXT"
+    "type": "PHOTO"
   },
   "edca2532-8f06-4c04-a3ff-1a965ebd30c0": {
     "id": "edca2532-8f06-4c04-a3ff-1a965ebd30c0",
     "username": "test8",
+    "user": {
+      "username": "test8",
+      "password": "test8",
+      "email": "test8@gmail.com",
+      "name": "Dragana",
+      "surname": "Dušančić",
+      "dateOfBirth": 1053021600,
+      "gender": "FEMALE",
+      "role": "REGULAR",
+      "profilePic": "../img/FEMALE4.jpeg",
+      "friendRequests": [],
+      "friends": [],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false
+    },
     "photo": "../img/photo5.jpg",
     "text": "Cras dignissim mauris a bibendum sagittis. Mauris iaculis mauris vel convallis varius.",
     "comments": [],
@@ -109,9 +244,336 @@
     "deleted": false,
     "type": "TEXT"
   },
+  "7fb77618-7029-48c4-943b-c625b7649b08": {
+    "id": "7fb77618-7029-48c4-943b-c625b7649b08",
+    "username": "test6",
+    "user": {
+      "username": "test6",
+      "password": "test6",
+      "email": "fibili@gmail.com",
+      "name": "Fibija",
+      "surname": "Ilić",
+      "dateOfBirth": 908647200,
+      "gender": "FEMALE",
+      "role": "REGULAR",
+      "profilePic": "../img/FEMALE1.jpeg",
+      "friendRequests": [],
+      "friends": [
+        "test3",
+        "test9",
+        "test2"
+      ],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false
+    },
+    "photo": "",
+    "text": "Vestibulum imperdiet, augue id pulvinar ultricies, quam ipsum interdum risus, at sagittis enim nibh quis odio. Mauris auctor elit dui, ac fringilla lacus dictum in.",
+    "comments": [
+      {
+        "id": "c4ab1ad6-9040-478c-9d7b-a702dd6c0f57",
+        "postId": "7fb77618-7029-48c4-943b-c625b7649b08",
+        "username": "test1",
+        "user": {
+          "username": "test1",
+          "password": "test1",
+          "email": "marez@gmail.com",
+          "name": "Marko",
+          "surname": "Zagorac",
+          "dateOfBirth": 821469600,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE1.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test3",
+            "test9",
+            "test2"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false,
+          "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+        },
+        "text": "Etiam sodales eros sit amet consequat vehicula.",
+        "timeStamp": 1662847162,
+        "editTimeStamp": 0,
+        "deleted": false
+      },
+      {
+        "id": "2d0d861b-1917-4dec-a8bb-dae9b3b54b79",
+        "postId": "7fb77618-7029-48c4-943b-c625b7649b08",
+        "username": "test2",
+        "user": {
+          "username": "test2",
+          "password": "test2",
+          "email": "stanojeg@gmail.com",
+          "name": "Stanoje",
+          "surname": "Glavaš",
+          "dateOfBirth": 954612000,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE2.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test1",
+            "test6",
+            "test3"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false
+        },
+        "text": "Donec ac justo iaculis, commodo eros sed, mollis quam.",
+        "timeStamp": 1662847162,
+        "editTimeStamp": 0,
+        "deleted": false
+      },
+      {
+        "id": "a0a7bed1-ec12-446b-80dc-991d42885529",
+        "postId": "7fb77618-7029-48c4-943b-c625b7649b08",
+        "username": "test1",
+        "user": {
+          "username": "test1",
+          "password": "test1",
+          "email": "marez@gmail.com",
+          "name": "Marko",
+          "surname": "Zagorac",
+          "dateOfBirth": 821469600,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE1.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test3",
+            "test9",
+            "test2"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false,
+          "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+        },
+        "timeStamp": 1662851913,
+        "editTimeStamp": 0,
+        "deleted": false
+      },
+      {
+        "id": "bdbb75b2-b683-45de-a74d-3b1beb8529bd",
+        "postId": "7fb77618-7029-48c4-943b-c625b7649b08",
+        "username": "test1",
+        "user": {
+          "username": "test1",
+          "password": "test1",
+          "email": "marez@gmail.com",
+          "name": "Marko",
+          "surname": "Zagorac",
+          "dateOfBirth": 821469600,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE1.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test3",
+            "test9",
+            "test2"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false,
+          "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+        },
+        "timeStamp": 1662851969,
+        "editTimeStamp": 0,
+        "deleted": false
+      }
+    ],
+    "timestamp": 1662775161685,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "cc87d7e7-8d6c-4d9a-b75d-d55ba4c569c4": {
+    "id": "cc87d7e7-8d6c-4d9a-b75d-d55ba4c569c4",
+    "username": "test3",
+    "user": {
+      "username": "test3",
+      "password": "test3",
+      "email": "baja.zoro@gmail.com",
+      "name": "Zoran",
+      "surname": "Bajić",
+      "dateOfBirth": 804708000,
+      "gender": "MALE",
+      "role": "REGULAR",
+      "profilePic": "../img/MALE3.jpeg",
+      "friendRequests": [],
+      "friends": [
+        "test1",
+        "test2",
+        "test6"
+      ],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false
+    },
+    "photo": "",
+    "text": "Phasellus placerat, magna in hendrerit varius, purus purus vehicula sem, ut volutpat quam metus nec sapien.",
+    "comments": [],
+    "timestamp": 1662775161682,
+    "deleted": false,
+    "type": "TEXT"
+  },
+  "359562d7-e1ca-4d0a-bf7a-2fa1ff95555f": {
+    "id": "359562d7-e1ca-4d0a-bf7a-2fa1ff95555f",
+    "username": "admin2",
+    "user": {
+      "username": "admin2",
+      "password": "admin2",
+      "email": "mica.ost@gmail.com",
+      "name": "Milica",
+      "surname": "Ostojić",
+      "dateOfBirth": 837367200,
+      "gender": "FEMALE",
+      "role": "ADMIN",
+      "profilePic": "../img/FEMALE3.jpeg",
+      "friendRequests": [],
+      "friends": [],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false
+    },
+    "photo": "../img/MALE3.jpeg",
+    "text": "",
+    "comments": [
+      {
+        "id": "59647c0d-5a08-4bce-81f9-1037d2f4815e",
+        "postId": "359562d7-e1ca-4d0a-bf7a-2fa1ff95555f",
+        "username": "test1",
+        "user": {
+          "username": "test1",
+          "password": "test1",
+          "email": "marez@gmail.com",
+          "name": "Marko",
+          "surname": "Zagorac",
+          "dateOfBirth": 821469600,
+          "gender": "MALE",
+          "role": "REGULAR",
+          "profilePic": "../img/MALE1.jpeg",
+          "friendRequests": [],
+          "friends": [
+            "test3",
+            "test9",
+            "test2"
+          ],
+          "isPrivate": false,
+          "deleted": false,
+          "blocked": false,
+          "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+        },
+        "text": "Fusce tincidunt sed neque sollicitudin varius.",
+        "timeStamp": 1662847161,
+        "editTimeStamp": 0,
+        "deleted": false
+      }
+    ],
+    "timestamp": 1662775161693,
+    "deleted": false,
+    "type": "PHOTO"
+  },
+  "a222559b-a842-41f8-b59c-13aa09d38995": {
+    "id": "a222559b-a842-41f8-b59c-13aa09d38995",
+    "username": "test1",
+    "photo": "blob:http://localhost:8080/f0aaa357-2753-4816-95d9-ea8292195f9d",
+    "text": "sdfsdf",
+    "comments": [],
+    "timestamp": 1662780472527,
+    "deleted": false
+  },
+  "5c7e68c4-6168-43ee-9cdb-54d72b5f2ada": {
+    "id": "5c7e68c4-6168-43ee-9cdb-54d72b5f2ada",
+    "username": "test1",
+    "user": {
+      "username": "test1",
+      "password": "test1",
+      "email": "marez@gmail.com",
+      "name": "Marko",
+      "surname": "Zagorac",
+      "dateOfBirth": 821469600,
+      "gender": "MALE",
+      "role": "REGULAR",
+      "profilePic": "../img/MALE1.jpeg",
+      "friendRequests": [],
+      "friends": [
+        "test3",
+        "test9",
+        "test2"
+      ],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false,
+      "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+    },
+    "photo": "../img/photo2.png",
+    "text": "Ut lobortis ultrices erat sit amet euismod.",
+    "comments": [],
+    "timestamp": 1662775161671,
+    "deleted": false,
+    "type": "PHOTO"
+  },
+  "cc890c0f-3f91-4b83-9eec-49b4da446213": {
+    "id": "cc890c0f-3f91-4b83-9eec-49b4da446213",
+    "username": "test1",
+    "user": {
+      "username": "test1",
+      "password": "test1",
+      "email": "marez@gmail.com",
+      "name": "Marko",
+      "surname": "Zagorac",
+      "dateOfBirth": 821469600,
+      "gender": "MALE",
+      "role": "REGULAR",
+      "profilePic": "../img/MALE1.jpeg",
+      "friendRequests": [],
+      "friends": [
+        "test3",
+        "test9",
+        "test2"
+      ],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false,
+      "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+    },
+    "photo": "",
+    "text": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
+    "comments": [],
+    "timestamp": 1662775161663,
+    "deleted": false,
+    "type": "TEXT"
+  },
   "4294d778-b36e-4471-b909-85e29deee9e9": {
     "id": "4294d778-b36e-4471-b909-85e29deee9e9",
     "username": "test1",
+    "user": {
+      "username": "test1",
+      "password": "test1",
+      "email": "marez@gmail.com",
+      "name": "Marko",
+      "surname": "Zagorac",
+      "dateOfBirth": 821469600,
+      "gender": "MALE",
+      "role": "REGULAR",
+      "profilePic": "../img/MALE1.jpeg",
+      "friendRequests": [],
+      "friends": [
+        "test3",
+        "test9",
+        "test2"
+      ],
+      "isPrivate": false,
+      "deleted": false,
+      "blocked": false,
+      "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI3ODAwNjAsInN1YiI6InRlc3QxIiwiZXhwIjoxNjYyNzgwODYwfQ.WFH8BX0Ve674mgJk85SyX40Ze2siRiUFsL8XkT3Gqdk"
+    },
     "photo": "../img/photo6.png",
     "text": "Nulla facilisi. Proin a elit eu diam blandit mollis.",
     "comments": [],

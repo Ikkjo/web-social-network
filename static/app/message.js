@@ -10,8 +10,10 @@ Vue.component("message", {
     },
     template: ` 
     <div id="message">
-        <router-link :to="/user/+message.from" class="profile-pic"><img :src="profilePic" alt="Profilna slika"></router-link>
-        <div class="message-text" :class="[message.from === user.username ? 'message-primary' : 'message-secondary']">{{message.message}}</div>
+        <div :class="[message.from === user.username ? 'message-primary' : 'message-secondary']">
+            <router-link :to="/user/+message.from" class="profile-pic"><img :src="profilePic" alt="Profilna slika"></router-link>
+            <div class="message-text">{{message.message}}</div>
+        </div>
     </div>	 
 `,
     methods: {},
@@ -24,9 +26,9 @@ Vue.component("message", {
                 }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
                 .catch(() => alert("Greška"))
 
-            axios.get("/user/" + message.from + "/profile-pic", { // TODO: Add this request to backend
+            axios.get("/user/" + this.message.from + "/profile-pic", { // TODO: Add this request to backend
                     headers: {
-                        Authorization: 'Bearer ' + window.sessionStorage.getItem("jwt"),
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                     },
                 }).then((response) => this.profilePic = JSON.parse(JSON.stringify(response.data)))
                 .catch(() => alert("Greška."));

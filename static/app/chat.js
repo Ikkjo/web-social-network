@@ -40,33 +40,23 @@ Vue.component("chat", {
             area.style.height = "1px";
             area.style.height = (25 + area.scrollHeight) + "px";
         },
-        getMessages(username) {
-            this.toUser = username
-            return
-            // TODO: Add this request to backend
-            axios.get("/chat/messages/" + username, {
-                    headers: {
-                        Authorization: 'Bearer' + this.user.jwt
-                    },
-                }).then((response) => {
-                    this.messages = JSON.parse(JSON.stringify(response.data))
-                    this.toUser = username
-                })
-                .catch(() => alert("Greška."))
-        },
         sendMessage(event) {
             if (event.shiftKey)
                 return
             let text = this.newMessage.replace(/^\s+|\s+$/g, '')
             text = text.replace(/\\n/g, '')
             if (text) {
-                let message = {
-                        from: this.user.username,
-                        to: this.toUser,
-                        message: this.newMessage
-                    }
-                    // TODO: Send the message
-                this.messages.push(message)
+                console.log({ from: this.user.username, to: this.toUser, message: this.newMessage })
+                axios.post("/add-message/", { from: this.user.username, to: this.toUser, message: this.newMessage }, {
+                        headers: {
+                            Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                        }
+                    }).then((response) => {
+                        console.log("POSLATO")
+                        this.messages.push(JSON.parse(JSON.stringify(response.data)))
+                    })
+                    .catch(() => alert("Greška"))
+
                 this.newMessage = ""
                 let area = event.target;
                 area.style.height = "69px";
@@ -75,67 +65,23 @@ Vue.component("chat", {
         scrollToEnd() {
             let el = document.querySelector(".chat-box")
             el.scrollTop = el.lastElementChild.offsetTop;
+        },
+        getMessages(username) {
+            axios.get("/get-messages/?sender=" + username + "&receiver=" + this.user.username, {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    },
+                }).then((response) => {
+                    this.messages = JSON.parse(JSON.stringify(response.data))
+                    this.toUser = username;
+                })
+                .catch(() => alert("Greška."))
         }
     },
     updated() {
         this.$nextTick(() => this.scrollToEnd());
     },
     mounted() {
-        axios.get("/user", {
-                headers: {
-                    Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
-                }
-            }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
-            .catch(() => alert("Greška"))
-        this.users = [{
-                name: "Aco",
-                surname: "Vucic",
-                username: "avucic",
-                profilePic: "../img/avatar1.jpg"
-            },
-            {
-                name: "Aco",
-                surname: "Vucic",
-                username: "avucic2",
-                profilePic: "../img/avatar1.jpg"
-            },
-            {
-                name: "Aco",
-                surname: "Vucic",
-                username: "avucic3",
-                profilePic: "../img/avatar1.jpg"
-            },
-            {
-                name: "Aco",
-                surname: "Vucic",
-                username: "avucic4",
-                profilePic: "../img/avatar1.jpg"
-            }
-        ]
-        this.messages = [{
-                from: "avucic",
-                to: "test1",
-                message: "Peri veš noću brate, štedi struju"
-            },
-            {
-                from: "avucic",
-                to: "test1",
-                message: "Brate nije u redu, mora se štedi"
-            },
-            {
-                from: "test1",
-                to: "avucic",
-                message: "Vučko brate mojne smaraš"
-            },
-            {
-                from: "test1",
-                to: "avucic",
-                message: "Perem veš kad oću!"
-            }
-        ]
-        this.toUser = "avucic"
-        return
-        // TODO: Remove above code
         if (window.sessionStorage.getItem("jwt")) {
             axios.get("/user", {
                     headers: {
@@ -145,19 +91,47 @@ Vue.component("chat", {
                 .catch(() => alert("Greška"))
 
             // Get all users that sent messages to the logged in user
-            axios.get("/chat/" + this.user.username + "/users", { // TODO: Add this request to backend
+            axios.get("/get-chats", { // TODO: Add this request to backend
                     headers: {
-                        Authorization: 'Bearer ' + this.user.jwt,
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                     },
-                }).then((response) => this.users = JSON.parse(JSON.stringify(response.data)))
+                }).then((response) => this.users.push.apply(this.users, JSON.parse(JSON.stringify(response.data))))
                 .catch(() => alert("Greška."));
+
 
             // Get messages from the first user in users list
             let username = this.$route.params.username
             if (username) {
-                this.getMessages(username);
+                axios.get("/user/" + username, { // TODO: Add this request to backend
+                        headers: {
+                            Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
+                        },
+                    }).then((response) => {
+                        this.users.push(response.data)
+                        this.toUser = username;
+                    })
+                    .catch(() => alert("Greška."));
+
+
+                axios.get("/get-messages/?sender=" + username + "&receiver=" + this.user.username, {
+                        headers: {
+                            Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                        },
+                    }).then((response) => {
+                        this.messages = JSON.parse(JSON.stringify(response.data))
+                        this.toUser = username
+                    })
+                    .catch(() => alert("Greška."))
             } else {
-                this.getMessages(this.users[0].username)
+                axios.get("/get-messages/?sender=" + this.users[0].username + "&receiver=" + this.user.username, {
+                        headers: {
+                            Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                        },
+                    }).then((response) => {
+                        this.messages = JSON.parse(JSON.stringify(response.data))
+                        this.toUser = this.users[0].username
+                    })
+                    .catch(() => alert("Greška."))
             }
         } else {
             this.$router.push("/")

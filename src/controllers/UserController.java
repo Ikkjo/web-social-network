@@ -167,6 +167,18 @@ public class UserController {
         }
     };
 
+    public static Route getProfilePic = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String user = request.params("user");
+            return new Gson().toJson(userService.getProfilePic(user));
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+
     public static Route areFriends = (Request request, Response response) -> {
         response.type("application/json");
         try {

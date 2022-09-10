@@ -36,6 +36,7 @@ const router = new VueRouter({
         { path: '/friend-list', component: FriendList },
         { path: '/friend-request-list', component: FriendRequestList },
         { path: '/chat/:username', component: Chat },
+        { path: '/chat', component: Chat },
     ]
 });
 
