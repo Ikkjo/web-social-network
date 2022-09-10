@@ -77,7 +77,7 @@ Vue.component("post", {
             let token = window.sessionStorage.getItem("token")
             axios.delete("/post/delete/" + this.post.id, {
                     headers: {
-                        Authorization: 'Bearer ' + this.user.jwt,
+                        Authorization: 'Bearer ' + window.sessionStorage.getItem("jwt"),
                     },
                 }).then(() => alert("Objava uspešno obrisana."))
                 .catch(() => alert("Greška."));
@@ -101,8 +101,13 @@ Vue.component("post", {
         },
     },
     mounted() {
-        if (window.sessionStorage.getItem("user")) {
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
         }
     },
     validations: {

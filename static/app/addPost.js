@@ -125,9 +125,13 @@ Vue.component("add-post", {
             this.$refs.photoUploader.value = '';
         },
     },
-    created() {
-        this.post.user = JSON.parse(window.sessionStorage.getItem("user"));
-        console.log(this.post.user.jwt)
+    mounted() {
+        axios.get("/user", {
+                headers: {
+                    Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                }
+            }).then((response) => this.post.user = JSON.parse(JSON.stringify(response.data)))
+            .catch(() => alert("Greška"))
     },
     validations: {
         post: {

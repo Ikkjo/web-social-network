@@ -47,7 +47,7 @@ public class Main {
         MainFeedController mainFeedController = new MainFeedController(postService);
         get("/post/main-feed/", MainFeedController.getMainFeedPosts);
 
-        PostController postController = new PostController(postService);
+        PostController postController = new PostController(postService, userService);
         post("/add-post/", PostController.addPost);
         delete("/remove-post/:postId/", PostController.deletePost);
         get("/post/:postId/", PostController.getPost);
@@ -55,13 +55,15 @@ public class Main {
         get("/my-photos/", PostController.getUserPhotos);
         post("/add-comment/", PostController.addComment);
         delete("/delete-comment/:commentId/", PostController.deleteComment);
+        get("/post/user/:user/", PostController.getAllPostsByUser);
+        get("/photos/user/:user/", PostController.getAllPhotosByUser);
 
         FriendRequestController friendRequestController = new FriendRequestController(friendRequestService);
         get("/friend-requests/", FriendRequestController.getFriendRequests);
         get("/sent-friend-requests/", FriendRequestController.getSentFriendRequests);
 
         UserController userController = new UserController(userService);
-        post("/add-friend/:sender/", UserController.sendFriendRequest);
+        post("/add-friend/", UserController.sendFriendRequest);
         put("/accept-request/:sender/", UserController.acceptFriendRequest);
         delete("/decline-request/:sender/", UserController.declineFriendRequest);
         delete("/remove-friend/:friend/", UserController.removeFriend);
@@ -70,6 +72,8 @@ public class Main {
         put("/unblock-user/:user/", UserController.unblockUser);
         get("/mutual-friends/", UserController.mutualFriends);
         get("/my-friends/", UserController.getFriends);
+        get("/are-friends/:user/", UserController.areFriends);
+        get("/user/", UserController.getLoggedInUser);
 
         ChatController chatController = new ChatController(chatService);
         post("/add-message/", ChatController.addMessage);

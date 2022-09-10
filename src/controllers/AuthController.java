@@ -21,7 +21,7 @@ public class AuthController {
         try {
             LoginDetailsDTO login = new Gson().fromJson(request.body(), LoginDetailsDTO.class);
             response.status(200);
-            return userService.logIn(login.getUsername(), login.getPassword());
+            return new Gson().toJson(userService.logIn(login.getUsername(), login.getPassword()));
         } catch (Exception e) {
             response.status(401);
             return response;

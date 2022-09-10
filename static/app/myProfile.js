@@ -56,9 +56,14 @@ Vue.component("my-profile", {
             this.$router.push("/chat/" + "");
         }
     },
-    created() {
-        if (window.sessionStorage.getItem("user")) {
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+    mounted() {
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
         }
     }
 });

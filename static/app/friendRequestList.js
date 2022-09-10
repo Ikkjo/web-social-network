@@ -21,22 +21,20 @@ Vue.component("friend-request-list", {
                     this.friendRequests.splice(i, 1);
         },
         getFriendRequests() {
-            // TODO: Add get friend requests
-            if (window.sessionStorage.getItem("user")) {
-                let user = JSON.parse(window.sessionStorage.getItem("user"))
-                axios.get("/friend-requests", {
-                        headers: {
-                            Authorization: 'Bearer ' + user.jwt,
-                        },
-                    }).then((response) => this.friendRequests = JSON.parse(JSON.stringify(response.data)))
-                    .catch(() => alert("Greška."));
-            } else {
-                alert("Greška.")
-            }
+
         }
     },
     mounted() {
-        this.getFriendRequests();
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/friend-requests", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
+                    },
+                }).then((response) => this.friendRequests = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška."));
+        } else {
+            alert("Greška.")
+        }
     },
 });
 

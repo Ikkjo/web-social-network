@@ -5,7 +5,7 @@ Vue.component("friend-card", {
     template: ` 
     <div id="friend-card">
             <user-thumbnail
-                :user="friend.user"
+                :user="friend"
                 :useDate="false" 
                 class="user-thumbnail"/>
             <i @click="removeFriend" class="fas fa-user-minus"></i>

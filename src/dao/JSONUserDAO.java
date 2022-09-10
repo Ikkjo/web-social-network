@@ -5,6 +5,7 @@ import beans.models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import data.JsonDatabase;
+import dto.EditProfileDTO;
 import utils.DateUtils;
 import utils.FilePathUtil;
 
@@ -126,16 +127,16 @@ public class JSONUserDAO implements UserDAO{
     }
 
     @Override
-    public void editUser(String username, User newDetails) {
+    public void editUser(String username, EditProfileDTO newDetails) {
         if(this.users.containsKey(username)) {
             User u = this.users.get(username);
-            u.setDateOfBirth(newDetails.getDateOfBirth());
             u.setName(newDetails.getName());
             u.setSurname(newDetails.getSurname());
             u.setEmail(newDetails.getEmail());
             u.setGender(newDetails.getGender());
-            u.setPassword(newDetails.getPassword());
-            u.setPrivate(newDetails.getPrivate());
+            if (!newDetails.getNewPassword().isEmpty())
+                u.setPassword(newDetails.getNewPassword());
+//            u.setPrivate(newDetails.isPrivate());
             saveChanges();
         }
     }

@@ -1,7 +1,14 @@
 Vue.component("user-profile", {
     data() {
         return {
-            user: null,
+            user: {
+                name: '',
+                surname: '',
+                dateOfBirth: '',
+                username: '',
+                profilePic: '',
+                role: '',
+            },
             loggedInUser: null,
             isFriend: false,
         }
@@ -20,11 +27,11 @@ Vue.component("user-profile", {
 
                     <div class="user-links" v-bind:class="{'user-links-50' : user.isPublic && !isFriend}">
                         <div class="links-top">
-                            <div v-if="isFriend || user.isPublic || loggedInUser.role.toLowerCase() === 'admin'" class="link-group">
+                            <div v-if="isFriend || user.isPublic || loggedInUser && loggedInUser.role.toLowerCase() === 'admin'" class="link-group">
                                 <i class="fas fa-book-open"></i>
                                 <router-link :to="'/user/'+user.username+'/posts'">Objave</router-link>
                             </div>
-                            <div v-if="isFriend || user.isPublic || loggedInUser.role.toLowerCase() === 'admin'" class="link-group">
+                            <div v-if="isFriend || user.isPublic || loggedInUser && loggedInUser.role.toLowerCase() === 'admin'" class="link-group">
                                 <i class="fas fa-images"></i>
                                 <router-link :to="'/user/'+user.username+'/photos'">Fotografije</router-link>
                             </div>
@@ -42,7 +49,7 @@ Vue.component("user-profile", {
                                 </label>
                             </div>
                             <div> -->
-                            <button v-if="isFriend || loggedInUser.role.toLowerCase() === 'admin'" class="btn btn-message" @click="openMessages"><i class="fas fa-comment-dots"></i>Poruka</button>
+                            <button v-if="isFriend || loggedInUser && loggedInUser.role.toLowerCase() === 'admin'" class="btn btn-message" @click="openMessages"><i class="fas fa-comment-dots"></i>Poruka</button>
                             <button @click="updateFriend" v-if="loggedInUser && loggedInUser.role.toLowerCase() === 'regular'" class="btn transparent" v-bind:class="{unfriend: isFriend}"><i v-bind:class="[isFriend ? 'fas fa-user-minus' : 'fas fa-user-plus']"></i>{{isFriend ? 'Izbriši iz prijatelja' : 'Pošalji zahtev'}}</button>
                             <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
                             <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
@@ -72,7 +79,7 @@ Vue.component("user-profile", {
             if (!this.isFriend) {
                 axios.post("/add-friend/", this.user.username, {
                     headers: {
-                        Authorization: 'Bearer ' + this.loggedInUser.jwt
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
                     }
                 }).then((response) => {
                     alert("Zahtev poslat")
@@ -80,7 +87,7 @@ Vue.component("user-profile", {
             } else {
                 axios.delete("/remove-friend/" + this.user.username, {
                         headers: {
-                            Authorization: 'Bearer ' + this.loggedInUser.jwt,
+                            Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                         },
                     }).then((response) => {
                         this.isFriend = false;
@@ -90,23 +97,25 @@ Vue.component("user-profile", {
             }
         }
     },
-    created() {
-        if (window.sessionStorage.getItem("user")) {
-            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
-            let username = JSON.parse(window.sessionStorage.getItem("user")).username;
-            let token = JSON.parse(window.sessionStorage.getItem("user")).jwt
+    mounted() {
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.loggedInUser = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
+
             axios.get("/are-friends/" + this.$route.params.username, {
                     headers: {
-                        Authorization: 'Bearer ' + token,
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                     },
                 }).then((response) => {
-                    console.log("Proslo")
                     this.isFriend = JSON.parse(JSON.stringify(response.data))
                 })
                 .catch(() => alert("Greška."));
         }
         axios.get("/user/" + this.$route.params.username).then((response) => {
-                console.log(response.data)
                 this.user = JSON.parse(JSON.stringify(response.data))
             })
             .catch(() => alert("Došlo je do greške."))
