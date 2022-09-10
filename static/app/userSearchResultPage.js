@@ -9,8 +9,7 @@ Vue.component("user-search-page", {
     </div>
     `,
     methods: {},
-    mounted() {
-    },
+    mounted() {},
 });
 
 Vue.component("user-search", {
@@ -37,7 +36,7 @@ Vue.component("user-search", {
     methods: {
         sort(event) {
             let sortBy = event.target.value;
-            switch(sortBy) {
+            switch (sortBy) {
                 case 'name':
                     this.users.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name) ? -1 : 0);
                 case 'surname':
@@ -50,8 +49,8 @@ Vue.component("user-search", {
     mounted() {
         let params = this.$route.query;
         axios.get("/user-search/", {
-            params: params
-        }).then(response => this.users = response.data.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0)))
-        .catch(error => alert("Pretraga neuspješna."));
+                params: params
+            }).then(response => this.users = response.data.sort((a, b) => (a.name > b.name) ? 1 : (a.name < b.name ? -1 : 0)))
+            .catch(error => alert("Pretraga neuspješna."));
     },
 });

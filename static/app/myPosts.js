@@ -23,11 +23,10 @@ Vue.component("my-posts", {
                     this.posts.splice(i, 1);
         },
         getPosts() {
-            if (window.sessionStorage.getItem("user")) {
-                let user = JSON.parse(window.sessionStorage.getItem("user"))
+            if (window.sessionStorage.getItem("jwt")) {
                 axios.get("/my-posts", {
                         headers: {
-                            Authorization: 'Bearer ' + user.jwt,
+                            Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                         },
                     }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
                     .catch(() => alert("Greška."));

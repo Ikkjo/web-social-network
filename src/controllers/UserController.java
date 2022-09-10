@@ -1,8 +1,10 @@
 package controllers;
 
+import beans.models.Post;
 import beans.models.User;
 import beans.models.UserRole;
 import com.google.gson.Gson;
+import dto.EditProfileDTO;
 import services.UserService;
 import spark.Request;
 import spark.Response;
@@ -22,7 +24,7 @@ public class UserController {
     public static Route sendFriendRequest = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            String sender = request.params("sender");
+            String sender = new Gson().fromJson(request.body(), String.class);
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
             userService.sendFriendRequest(loggedInUser, sender);
             response.status(200);
@@ -79,10 +81,19 @@ public class UserController {
         response.type("application/json");
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
-            User newUserDetails = new Gson().fromJson(request.body(), User.class);
+            EditProfileDTO newUserDetails = new Gson().fromJson(request.body(), EditProfileDTO.class);
             User user = userService.getUser(loggedInUser);
-            if(newUserDetails.getUsername().equals(user.getUsername()) &&
-                    !newUserDetails.getPassword().equals(user.getPassword())){
+            if(newUserDetails.getUsername().equals(user.getUsername())) {
+                if (!newUserDetails.getPassword().isEmpty()) {
+                    if (newUserDetails.getPassword().equals(user.getPassword())) {
+                        userService.editProfile(newUserDetails);
+                        response.status(200);
+                    }
+                    else {
+                        response.status(400);
+                        return response;
+                    }
+                }
                 userService.editProfile(newUserDetails);
                 response.status(200);
             } else {
@@ -155,5 +166,32 @@ public class UserController {
             return response;
         }
     };
+
+    public static Route areFriends = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String user = request.params("user");
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            userService.areFriends(loggedInUser, user);
+            response.status(200);
+            return response;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route getLoggedInUser = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String loggedInUser = AuthUtils.getUsernameFromToken(request);
+            response.status(200);
+            return new Gson().toJson(userService.getUser(loggedInUser));
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
 
 }

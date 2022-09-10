@@ -8,8 +8,8 @@ Vue.component("user-search-result", {
     },
     template: `
     <div class="flex-container user-search-result-container">
-        <user-thumbnail :user="user" :useEmail="user && user.role.toLowerCase()='admin'"></user-thumbnail>
-        <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='regular' !isFriend" @click="sendFriendRequest" class="btn user-search-result-btn"><i class="fas fa-user-plus"></i></button></a>
+        <user-thumbnail :user="user" :useEmail="user && user.role.toLowerCase()==='admin'"></user-thumbnail>
+        <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='regular' && !isFriend" @click="sendFriendRequest" class="btn user-search-result-btn"><i class="fas fa-user-plus"></i></button></a>
         <button v-if="loggedInUser && ((loggedInUser.role.toLowerCase()==='regular' && isFriend) || loggedInUser.role.toLowerCase()==='admin')" @click="sendMessage" class= "btn user-search-result-btn"><i class="fas fa-comment-dots"></i></button></a>
         <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin' && user.blocked === false" @click="block" class= "btn user-search-result-btn ban-btn"><i class="fas fa-ban"></i></button></a>
         <button v-if="loggedInUser && loggedInUser.role.toLowerCase()==='admin && user.blocked === true'" @click="unblock" class= "btn user-search-result-btn"><i class="far fa-check-circle"></i></button></a>
@@ -33,16 +33,20 @@ Vue.component("user-search-result", {
     },
     mounted() {
         // Add check for isFriend parameter using the logged in user
-        if (window.sessionStorage.getItem("user")) {
-            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
-            username = JSON.parse(window.sessionStorage.getItem("user")).username;
-            token = JSON.parse(window.sessionStorage.getItem("user")).jwt
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.loggedInUser = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
+
             axios.get("/are-friends", {
                     headers: {
-                        Authorization: 'Bearer ' + token,
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt,
                     },
                     params: {
-                        username1: username,
+                        username1: this.loggedInUser.username,
                         username2: this.user.username,
                     }
                 }).then((response) => this.isFriend = response.data)

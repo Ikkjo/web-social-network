@@ -7,6 +7,8 @@ import beans.models.User;
 import com.google.gson.Gson;
 import dao.FriendRequestDAO;
 import dao.UserDAO;
+import dto.EditProfileDTO;
+import dto.JWTDTO;
 import utils.AuthUtils;
 
 import java.util.*;
@@ -21,12 +23,13 @@ public class UserService {
         this.friendRequestDAO = friendRequestDAO;
     }
 
-    public String logIn(String username, String password){
+    public JWTDTO logIn(String username, String password){
         if(isValidUser(username, password)) {
             User user = getUser(username);
             String jws = AuthUtils.createJWT(user.getUsername(), 800000);
             user.setJwt(jws);
-            return new Gson().toJson(user);
+            JWTDTO jwtdto = new JWTDTO(jws);
+            return jwtdto;
         }
         return null;
     }
@@ -118,7 +121,7 @@ public class UserService {
         }
     }
 
-    public void editProfile(User newProfileDetails) {
+    public void editProfile(EditProfileDTO newProfileDetails) {
         userDAO.editUser(newProfileDetails.getUsername(), newProfileDetails);
     }
 

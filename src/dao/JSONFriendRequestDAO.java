@@ -44,7 +44,7 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
                     !requests.get(from).contains(request)) {
                 requests.get(from).add(request);
             } else {
-                Set<FriendRequest> newRecipientSet = new HashSet<>();
+                HashSet<FriendRequest> newRecipientSet = new HashSet<>();
                 newRecipientSet.add(request);
                 requests.put(from, newRecipientSet);
             }
@@ -78,6 +78,7 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
 
     @Override
     public List<FriendRequest> getRequestByRecipient(String recipient) {
+
         List<FriendRequest> recipientList = new ArrayList<>();
 
         for (FriendRequest req : getAllRequests()) {
@@ -108,7 +109,7 @@ public class JSONFriendRequestDAO implements FriendRequestDAO{
 
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 
-            Type requestsTypeToken = new TypeToken<Map<String, List<FriendRequest>>>() {}.getType();
+            Type requestsTypeToken = new TypeToken<Map<String, Set<FriendRequest>>>() {}.getType();
 
             this.requests = new Gson().fromJson(br, requestsTypeToken);
 

@@ -42,8 +42,13 @@ Vue.component("user-thumbnail", {
         }
     },
     mounted() {
-        if (window.sessionStorage.getItem("user"))
-            this.loggedInUser = JSON.parse(window.sessionStorage.getItem("user"))
+        if (window.sessionStorage.getItem("jwt"))
+            axios.get("/user", {
+                headers: {
+                    Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                }
+            }).then((response) => this.loggedInUser = JSON.parse(JSON.stringify(response.data)))
+            .catch(() => alert("Greška"))
         if (this.useDate) {
             this.date = new Date(this.user.dateOfBirth).toLocaleDateString();
         }

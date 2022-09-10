@@ -8,7 +8,6 @@ Vue.component("posts", {
     <div id="posts">
     <nav-bar></nav-bar>
     <div class="container">
-        <add-post defaultType="text"></add-post>
         <div class="posts">
             <post v-for="(post, i) in posts" :key="i" :post="posts[i]" @deletePost="deletePost"/>
         </div>
@@ -25,9 +24,9 @@ Vue.component("posts", {
     },
     mounted() {
         let token = "";
-        if (window.sessionStorage.getItem("user"))
-            token = window.sessionStorage.getItem("user").jwt
-        axios.get("/post/user/" + this.$route.params.username, { // TODO: Update the request
+        if (window.sessionStorage.getItem("jwt"))
+            token = window.sessionStorage.getItem("jwt")
+        axios.get("/post/user/" + this.$route.params.username, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                 },

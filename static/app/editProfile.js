@@ -3,7 +3,9 @@ Vue.use(vuelidate.default)
 Vue.component("edit-profile", {
     data() {
         return {
-            user: null,
+            user: {
+                name: '',
+            },
             form: {
                 name: '',
                 surname: '',
@@ -11,7 +13,8 @@ Vue.component("edit-profile", {
                 password: '',
                 newPassword: '',
                 confirmNewPassword: '',
-                gender: ''
+                gender: '',
+                isPrivate: false,
             },
             infocus: {
                 name: true,
@@ -94,9 +97,20 @@ Vue.component("edit-profile", {
             this.infocus[field] = false
         },
         saveChanges() {
-            axios.put("/edit-profile/", this.form, {
+            let newDetails = {
+                name: this.form.name,
+                surname: this.form.surname,
+                email: this.form.email,
+                password: this.form.password,
+                newPassword: this.form.newPassword,
+                gender: this.form.gender,
+                isPrivate: this.form.isPrivate,
+                username: this.user.username
+            }
+            console.log(newDetails)
+            axios.put("/edit-profile/", newDetails, {
                     headers: {
-                        Authorization: 'Bearer ' + user.jwt,
+                        Authorization: 'Bearer ' + this.user.jwt,
                     },
                 }).then((response) => { alert("Podaci su uspešno ažurirani") })
                 .catch(() => alert("Greška."));
@@ -122,12 +136,20 @@ Vue.component("edit-profile", {
         }
     },
     mounted() {
-        if (window.sessionStorage.getItem("user"))
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
-        this.form.name = JSON.parse(JSON.stringify(this.user.name))
-        this.form.surname = JSON.parse(JSON.stringify(this.user.surname))
-        this.form.email = JSON.parse(JSON.stringify(this.user.email))
-        this.form.gender = JSON.parse(JSON.stringify(this.user.gender))
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => {
+                    this.user = JSON.parse(JSON.stringify(response.data))
+                    this.form.name = JSON.parse(JSON.stringify(this.user.name))
+                    this.form.surname = JSON.parse(JSON.stringify(this.user.surname))
+                    this.form.email = JSON.parse(JSON.stringify(this.user.email))
+                })
+                .catch(() => alert("Greška"))
+        }
+
     },
     validations: {
         form: {

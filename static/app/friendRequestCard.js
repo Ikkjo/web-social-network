@@ -3,9 +3,7 @@ Vue.component("friend-request-card", {
         friendRequest: Object
     },
     data() {
-        return {
-
-        }
+        return {}
     },
     template: ` 
     <div id="friend-request-card">
@@ -19,11 +17,10 @@ Vue.component("friend-request-card", {
 `,
     methods: {
         acceptRequest() {
-            if (window.sessionStorage.getItem("user")) {
-                let user = JSON.parse(window.sessionStorage.getItem("user"))
+            if (window.sessionStorage.getItem("jwt")) {
                 axios.put("/accept-request/" + this.friendRequest.from, {
                         headers: {
-                            Authorization: 'Bearer ' + user.jwt,
+                            Authorization: 'Bearer ' + window.sessionStorage.getItem("jwt"),
                         },
                     }).then((response) => {})
                     .catch(() => alert("Greška."));
@@ -33,11 +30,11 @@ Vue.component("friend-request-card", {
             this.$emit("removeRequest", this.friendRequest.from)
         },
         declineRequest() {
-            if (window.sessionStorage.getItem("user")) {
-                let user = JSON.parse(window.sessionStorage.getItem("user"))
+            if (window.sessionStorage.getItem("jwt")) {
+                let jwt = 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
                 axios.delete("/decline-request/" + this.friendRequest.from, {
                         headers: {
-                            Authorization: 'Bearer ' + user.jwt,
+                            Authorization: 'Bearer ' + jwt,
                         },
                     }).then((response) => {})
                     .catch(() => alert("Greška."));

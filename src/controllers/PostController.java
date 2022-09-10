@@ -17,8 +17,9 @@ public class PostController {
     public static PostService postService;
     public static UserService userService;
 
-    public PostController(PostService pS) {
+    public PostController(PostService pS, UserService uS) {
         postService = pS;
+        userService = uS;
     }
 
     public static Route addPost = (Request request, Response response) -> {
@@ -79,6 +80,32 @@ public class PostController {
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
             List<Post> userPosts =  postService.getPhotosByUser(loggedInUser);
+            response.status(200);
+            return userPosts;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route getAllPostsByUser = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String user = request.params("user");
+            List<Post> userPosts =  postService.getPostsByUser(user);
+            response.status(200);
+            return userPosts;
+        } catch (Exception e) {
+            response.status(401);
+            return response;
+        }
+    };
+
+    public static Route getAllPhotosByUser = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            String user = request.params("user");
+            List<Post> userPosts =  postService.getPhotosByUser(user);
             response.status(200);
             return userPosts;
         } catch (Exception e) {

@@ -23,9 +23,13 @@ Vue.component("mutual-friends-list", {
         },
     },
     mounted() {
-        if (window.sessionStorage.getItem("user")) {
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
-                // TODO: Add get mutual friends
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/mutual-friends/", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.friends = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
         }
     },
 });

@@ -15,15 +15,18 @@ Vue.component("message", {
     </div>	 
 `,
     methods: {},
-    created() {
-        this.profilePic = "../img/avatar1.jpg" // remove this line of code when TODO is done
-        this.user = JSON.parse(window.sessionStorage.getItem("user"))
-        return // remove this line of code when TODO is done
-        if (window.sessionStorage.getItem("user")) {
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+    mounted() {
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
+
             axios.get("/user/" + message.from + "/profile-pic", { // TODO: Add this request to backend
                     headers: {
-                        Authorization: 'Bearer ' + user.jwt,
+                        Authorization: 'Bearer ' + window.sessionStorage.getItem("jwt"),
                     },
                 }).then((response) => this.profilePic = JSON.parse(JSON.stringify(response.data)))
                 .catch(() => alert("Greška."));

@@ -81,7 +81,12 @@ Vue.component("chat", {
         this.$nextTick(() => this.scrollToEnd());
     },
     mounted() {
-        this.user = JSON.parse(window.sessionStorage.getItem("user"))
+        axios.get("/user", {
+                headers: {
+                    Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                }
+            }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
+            .catch(() => alert("Greška"))
         this.users = [{
                 name: "Aco",
                 surname: "Vucic",
@@ -131,8 +136,13 @@ Vue.component("chat", {
         this.toUser = "avucic"
         return
         // TODO: Remove above code
-        if (window.sessionStorage.getItem("user")) {
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
 
             // Get all users that sent messages to the logged in user
             axios.get("/chat/" + this.user.username + "/users", { // TODO: Add this request to backend

@@ -27,8 +27,13 @@ Vue.component("comment", {
         }
     },
     mounted() {
-        if (window.sessionStorage.getItem("user")) {
-            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+        if (window.sessionStorage.getItem("jwt")) {
+            axios.get("/user", {
+                    headers: {
+                        Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
+                    }
+                }).then((response) => this.user = JSON.parse(JSON.stringify(response.data)))
+                .catch(() => alert("Greška"))
         }
     },
 });
