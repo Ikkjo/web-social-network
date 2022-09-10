@@ -6,12 +6,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class JsonDatabase{
 	public static void save(File jsonFile, Object data) {
 		try (FileWriter fw = new FileWriter(jsonFile)) {
 			
-			Gson json = new Gson();
+			Gson json = new GsonBuilder().setPrettyPrinting().create();
 			String jsonStr = json.toJson(data);
 			
 			fw.write(jsonStr);

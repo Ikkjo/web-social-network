@@ -55,6 +55,7 @@ public class PostController {
         try {
             Post post =  postService.getPostById(UUID.fromString(request.params("postId")));
             addUserToPost(post);
+            addCommentsToPost(post);
             response.status(200);
             return post;
         } catch (Exception e) {
@@ -71,6 +72,7 @@ public class PostController {
 
             for(Post p : userPosts) {
                 addUserToPost(p);
+                addCommentsToPost(p);
             }
 
             response.status(200);
@@ -89,6 +91,7 @@ public class PostController {
 
             for(Post p : userPhotos) {
                 addUserToPost(p);
+                addCommentsToPost(p);
             }
 
             response.status(200);
@@ -130,7 +133,7 @@ public class PostController {
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
             Comment newComment = new Gson().fromJson(request.body(), Comment.class);
-            if(newComment.getUser().equals(loggedInUser)){
+            if(newComment.getUsername().equals(loggedInUser)){
                 postService.addComment(newComment);
                 response.status(200);
                 return newComment;
@@ -151,7 +154,7 @@ public class PostController {
             UUID commentId = UUID.fromString(request.params("commentId"));
             Comment c = postService.getComment(commentId);
 
-            if(c.getUser().equals(loggedInUser)) {
+            if(c.getUsername().equals(loggedInUser)) {
                 if(postService.deleteComment(commentId)){
                     response.status(200);
                 } else {
@@ -169,5 +172,16 @@ public class PostController {
 
     private static void addUserToPost(Post p){
         p.setUser(userService.getUser(p.getUsername()));
+    }
+
+    private static void addCommentsToPost(Post p) {
+        p.setComments(postService.getPostComments(p.getId()));
+        addUserToPostComments(p);
+    }
+
+    private static void addUserToPostComments(Post p) {
+        for(Comment c : p.getComments()){
+            c.setUser(userService.getUser(c.getUsername()));
+        }
     }
 }

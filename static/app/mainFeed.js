@@ -28,8 +28,9 @@ Vue.component("main-feed", {
         }
     },
     mounted() {
+        let jwt = "";
         if (window.sessionStorage.getItem("jwt")) {
-            console.log("Bearer " + JSON.parse(window.sessionStorage.getItem("jwt")).jwt);
+            jwt = JSON.parse(window.sessionStorage.getItem("jwt")).jwt
             axios.get("/user", {
                     headers: {
                         Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem("jwt")).jwt
@@ -41,7 +42,12 @@ Vue.component("main-feed", {
                 .catch(() => alert("Greška"))
         }
         // TODO: Add for logged in user
-        axios.get("/post/main-feed/", {}).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
+        console.log(jwt)
+        axios.get("/post/main-feed/", {
+            headers: {
+                Authorization: 'Bearer ' + jwt
+            }
+        }).then((response) => this.posts = JSON.parse(JSON.stringify(response.data)))
             .catch(() => alert("Greška."));
     },
 });

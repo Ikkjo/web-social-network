@@ -34,7 +34,7 @@ public class JSONCommentDAO implements CommentDAO{
     public List<Comment> getCommentsByUser(String username) {
         List<Comment> userComments = new ArrayList<>();
         for (Comment c: getComments()) {
-            if(c.getUser().equals(username)){
+            if(c.getUsername().equals(username)){
                 userComments.add(c);
             }
         }

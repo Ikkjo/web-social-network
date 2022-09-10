@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class TestData {
     private static final JSONUserDAO userDAO = new JSONUserDAO();
@@ -31,7 +32,7 @@ public class TestData {
                 "Zagorac",
                 Gender.MALE,
                 UserRole.REGULAR,
-                "../img/MALE1.jpeg/"
+                "../img/MALE1.jpeg"
                 );
         User male2 = new User("test2",
                 "test2",
@@ -40,7 +41,7 @@ public class TestData {
                 "Glavaš",
                 Gender.MALE,
                 UserRole.REGULAR,
-                "../img/MALE2.jpeg/"
+                "../img/MALE2.jpeg"
         );
         User male3 = new User("test3",
                 "test3",
@@ -49,7 +50,7 @@ public class TestData {
                 "Bajić",
                 Gender.MALE,
                 UserRole.REGULAR,
-                "../img/MALE3.jpeg/"
+                "../img/MALE3.jpeg"
         );
         User male4 = new User("test4",
                 "test4",
@@ -58,7 +59,7 @@ public class TestData {
                 "Silbaš",
                 Gender.MALE,
                 UserRole.REGULAR,
-                "../img/MALE4.jpeg/"
+                "../img/MALE4.jpeg"
         );
         User male5 = new User("test5",
                 "test5",
@@ -67,7 +68,7 @@ public class TestData {
                 "Testić",
                 Gender.MALE,
                 UserRole.REGULAR,
-                "../img/MALE5.jpeg/"
+                "../img/MALE5.jpeg"
         );
         User female1 = new User("test6",
                 "test6",
@@ -76,7 +77,7 @@ public class TestData {
                 "Ilić",
                 Gender.FEMALE,
                 UserRole.REGULAR,
-                "../img/FEMALE1.jpeg/"
+                "../img/FEMALE1.jpeg"
         );
         User female2 = new User("test7",
                 "test7",
@@ -85,7 +86,7 @@ public class TestData {
                 "Makezić",
                 Gender.FEMALE,
                 UserRole.REGULAR,
-                "../img/FEMALE2.jpeg/"
+                "../img/FEMALE2.jpeg"
         );
         User female3 = new User("admin2",
                 "admin2",
@@ -94,7 +95,7 @@ public class TestData {
                 "Ostojić",
                 Gender.FEMALE,
                 UserRole.ADMIN,
-                "../img/FEMALE3.jpeg/"
+                "../img/FEMALE3.jpeg"
         );
         User female4 = new User("test8",
                 "test8",
@@ -103,7 +104,7 @@ public class TestData {
                 "Dušančić",
                 Gender.FEMALE,
                 UserRole.REGULAR,
-                "../img/FEMALE4.jpeg/"
+                "../img/FEMALE4.jpeg"
         );
         User female5 = new User("test9",
                 "test9",
@@ -112,7 +113,7 @@ public class TestData {
                 "Nepergaća",
                 Gender.FEMALE,
                 UserRole.REGULAR,
-                "../img/FEMALE5.jpeg/"
+                "../img/FEMALE5.jpeg"
         );
         User naocare = new User("admin1",
                 "admin1",
@@ -121,7 +122,7 @@ public class TestData {
                 "Naocare",
                 Gender.MALE,
                 UserRole.ADMIN,
-                "../img/NO_GLASSES.jpg/");
+                "../img/NO_GLASSES.jpg");
 
         male1.setDateOfBirth(LocalDate.of(1996, 1, 12).toEpochSecond(LocalTime.MIDNIGHT, ZoneOffset.MIN));
         male2.setDateOfBirth(LocalDate.of(2000, 4, 1).toEpochSecond(LocalTime.MIDNIGHT, ZoneOffset.MIN));
@@ -184,9 +185,217 @@ public class TestData {
 
         userService.blockUser(female2.getUsername());
 
-        // postovi, fotografije, komentari, poruke
+        // postovi, fotografije, komentari
+
+        Post p1 = new Post(
+                UUID.randomUUID(),
+                male1.getUsername(),
+                male1,
+                "",
+                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p2 = new Post(
+                UUID.randomUUID(),
+                female1.getUsername(),
+                female1,
+                "../img/photo1.jpeg",
+                "Praesent elementum turpis ac nunc tempus, ut tincidunt metus porta. Suspendisse vitae lectus nulla.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p3 = new Post(
+                UUID.randomUUID(),
+                male1.getUsername(),
+                male1,
+                "../img/photo2.png",
+                "Ut lobortis ultrices erat sit amet euismod.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.PHOTO);
+
+        Post p4 = new Post(
+                UUID.randomUUID(),
+                female2.getUsername(),
+                female2,
+                "../img/photo3.jpg",
+                "",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.PHOTO);
+
+        Post p5 = new Post(
+                UUID.randomUUID(),
+                male4.getUsername(),
+                male4,
+                "",
+                "Mauris ullamcorper consectetur enim, eget volutpat nunc pharetra quis.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p6 = new Post(
+                UUID.randomUUID(),
+                female2.getUsername(),
+                female2,
+                "../img/photo4.jpeg",
+                "In et ex id lorem suscipit hendrerit eu nec dolor. Duis semper dolor feugiat tortor ornare, nec varius urna blandit.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p7 = new Post(
+                UUID.randomUUID(),
+                female4.getUsername(),
+                female4,
+                "../img/photo5.jpg",
+                "Cras dignissim mauris a bibendum sagittis. Mauris iaculis mauris vel convallis varius.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p8 = new Post(
+                UUID.randomUUID(),
+                male3.getUsername(),
+                male3,
+                "",
+                "Phasellus placerat, magna in hendrerit varius, purus purus vehicula sem, ut volutpat quam metus nec sapien.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p9 = new Post(
+                UUID.randomUUID(),
+                female1.getUsername(),
+                female1,
+                "",
+                "Vestibulum imperdiet, augue id pulvinar ultricies, quam ipsum interdum risus, at sagittis enim nibh quis odio. Mauris auctor elit dui, ac fringilla lacus dictum in.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p10 = new Post(
+                UUID.randomUUID(),
+                male1.getUsername(),
+                male1,
+                "../img/photo6.png",
+                "Nulla facilisi. Proin a elit eu diam blandit mollis.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p11 = new Post(
+                UUID.randomUUID(),
+                female2.getUsername(),
+                female2,
+                "",
+                "Nunc sagittis massa id ipsum vestibulum, quis dapibus nibh bibendum.",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.TEXT);
+
+        Post p12 = new Post(
+                UUID.randomUUID(),
+                female3.getUsername(),
+                female3,
+                "../img/MALE3.jpeg",
+                "",
+                new ArrayList<>(),
+                null,
+                false,
+                PostType.PHOTO);
+
+        Comment c1 = new Comment(
+                UUID.randomUUID(),
+                p12.getId(),
+                male1.getUsername(),
+                "Fusce tincidunt sed neque sollicitudin varius.",
+                LocalDateTime.now().toEpochSecond(ZoneOffset.MIN),
+                null,
+                false);
+
+        Comment c2 = new Comment(
+                UUID.randomUUID(),
+                p1.getId(),
+                male3.getUsername(),
+                "Phasellus tempus leo in venenatis eleifend. Duis faucibus sapien eros, ut malesuada tellus rhoncus et.",
+                LocalDateTime.now().toEpochSecond(ZoneOffset.MIN)+1,
+                null,
+                false);
+
+        Comment c3 = new Comment(
+                UUID.randomUUID(),
+                p1.getId(),
+                female2.getUsername(),
+                "Nullam imperdiet scelerisque ex eget lacinia. Vivamus faucibus lorem congue sapien ornare consequat.",
+                LocalDateTime.now().toEpochSecond(ZoneOffset.MIN)+1,
+                null,
+                false);
+
+        Comment c4 = new Comment(
+                UUID.randomUUID(),
+                p1.getId(),
+                male1.getUsername(),
+                "Cras vestibulum magna dignissim turpis imperdiet, a tincidunt tellus venenatis.",
+                LocalDateTime.now().toEpochSecond(ZoneOffset.MIN)+1,
+                null,
+                false);
+
+        Comment c5 = new Comment(
+                UUID.randomUUID(),
+                p3.getId(),
+                male1.getUsername(),
+                "Etiam sodales eros sit amet consequat vehicula.",
+                LocalDateTime.now().toEpochSecond(ZoneOffset.MIN)+1,
+                null,
+                false);
+
+        Comment c6 = new Comment(
+                UUID.randomUUID(),
+                p3.getId(),
+                male2.getUsername(),
+                "Donec ac justo iaculis, commodo eros sed, mollis quam.",
+                LocalDateTime.now().toEpochSecond(ZoneOffset.MIN)+1,
+                null,
+                false);
+
+
+
+        postService.addPost(p1);
+        postService.addPost(p2);
+        postService.addPost(p3);
+        postService.addPost(p4);
+        postService.addPost(p5);
+        postService.addPost(p6);
+        postService.addPost(p7);
+        postService.addPost(p8);
+        postService.addPost(p9);
+        postService.addPost(p10);
+        postService.addPost(p11);
+        postService.addPost(p12);
+
+        postService.addComment(c1);
+        postService.addComment(c2);
+        postService.addComment(c3);
+        postService.addComment(c4);
+        postService.addComment(c5);
+        postService.addComment(c6);
+
+        // Poruke
 
     }
-
-
 }
