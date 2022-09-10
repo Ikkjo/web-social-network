@@ -55,6 +55,7 @@ public class PostController {
         try {
             Post post =  postService.getPostById(UUID.fromString(request.params("postId")));
             addUserToPost(post);
+            addCommentsToPost(post);
             response.status(200);
             return post;
         } catch (Exception e) {
@@ -71,6 +72,7 @@ public class PostController {
 
             for(Post p : userPosts) {
                 addUserToPost(p);
+                addCommentsToPost(p);
             }
 
             response.status(200);
@@ -89,6 +91,7 @@ public class PostController {
 
             for(Post p : userPhotos) {
                 addUserToPost(p);
+                addCommentsToPost(p);
             }
 
             response.status(200);
@@ -169,5 +172,9 @@ public class PostController {
 
     private static void addUserToPost(Post p){
         p.setUser(userService.getUser(p.getUsername()));
+    }
+
+    private static void addCommentsToPost(Post p) {
+        p.setComments(postService.getPostComments(p.getId()));
     }
 }
