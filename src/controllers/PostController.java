@@ -130,7 +130,7 @@ public class PostController {
         try {
             String loggedInUser = AuthUtils.getUsernameFromToken(request);
             Comment newComment = new Gson().fromJson(request.body(), Comment.class);
-            if(newComment.getUser().equals(loggedInUser)){
+            if(newComment.getUsername().equals(loggedInUser)){
                 postService.addComment(newComment);
                 response.status(200);
                 return newComment;
@@ -151,7 +151,7 @@ public class PostController {
             UUID commentId = UUID.fromString(request.params("commentId"));
             Comment c = postService.getComment(commentId);
 
-            if(c.getUser().equals(loggedInUser)) {
+            if(c.getUsername().equals(loggedInUser)) {
                 if(postService.deleteComment(commentId)){
                     response.status(200);
                 } else {
